@@ -3,22 +3,6 @@
 alias zshenv="$EDITOR ~/.zshenv"
 alias zshrc="$EDITOR ~/.zshrc"
 
-# alias ls="ls --color=auto"
-# alias la='ls -lAFh'   #long list,show almost all,show type,human readable
-# alias lr='ls -tRFh'   #sorted by date,recursive,show type,human readable
-# alias lt='ls -ltFh'   #long list,sorted by date,show type,human readable
-# alias ll='ls -l'      #long list
-# alias ltr='ls -ltrFh'   #long list,sorted by date,show type,human readable
-# alias latr='ls -altrFh'   #long list,sorted by date,show type,human readable
-# alias ldot='ls -ld .*'
-# alias lS='ls -1FSsh'
-# alias lart='ls -1Fcart'
-# alias lrt='ls -1Fcrt'
-# alias lsr='ls -lARFh' #Recursive list of files and directories
-# alias lsn='ls -1'     #A column contains name of files and directories
-
-# alias ff='find . -type f -name'
-
 # File system
 alias ls='eza --group-directories-first --icons'
 alias ll='eza -l --group-directories-first --icons'
@@ -49,7 +33,6 @@ alias rm='echo "Careful now!"; false'
 alias dockerprune='docker rmi $(docker images -f "dangling=true" -q)'
 
 # git
-
 alias gs='git status'
 alias gdh='git diff HEAD'
 alias gdm='git diff master'
@@ -71,18 +54,12 @@ alias gsync='git fetch && git pull && gbdm && gbdms && git remote prune origin'
 alias gclean='git reset --hard && git clean -fd'
 
 # mix
-
 alias mt='mix test'
 alias mtw='mix test.watch'
 alias mpr='mix phx.routes'
 alias mps='mix phx.server'
 
 # aliases
-
-# alias fd="fdfind"
-
-alias dot="cd $HOME/.dotfiles"
-
 alias rtx=mise
 
 alias localtunnel="$HOME/.local/bin/lt"
@@ -91,6 +68,9 @@ alias qmku="cd $HOME/code/qmk_userspace"
 alias qmkf="cd $HOME/code/qmk_firmware"
 
 alias nvl="NVIM_APPNAME=nvim-lazy nvim"
+
+# chezmoi
+alias dot="chezmoi cd"
 
 alias cm="chezmoi"
 alias cma="chezmoi add"
