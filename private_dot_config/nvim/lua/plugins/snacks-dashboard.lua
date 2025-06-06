@@ -30,38 +30,7 @@ return {
 						key = "c",
 						desc = "Config",
 						action = function()
-							local results = require("chezmoi.commands").list({
-								args = {
-									"--path-style",
-									"absolute",
-									"--include",
-									"files",
-									"--exclude",
-									"externals",
-								},
-							})
-							local items = {}
-
-							for _, czFile in ipairs(results) do
-								if string.find(czFile, ".config/nvim/") then
-									table.insert(items, {
-										text = czFile,
-										file = czFile,
-									})
-								end
-							end
-
-							---@type snacks.picker.Config
-							local opts = {
-								items = items,
-								confirm = function(picker, item)
-									picker:close()
-									require("chezmoi.commands").edit({
-										targets = { item.text },
-										args = { "--watch" },
-									})
-								end,
-							}
+							local opts = require("utils.chezmoi-snacks-picker").picker_opts(".config/nvim/")
 							Snacks.picker.pick(opts)
 						end,
 					},
