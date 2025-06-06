@@ -20,48 +20,6 @@ vim.diagnostic.config({
 
 vim.lsp.inlay_hint.enable(false)
 
--- local kinds = {
--- 	Array = " ",
--- 	Boolean = "󰨙 ",
--- 	Class = " ",
--- 	Codeium = "󰘦 ",
--- 	Color = " ",
--- 	Control = " ",
--- 	Collapsed = " ",
--- 	Constant = "󰏿 ",
--- 	Constructor = " ",
--- 	Copilot = " ",
--- 	Enum = " ",
--- 	EnumMember = " ",
--- 	Event = " ",
--- 	Field = " ",
--- 	File = " ",
--- 	Folder = " ",
--- 	Function = "󰊕 ",
--- 	Interface = " ",
--- 	Key = " ",
--- 	Keyword = " ",
--- 	Method = "󰊕 ",
--- 	Module = " ",
--- 	Namespace = "󰦮 ",
--- 	Null = " ",
--- 	Number = "󰎠 ",
--- 	Object = " ",
--- 	Operator = " ",
--- 	Package = " ",
--- 	Property = " ",
--- 	Reference = " ",
--- 	Snippet = "󱄽 ",
--- 	String = " ",
--- 	Struct = "󰆼 ",
--- 	Supermaven = " ",
--- 	TabNine = "󰏚 ",
--- 	Text = " ",
--- 	TypeParameter = " ",
--- 	Unit = " ",
--- 	Value = " ",
--- 	Variable = "󰀫 ",
--- }
 local completion_kinds = vim.lsp.protocol.CompletionItemKind
 local kinds = vim.g.custom_icons.kinds
 for i, kind in ipairs(completion_kinds) do

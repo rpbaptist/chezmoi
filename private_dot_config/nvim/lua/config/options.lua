@@ -9,6 +9,11 @@ vim.g.kitty_navigator_password = "nvimwindows"
 vim.o.background = "dark"
 
 vim.g.custom_icons = {
+	modified = {
+		added = " ",
+		modified = " ",
+		removed = " ",
+	},
 	kinds = {
 		Array = " ",
 		Boolean = "󰨙 ",
