@@ -1,0 +1,44 @@
+# Navigation
+
+|==========================================================================|
+| CTRL + A  | Go to the beginning of the line (Home)                       |
+| CTRL + E  | Go to the End of the line (End)                              |
+| ALT  + B  | Back (left) one word                                         |
+| ALT  + F  | Forward (right) one word                                     |
+| CTRL + F  | Forward one character                                        |
+| CTRL + B  | Backward one character                                       |
+| CTRL + XX | Toggle between the start of line and current cursor position |
+|==========================================================================|
+
+# Edit
+
+|================================================================================================|
+| CTRL + U   | Cut the line before the cursor position                                           |
+| ALT  + DEL | Delete the Word before the cursor                                                 |
+| ALT  + D   | Delete the Word after the cursor                                                  |
+| CTRL + D   | Delete character under the cursor                                                 |
+| CTRL + H   | Delete character before the cursor (backspace)                                    |
+| CTRL + W   | Cut the Word before the cursor to the clipboard                                   |
+| CTRL + K   | Cut the Line after the cursor to the clipboard                                    |
+| ALT  + T   | Swap current word with previous                                                   |
+| CTRL + T   | Swap the last two characters before the cursor (typo)                             |
+| ESC  + T   | Swap the last two words before the cursor.                                        |
+| CTRL + Y   | Paste the last thing to be cut (yank)                                             |
+| ALT  + U   | UPPER capitalize every character from the cursor to the end of the current word.  |
+| ALT  + L   | Lower the case of every character from the cursor to the end of the current word. |
+| ALT  + C   | Capitalize the character under the cursor and move to the end of the word.        |
+| ALT  + R   | Cancel the changes and put back the line as it was in the history (revert)        |
+| СTRL + _   | Undo                                                                              |
+|================================================================================================|
+
+# History
+
+|=====================================================================================|
+| CTRL + R | Recall the last command including the specified character(s).            |
+| CTRL + P | Previous command in history (i.e. walk back through the command history) |
+| CTRL + N | Next command in history (i.e. walk forward through the command history)  |
+| CTRL + S | Go back to the next most recent command.                                 |
+| CTRL + O | Execute the command found via Ctrl+r or Ctrl+s                           |
+| CTRL + G | Escape from history searching mode                                       |
+| ALT  + . | Use the last word of the previous command                                |
+|=====================================================================================|

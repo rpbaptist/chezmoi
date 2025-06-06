@@ -1,0 +1,49 @@
+# Command Editing Shortcuts
+
+ctrl + a – go to the start of the command line
+ctrl + e – go to the end of the command line
+ctrl + k – delete from cursor to the end of the command line
+ctrl + u – delete from cursor to the start of the command line
+ctrl + w – delete from cursor to start of word (i.e. delete backwards one word)
+ctrl + y – paste word or text that was cut using one of the deletion shortcuts (such as the one above) after the cursor
+ctrl + xx – move between start of command line and current cursor position (and back again)
+alt  + b – move backward one word (or go to start of word the cursor is currently on)
+alt  + f – move forward one word (or go to end of word the cursor is currently on)
+alt  + d – delete to end of word starting at cursor (whole word if cursor is at the beginning of word)
+alt  + c – capitalize to end of word starting at cursor (whole word if cursor is at the beginning of word)
+alt  + u – make uppercase from cursor to end of word
+alt  + l – make lowercase from cursor to end of word
+alt  + t – swap current word with previous
+ctrl + f – move forward one character
+ctrl + b – move backward one character
+ctrl + d – delete character under the cursor
+ctrl + h – delete character before the cursor
+ctrl + t – swap character under cursor with the previous one
+
+# Command Recall Shortcuts
+
+ctrl + r – search the history backwards
+ctrl + g – escape from history searching mode
+ctrl + p – previous command in history (i.e. walk back through the command history)
+ctrl + n – next command in history (i.e. walk forward through the command history)
+alt  + . – use the last word of the previous command
+
+# Command Control Shortcuts
+
+ctrl + l – clear the screen
+ctrl + s – stops the output to the screen (for long running verbose command)
+ctrl + q – allow output to the screen (if previously stopped using command above)
+ctrl + c – terminate the command
+ctrl + z – suspend/stop the command
+
+# Bash Bang (!) Commands
+
+Bash also has some handy features that use the ! (bang) to allow you to do some funky stuff with bash commands.
+
+!!      – run last command
+!blah   – run the most recent command that starts with ‘blah’ (e.g. !ls)
+!blah:p – print out the command that !blah would run (also adds it as the latest command in the command history)
+!$      – the last word of the previous command (same as alt  + .)
+!$:p    – print out the word that !$ would substitute
+!*      – the previous command except for the last word (e.g. if you type ‘find some_file.txt /‘, then !* would give you ‘find some_file.txt‘)
+!*:p    – print out what !* would substitute

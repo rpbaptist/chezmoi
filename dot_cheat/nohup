@@ -1,0 +1,1 @@
+nohup myprogram logs/myprogram.log 2>&1 &

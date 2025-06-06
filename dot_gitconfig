@@ -1,0 +1,52 @@
+[user]
+	name = Richard Baptist
+	email = code@richardbaptist.nl
+	signingkey = /home/richard/.ssh/richard_ed25519
+[checkout]
+  defaultRemote=origin
+[color]
+	diff = true
+	status = true
+	branch = true
+	ui = auto
+[core]
+	; askpass = git-gui--askpass
+	editor = "$VISUAL"
+	excludesfile = ~/.gitignore
+	commentChar = ";"
+[push]
+	default = current
+	followTags = true
+[rebase]
+	autosquash = true
+[commit]
+	gpgsign = true
+[pager]
+  branch = false
+[pull]
+	ff = only
+[init]
+	defaultBranch = master
+[diff]
+	colorMoved = blocks
+[maintenance]
+	repo = /home/richard/.zsh/repos/marlonrichert/zcolors
+	repo = /home/richard/.zsh/repos/marlonrichert/zsh-autocomplete
+	repo = /home/richard/.zsh/repos/marlonrichert/zsh-edit
+	repo = /home/richard/.zsh/repos/ohmyzsh/ohmyzsh
+	repo = /home/richard/.zsh/repos/zsh-users/zsh-autosuggestions
+	repo = /home/richard/.zsh/repos/zsh-users/zsh-history-substring-search
+	repo = /home/richard/.zsh/repos/Aloxaf/fzf-tab
+	repo = /home/richard/.zsh/repos/junegunn/fzf
+	repo = /home/richard/.zsh/repos/trapd00r/LS_COLORS
+	repo = /home/richard/.zsh/repos/zsh-users/zsh-syntax-highlighting
+	repo = /home/richard/.zsh/repos/znap
+[gpg]
+	format = ssh
+[delta]
+  syntax-theme = gruvbox-dark
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process

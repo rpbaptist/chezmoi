@@ -1,0 +1,434 @@
+#compdef lift
+
+
+_lift_boba() {
+  _lift_boba_flags() {
+    local context state state_descr line
+    typeset -A opt_args
+
+    _arguments -S \
+--help"[Show help for command]" \
+"*: :_files"
+  }
+
+  local context state state_descr line
+  typeset -A opt_args
+
+  _arguments -C "1: :->cmds" "*: :->args"
+
+  case "$state" in
+    cmds)
+      if [[ "${words[CURRENT]}" == -* ]]; then
+        _lift_boba_flags
+      else
+_values "completions" \
+"server[Starts the Boba dev server]" \
+
+      fi
+      ;;
+    args)
+      case $line[1] in
+        "server")
+          _arguments -S \
+--json"[Format output as json.]" \
+--log-level"[Specify level for logging.]:log-level options:(debug warn error info trace)" \
+--help"[Show help for command]" \
+"*: :_files"
+        ;;
+
+      *)
+        _lift_boba_flags
+      ;;
+      esac
+      ;;
+  esac
+}
+
+_lift_employ() {
+  _lift_employ_flags() {
+    local context state state_descr line
+    typeset -A opt_args
+
+    _arguments -S \
+--help"[Show help for command]" \
+"*: :_files"
+  }
+
+  local context state state_descr line
+  typeset -A opt_args
+
+  _arguments -C "1: :->cmds" "*: :->args"
+
+  case "$state" in
+    cmds)
+      if [[ "${words[CURRENT]}" == -* ]]; then
+        _lift_employ_flags
+      else
+_values "completions" \
+"dev[Starts the NextJS development server]" \
+"storybook[Starts Storybook development server]" \
+"test[Run all test suites]" \
+"test-file[Run a single test suite]" \
+
+      fi
+      ;;
+    args)
+      case $line[1] in
+        "dev")
+          _arguments -S \
+--json"[Format output as json.]" \
+--log-level"[Specify level for logging.]:log-level options:(debug warn error info trace)" \
+--help"[Show help for command]" \
+"*: :_files"
+        ;;
+        "storybook")
+          _arguments -S \
+--json"[Format output as json.]" \
+--log-level"[Specify level for logging.]:log-level options:(debug warn error info trace)" \
+--help"[Show help for command]" \
+"*: :_files"
+        ;;
+        "test")
+          _arguments -S \
+--json"[Format output as json.]" \
+--log-level"[Specify level for logging.]:log-level options:(debug warn error info trace)" \
+--help"[Show help for command]" \
+"*: :_files"
+        ;;
+        "test-file")
+          _arguments -S \
+--json"[Format output as json.]" \
+--log-level"[Specify level for logging.]:log-level options:(debug warn error info trace)" \
+--help"[Show help for command]" \
+"*: :_files"
+        ;;
+
+      *)
+        _lift_employ_flags
+      ;;
+      esac
+      ;;
+  esac
+}
+
+_lift_gitlab() {
+  _lift_gitlab_flags() {
+    local context state state_descr line
+    typeset -A opt_args
+
+    _arguments -S \
+--help"[Show help for command]" \
+"*: :_files"
+  }
+
+  local context state state_descr line
+  typeset -A opt_args
+
+  _arguments -C "1: :->cmds" "*: :->args"
+
+  case "$state" in
+    cmds)
+      if [[ "${words[CURRENT]}" == -* ]]; then
+        _lift_gitlab_flags
+      else
+_values "completions" \
+"assigned-mrs[describe the command here]" \
+"reviewer-mrs[Lists MRs where you are assigned as a reviewer]" \
+
+      fi
+      ;;
+    args)
+      case $line[1] in
+        "assigned-mrs")
+          _arguments -S \
+"(-f --force)"{-f,--force}"[]" \
+"(-n --name)"{-n,--name}"[name to print]:file:_files" \
+--help"[Show help for command]" \
+"*: :_files"
+        ;;
+        "reviewer-mrs")
+          _arguments -S \
+--help"[Show help for command]" \
+"*: :_files"
+        ;;
+
+      *)
+        _lift_gitlab_flags
+      ;;
+      esac
+      ;;
+  esac
+}
+
+_lift_jobs() {
+  _lift_jobs_flags() {
+    local context state state_descr line
+    typeset -A opt_args
+
+    _arguments -S \
+--help"[Show help for command]" \
+"*: :_files"
+  }
+
+  local context state state_descr line
+  typeset -A opt_args
+
+  _arguments -C "1: :->cmds" "*: :->args"
+
+  case "$state" in
+    cmds)
+      if [[ "${words[CURRENT]}" == -* ]]; then
+        _lift_jobs_flags
+      else
+_values "completions" \
+"dev[Starts the NextJS development server]" \
+"test[Runs the tests in the Jobs workspace]" \
+
+      fi
+      ;;
+    args)
+      case $line[1] in
+        "dev")
+          _arguments -S \
+--json"[Format output as json.]" \
+--log-level"[Specify level for logging.]:log-level options:(debug warn error info trace)" \
+--help"[Show help for command]" \
+"*: :_files"
+        ;;
+        "test")
+          _arguments -S \
+--json"[Format output as json.]" \
+--log-level"[Specify level for logging.]:log-level options:(debug warn error info trace)" \
+--help"[Show help for command]" \
+"*: :_files"
+        ;;
+
+      *)
+        _lift_jobs_flags
+      ;;
+      esac
+      ;;
+  esac
+}
+
+_lift_tiger() {
+  _lift_tiger_flags() {
+    local context state state_descr line
+    typeset -A opt_args
+
+    _arguments -S \
+--help"[Show help for command]" \
+"*: :_files"
+  }
+
+  local context state state_descr line
+  typeset -A opt_args
+
+  _arguments -C "1: :->cmds" "*: :->args"
+
+  case "$state" in
+    cmds)
+      if [[ "${words[CURRENT]}" == -* ]]; then
+        _lift_tiger_flags
+      else
+_values "completions" \
+"lint[Run linting commands for Tiger.]" \
+"create-feature-flag[Creates a new Feature Flag]" \
+"dev-setup[Run the dev_setup.exs script]" \
+"generate-email[Generates a worker, mailer, html and text templates and corresponding tests for sending emails.]" \
+"server[Starts the Phoenix dev server for tiger]" \
+"test-diff[Runs tests for files changed compared to master.]" \
+"test-file[Run tests in watch mode using IEx]" \
+
+      fi
+      ;;
+    args)
+      case $line[1] in
+        "lint")
+          _lift_tiger_lint
+        ;;
+        "create-feature-flag")
+          _arguments -S \
+--json"[Format output as json.]" \
+--log-level"[Specify level for logging.]:log-level options:(debug warn error info trace)" \
+--key"[Feature flag key]:file:_files" \
+--description"[Feature flag description]:file:_files" \
+--team"[Team owning the feature flag]:file:_files" \
+--target"[Target platform]:target options:(web mobile)" \
+"(-f --force)"{-f,--force}"[Force creation]" \
+--help"[Show help for command]" \
+"*: :_files"
+        ;;
+        "dev-setup")
+          _arguments -S \
+--json"[Format output as json.]" \
+--log-level"[Specify level for logging.]:log-level options:(debug warn error info trace)" \
+--reset"[Reset the local DB]" \
+--help"[Show help for command]" \
+"*: :_files"
+        ;;
+        "generate-email")
+          _arguments -S \
+--json"[Format output as json.]" \
+--log-level"[Specify level for logging.]:log-level options:(debug warn error info trace)" \
+--owner-team"[Team owning the Oban worker]:file:_files" \
+--worker-context"[Context for the Oban worker]:file:_files" \
+--mailer-context"[Context for the mailer]:file:_files" \
+"(-f --force)"{-f,--force}"[Force creation]" \
+--help"[Show help for command]" \
+"*: :_files"
+        ;;
+        "server")
+          _arguments -S \
+--json"[Format output as json.]" \
+--log-level"[Specify level for logging.]:log-level options:(debug warn error info trace)" \
+--help"[Show help for command]" \
+"*: :_files"
+        ;;
+        "test-diff")
+          _arguments -S \
+--json"[Format output as json.]" \
+--log-level"[Specify level for logging.]:log-level options:(debug warn error info trace)" \
+--help"[Show help for command]" \
+"*: :_files"
+        ;;
+        "test-file")
+          _arguments -S \
+--json"[Format output as json.]" \
+--log-level"[Specify level for logging.]:log-level options:(debug warn error info trace)" \
+"(-p --path)"{-p,--path}"[Path to test file]:file:_files" \
+--help"[Show help for command]" \
+"*: :_files"
+        ;;
+
+      *)
+        _lift_tiger_flags
+      ;;
+      esac
+      ;;
+  esac
+}
+
+_lift_tiger_lint() {
+  _lift_tiger_lint_flags() {
+    local context state state_descr line
+    typeset -A opt_args
+
+    _arguments -S \
+--json"[Format output as json.]" \
+--log-level"[Specify level for logging.]:log-level options:(debug warn error info trace)" \
+--help"[Show help for command]" \
+"*: :_files"
+  }
+
+  local context state state_descr line
+  typeset -A opt_args
+
+  _arguments -C "1: :->cmds" "*: :->args"
+
+  case "$state" in
+    cmds)
+      if [[ "${words[CURRENT]}" == -* ]]; then
+        _lift_tiger_lint_flags
+      else
+_values "completions" \
+"complete[Run complete linting suite including compile checks, workflow validation, security checks, and dependency audits]" \
+"credo[Run Credo static code analysis with compile-time config and migration checks]" \
+"folder-structure[Validate project folder structure]" \
+"quick[Run quick linting checks]" \
+
+      fi
+      ;;
+    args)
+      case $line[1] in
+        "complete")
+          _arguments -S \
+--json"[Format output as json.]" \
+--log-level"[Specify level for logging.]:log-level options:(debug warn error info trace)" \
+--help"[Show help for command]" \
+"*: :_files"
+        ;;
+        "credo")
+          _arguments -S \
+--json"[Format output as json.]" \
+--log-level"[Specify level for logging.]:log-level options:(debug warn error info trace)" \
+--help"[Show help for command]" \
+"*: :_files"
+        ;;
+        "folder-structure")
+          _arguments -S \
+--json"[Format output as json.]" \
+--log-level"[Specify level for logging.]:log-level options:(debug warn error info trace)" \
+--help"[Show help for command]" \
+"*: :_files"
+        ;;
+        "quick")
+          _arguments -S \
+--json"[Format output as json.]" \
+--log-level"[Specify level for logging.]:log-level options:(debug warn error info trace)" \
+--help"[Show help for command]" \
+"*: :_files"
+        ;;
+
+      *)
+        _lift_tiger_lint_flags
+      ;;
+      esac
+      ;;
+  esac
+}
+
+
+_lift() {
+  local context state state_descr line
+  typeset -A opt_args
+
+  _arguments -C "1: :->cmds" "*::arg:->args"
+
+  case "$state" in
+    cmds)
+      _values "completions" \
+"boba[Run a script in the Tiger repo.]" \
+"employ[Run a script in the Employ workspace.]" \
+"gitlab[Select a merge request command to execute]" \
+"jobs[Run a script in the Jobs workspace.]" \
+"tiger[Run a script in the Tiger repo.]" \
+"setup[Setup CLI configuration]" \
+"autocomplete[Display autocomplete installation instructions.]" \
+"help[Display help for lift.]" \
+
+    ;;
+    args)
+      case $line[1] in
+boba)
+  _lift_boba
+  ;;
+employ)
+  _lift_employ
+  ;;
+gitlab)
+  _lift_gitlab
+  ;;
+jobs)
+  _lift_jobs
+  ;;
+tiger)
+  _lift_tiger
+  ;;
+autocomplete)
+_arguments -S \
+"(-r --refresh-cache)"{-r,--refresh-cache}"[Refresh cache (ignores displaying instructions)]" \
+--help"[Show help for command]" \
+"*: :_files" ;; 
+help)
+_arguments -S \
+"(-n --nested-commands)"{-n,--nested-commands}"[Include all nested commands in the output.]" \
+--help"[Show help for command]" \
+"*: :_files" ;; 
+esac
+
+    ;;
+  esac
+}
+
+_lift

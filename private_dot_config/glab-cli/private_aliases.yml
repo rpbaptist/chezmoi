@@ -1,0 +1,9 @@
+ci: pipeline ci
+co: mr checkout
+iv: issue view "$1" -R remote-com/employ-starbase/tracker
+mrv: mr view --web
+ilm: issue list --assignee=@me -R remote-com/employ-starbase/tracker
+ilt: issue ls -R remote-com/employ-starbase/tracker -l "team::payroll_preparation" -l "flow::ready for dev"
+mrc: mr create -a @me --draft --remove-source-branch --squash-before-merge -t "$1"
+mra: mr list --assignee=@me
+mrr: mr list --reviewer=@me

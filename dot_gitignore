@@ -1,0 +1,12 @@
+.gitconfig
+.tags
+.tags-tmp
+.tags_lock/*
+*.sublime-project
+*.sublime-workspace
+.envrc
+.rake_tasks
+.mix_tasks
+.rtx.toml
+personal.planning.avanterules
+mise.local.toml

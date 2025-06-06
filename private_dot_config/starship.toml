@@ -1,0 +1,179 @@
+format = """
+([ $username$hostname ](bg:#3c3836)\
+[ ](fg:black bg:#3c3836))\
+\
+[ $directory ](bg:#3c3836)\
+[([ ](fg:black bg:#3c3836)\
+$elixir\
+$zig\
+$custom\
+$c\
+$nodejs )](bg:#3c3836)\
+\
+[([ ](fg:black bg:#3c3836)\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status )](fg:bright-cyan bg:#3c3836)\
+\
+[](#3c3836)\
+$line_break\
+($sudo )$character
+"""
+
+command_timeout = 600
+
+continuation_prompt = ''
+
+[sudo]
+disabled = true
+style = 'bright-purple'
+symbol = ''
+format = '[$symbol]($style)'
+
+[character]
+success_symbol = "[❯](blue)"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](green)"
+
+[directory]
+read_only = " 󰌾"
+read_only_style = "fg:bright-red bg:#3c3836"
+style = "fg:yellow bg:#3c3836"
+format = '[$path]($style)[$read_only]($read_only_style)'
+
+[git_branch]
+symbol = "󰘬 "
+truncation_length = 40
+style = "fg:bright-cyan bg:#3c3836"
+format = "[$symbol$branch]($style)"
+
+[git_commit]
+tag_symbol = " 󰓹 "
+style = "fg:bright-cyan bg:#3c3836"
+format = '[\($hash$tag\)]($style)'
+
+[git_status]
+stashed = "≡"
+ahead = '[](fg:cyan bg:#3c3836)'
+up_to_date = "[✔](bold fg:cyan bg:#3c3836)"
+behind = '[](fg:bright-red bg:#3c3836)'
+diverged = "[✗](fg:bold bright-red bg:#3c3836)"
+staged = '[+](fg:bold cyan bg:#3c3836)'
+deleted = '[-](fg:bold bright-red bg:#3c3836)'
+untracked = '[?](fg:bright-yellow bg:#3c3836)'
+renamed = '[»](fg:bright-yellow bg:#3c3836)'
+modified = "[≠](fg:bright-yellow bg:#3c3836)"
+typechanged = ''
+style = 'bg:#3c3836'
+format = "[( $ahead_behind)( $all_status)]($style)"
+
+[git_state]
+style = "fg:bright-yellow bg:#3c3836"
+format = ' [$state( $progress_current/$progress_total)]($style)'
+
+[cmd_duration]
+disabled = true
+format = "[$duration]($style) "
+style = "yellow"
+
+[username]
+style_user = "fg:bright-blue bg:#3c3836"
+style_root = "fg:bold red bg:#3c3836"
+format = "[$user]($style)"
+# show_always = true
+
+[hostname]
+# ssh_only = false
+style = "fg:bright-yellow bg:#3c3836"
+ssh_symbol = " "
+format = "[@$hostname]($style)"
+
+[aws]
+symbol = "  "
+
+[c]
+symbol = " "
+style = 'fg:bright-yellow bg:#3c3836'
+version_format = '${raw}'
+format = '[$symbol($version(-$name))]($style)'
+
+[docker_context]
+symbol = " "
+format = '[$symbol($version(-$name))]($style)'
+
+[elixir]
+disabled = true
+symbol = " "
+version_format = '${raw}'
+style = 'fg:bright-purple bg:#3c3836'
+format = '[$symbol$version]($style)'
+
+[custom.elixir]
+symbol = " "
+style = 'fg:bright-purple bg:#3c3836'
+command = "elixir --short-version"
+format = '[$symbol$output]($style)'
+detect_files = ['mix.exs']
+
+[golang]
+symbol = " "
+
+[lua]
+symbol = " "
+
+[memory_usage]
+symbol = "󰍛 "
+
+[meson]
+symbol = "󰔷 "
+
+[nix_shell]
+symbol = " "
+
+[zig]
+symbol = " "
+style = 'fg:bright-purple bg:#3c3836'
+format = '[$symbol$version]($style)'
+
+[nodejs]
+symbol = " "
+style = "fg:green bg:#3c3836"
+version_format = '${raw}'
+format = '[$symbol($version)]($style)'
+
+[os.symbols]
+Alpine = " "
+Arch = " "
+Artix = " "
+Debian = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "󰛓 "
+Gentoo = " "
+HardenedBSD = "󰞌 "
+Illumos = "󰈸 "
+Linux = " "
+Mabox = " "
+Manjaro = " "
+NixOS = " "
+OpenBSD = "󰈺 "
+openSUSE = " "
+Raspbian = " "
+Redox = "󰀘 "
+Solus = "󰠳 "
+SUSE = " "
+Ubuntu = " "
+
+[package]
+symbol = "󰏗 "
+
+[python]
+symbol = " "
+
+[ruby]
+symbol = " "
+
+[rust]
+symbol = " "

@@ -1,0 +1,3 @@
+Write to file
+
+File.write('/path/to/file', 'Some glorious content')
