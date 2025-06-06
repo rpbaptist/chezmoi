@@ -8,6 +8,51 @@ vim.g.kitty_navigator_password = "nvimwindows"
 
 vim.o.background = "dark"
 
+vim.g.custom_icons = {
+	kinds = {
+		Array = " ",
+		Boolean = "󰨙 ",
+		Class = " ",
+		Codeium = "󰘦 ",
+		Color = " ",
+		Control = " ",
+		Collapsed = " ",
+		Constant = "󰏿 ",
+		Constructor = " ",
+		Copilot = " ",
+		Enum = " ",
+		EnumMember = " ",
+		Event = " ",
+		Field = " ",
+		File = " ",
+		Folder = " ",
+		Function = "󰊕 ",
+		Interface = " ",
+		Key = " ",
+		Keyword = " ",
+		Method = "󰊕 ",
+		Module = " ",
+		Namespace = "󰦮 ",
+		Null = " ",
+		Number = "󰎠 ",
+		Object = " ",
+		Operator = " ",
+		Package = " ",
+		Property = " ",
+		Reference = " ",
+		Snippet = "󱄽 ",
+		String = " ",
+		Struct = "󰆼 ",
+		Supermaven = " ",
+		TabNine = "󰏚 ",
+		Text = " ",
+		TypeParameter = " ",
+		Unit = " ",
+		Value = " ",
+		Variable = "󰀫 ",
+	},
+}
+
 local opt = vim.opt
 
 opt.relativenumber = false
