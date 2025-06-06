@@ -95,14 +95,14 @@ return {
 		{
 			"<leader>fe",
 			function()
-				Snacks.explorer({ layout = { preset = "sidebar" } })
+				Snacks.explorer({ cwd = vim.fn.expand("%:h"), layout = { preset = "sidebar" } })
 			end,
 			desc = "Find Files",
 		},
 		{
 			"<leader>fE",
 			function()
-				Snacks.explorer({cwd = true})
+				Snacks.explorer({cwd = vim.fn.expand("%:h")})
 			end,
 			desc = "Find Files",
 		},
