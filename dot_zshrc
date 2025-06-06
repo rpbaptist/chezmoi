@@ -78,6 +78,7 @@ znap fpath _kubectl   "kubectl   completion  zsh"
 znap fpath _remotectl "remotectl completion  zsh"
 znap fpath _mise      "mise      completion  zsh"
 znap fpath _starship  "starship  completions zsh"
+znap fpath _chezmoi   "chezmoi   completion zsh"
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS+=(main brackets regexp)
 typeset -A ZSH_HIGHLIGHT_STYLES
