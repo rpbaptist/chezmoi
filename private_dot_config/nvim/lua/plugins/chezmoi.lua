@@ -12,11 +12,4 @@ return {
 			on_watch = false,
 		},
 	},
-	keys = {
-		{
-			"<leader>sz",
-			pick_chezmoi,
-			desc = "Chezmoi",
-		},
-	},
 }
