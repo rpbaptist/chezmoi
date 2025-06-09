@@ -25,15 +25,22 @@ return {
 		jumplist = true,
 	},
 	keys = {
-		{ "<C-Up>", "<cmd>Treewalker Up<cr>", silent = true, desc = "Navigate block up" },
-		{ "<C-Down>", "<cmd>Treewalker Down<cr>", silent = true, desc = "Navigate block down" },
-		{ "<C-Left>", "<cmd>Treewalker Left<cr>", silent = true, desc = "Navigate block left" },
-		{ "<C-Right>", "<cmd>Treewalker Right<cr>", silent = true, desc = "Navigate block right" },
+		{ "<C-Up>", "<cmd>Treewalker Up<cr>", silent = true, mode = { "n", "v" }, desc = "Navigate block up" },
+		{ "<C-Down>", "<cmd>Treewalker Down<cr>", silent = true, mode = { "n", "v" }, desc = "Navigate block down" },
+		{ "<C-Left>", "<cmd>Treewalker Left<cr>", silent = true, mode = { "n", "v" }, desc = "Navigate block left" },
+		{
+			"<C-Right>",
+			"<cmd>Treewalker Right<cr>",
+			silent = true,
+			mode = { "n", "v" },
+			desc = "Navigate block right",
+		},
 
 		-- swapping
-		{ "<C-S-Up>", "<cmd>Treewalker SwapUp<cr>", silent = true, desc = "Move block up" },
-		{ "<C-S-Down>", "<cmd>Treewalker SwapDown<cr>", silent = true, desc = "Move block down" },
-		{ "<C-S-Left>", "<cmd>Treewalker SwapLeft<cr>", silent = true, desc = "Move object left" },
-		{ "<C-S-Right>", "<cmd>Treewalker SwapRight<cr>", silent = true, desc = "Move object right" },
+		{ "<C-S-Up>", "<cmd>Treewalker SwapUp<cr>", silent = true, mode = "n", desc = "Move block up" },
+		{ "<C-S-Down>", "<cmd>Treewalker SwapDown<cr>", silent = true, mode = "n", desc = "Move block down" },
+		{ "<C-S-Left>", "<cmd>Treewalker SwapLeft<cr>", silent = true, mode = "n", desc = "Move object left" },
+		{ "<C-S-Right>", "<cmd>Treewalker SwapRight<cr>", silent = true, mode = "n", desc = "Move object right",
+		},
 	},
 }
