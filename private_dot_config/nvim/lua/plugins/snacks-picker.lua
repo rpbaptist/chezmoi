@@ -225,6 +225,13 @@ return {
 		},
 		-- git
 		{
+			"<leader>gb",
+			function()
+				Snacks.picker.git_log_line()
+			end,
+			desc = "Git Blame Line",
+		},
+		{
 			"<leader>gf",
 			function()
 				Snacks.picker.git_status()
