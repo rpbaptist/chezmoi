@@ -52,30 +52,21 @@ set({ "n", "x", "i", "v" }, "<Home>", function()
 	end
 end, { desc = "Move to beginning of line", remap = true })
 
+local file_path = require("utils.file-path")
 set({ "n", "x", "v" }, "<leader>fP", function()
-	local path = vim.fn.expand("%:p")
-	vim.fn.setreg("+", path)
-	vim.notify("Copied " .. path .. " to clipboard")
+	file_path.copy({ absolute = true })
 end, { desc = "Copy absolute file path" })
 
 set({ "n", "x", "v" }, "<leader>fp", function()
-	local path = vim.fn.expand("%:.")
-	vim.fn.setreg("+", path)
-	vim.notify("Copied " .. path .. " to clipboard")
+	file_path.copy()
 end, { desc = "Copy relative file path" })
 
 set({ "n", "x", "v" }, "<leader>fL", function()
-	local path = vim.fn.expand("%:p")
-	local line = vim.fn.line(".")
-	vim.fn.setreg("+", path .. ":" .. line)
-	vim.notify("Copied " .. path .. ":" .. line .. " to clipboard")
+	file_path.copy({ absolute = true, line = true })
 end, { desc = "Copy absolute file path with line" })
 
 set({ "n", "x", "v" }, "<leader>fl", function()
-	local path = vim.fn.expand("%:.")
-	local line = vim.fn.line(".")
-	vim.fn.setreg("+", path .. ":" .. line)
-	vim.notify("Copied " .. path .. ":" .. line .. " to clipboard")
+	file_path.copy({ line = true })
 end, { desc = "Copy relative file path with line" })
 
 function TestCurrentFile()
@@ -85,9 +76,8 @@ function TestCurrentFile()
 end
 
 function TestCurrentLine()
-	local current_file = vim.fn.expand("%:p")
-	local current_line = vim.fn.line(".")
-	local cmd = 'IexTests.test("' .. current_file .. '", ' .. current_line .. ")"
+	local current_file = file_path.get({ absolute = true, line = true })
+	local cmd = 'IexTests.test("' .. current_file .. '")'
 	Snacks.terminal.get(cmd)
 end
 
@@ -200,7 +190,6 @@ end, { desc = "Quickfix List" })
 
 set("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
 set("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
-
 
 set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
 
