@@ -74,6 +74,7 @@ alias dot="chezmoi cd"
 
 alias cm="chezmoi"
 alias cma="chezmoi add"
+alias cmall="chezmoi add $HOME/.config/nvim/lazy-lock.json"
 alias cmd="chezmoi diff"
 alias cme="chezmoi edit"
 alias cmf="chezmoi forget"
