@@ -1,7 +1,7 @@
 return {
 	{
 		"nvim-neotest/neotest",
-    event = "VeryLazy",
+		lazy = true,
 		dependencies = {
 			"nvim-neotest/nvim-nio",
 			"nvim-lua/plenary.nvim",
@@ -12,17 +12,10 @@ return {
 			return {
 				adapters = {
 					require("neotest-elixir"),
-					-- require("neotest-elixir")({
-					-- 	strategy = "iex",
-					-- }),
 				},
 				status = { virtual_text = true },
 				output = { open_on_run = true },
-				quickfix = {
-					open = function()
-						vim.cmd("copen")
-					end,
-				},
+				quickfix = false,
 			}
 		end,
 		config = function(_, opts)
