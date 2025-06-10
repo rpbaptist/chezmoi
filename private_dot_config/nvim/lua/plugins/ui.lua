@@ -1,7 +1,7 @@
 return {
 	{
 		"Tummetott/reticle.nvim",
-		event = "VeryLazy",
+		lazy = true,
 		opts = {
 			always_highlight_number = true,
 		},
@@ -12,13 +12,5 @@ return {
 		opts = {},
 	},
 	{ "MunifTanjim/nui.nvim" },
-	{
-		"TungstnBallon/conflict.nvim",
-		keys = {
-			{ "]g", ":lua ConflictJumpToNext<cr>", desc = "Next conflict" },
-			{ "[g", ":lua ConflictJumpToPrev<cr>", desc = "Previous conflict" },
-			{ "<leader>gc", ":lua ConflictResolveAroundCursor<cr>", desc = "Resolve conflict" },
-		},
-	},
 	{ "nacro90/numb.nvim", opts = {} },
 }
