@@ -28,14 +28,13 @@ end
 M.picker_opts = function(filter)
 	local items = M.list_config_files(filter)
 
-	---@type snacks.picker.Config
 	return {
 		items = items,
 		confirm = function(picker, item)
 			picker:close()
 			require("chezmoi.commands").edit({
 				targets = { item.text },
-				args = { "--watch" },
+				args = { "--watch", "--apply" },
 			})
 		end,
 	}

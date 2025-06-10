@@ -1,6 +1,6 @@
 return {
 	"echasnovski/mini.diff",
-  lazy = true,
+  event = "VeryLazy",
 	opts = {
 		view = {
 			style = "sign",
