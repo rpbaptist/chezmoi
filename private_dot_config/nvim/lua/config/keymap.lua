@@ -202,10 +202,3 @@ set("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 set("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 set("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
-set("n", "<C-S-Left>", function()
-	require("utils.swap-nodes").swap_parameters("previous")
-end, { desc = "Swap with previous node" })
-
-set("n", "<C-S-Right>", function()
-	require("utils.swap-nodes").swap_parameters("next")
-end, { desc = "Swap with previous node" })
