@@ -44,7 +44,7 @@ return {
 				"vimdoc",
 				"xml",
 				"yaml",
-        "git_config",
+				"git_config",
 			},
 			indent = { enable = true },
 			incremental_selection = {
@@ -77,13 +77,7 @@ return {
 					},
 				},
 				swap = {
-					enable = true,
-					swap_next = {
-						["]k"] = "@parameter.inner",
-					},
-					swap_previous = {
-						["[k"] = "@parameter.inner",
-					},
+					enable = false,
 				},
 			},
 		},
