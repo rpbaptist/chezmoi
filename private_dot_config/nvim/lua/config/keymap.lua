@@ -14,6 +14,8 @@ set({ "n", "v" }, "<PageUp>", "<C-u><C-u>")
 
 set("n", "<A-v>", "<C-v>")
 
+set("v", "<F9>", ":sort<CR>")
+
 -- True delete
 set({ "n", "x", "v" }, "<leader>d", '"_d', { desc = "Delete without cut" })
 -- set({ "n", "x", "v" }, "D", '"_D', { desc = "Delete until end of line" })
