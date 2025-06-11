@@ -13,6 +13,10 @@ return {
 				adapters = {
 					require("neotest-elixir"),
 				},
+				discovery = {
+					concurrent = 2,
+					enabled = false,
+				},
 				status = { virtual_text = true },
 				output = { open_on_run = true },
 				quickfix = {
