@@ -18,7 +18,6 @@ set("v", "<F9>", ":sort<CR>")
 
 -- True delete
 set({ "n", "x", "v" }, "<leader>d", '"_d', { desc = "Delete without cut" })
--- set({ "n", "x", "v" }, "D", '"_D', { desc = "Delete until end of line" })
 set({ "n", "x", "v" }, "c", '"_c', { desc = "Change without cut" })
 set({ "n", "x", "v" }, "C", '"_C', { desc = "Change without cut" })
 set({ "n", "x", "v" }, "x", '"_x', { desc = "Delete without cut" })
@@ -101,10 +100,6 @@ end, { desc = "Copy relative file path with line" })
 -- set("n", "<leader>td", ":lua TestCurrentDirectory()<CR>", { desc = "Test current file directory" })
 -- set("n", "<leader>tww", ":lua WatchCurrentFile()<CR>", { desc = "Watch current file" })
 -- set("n", "<leader>tws", ":lua StopWatchingCurrentFile()<CR>", { desc = "Stop watching current file" })
---
--- better up/down
--- set({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
--- set({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 --
 
 -- buffers
