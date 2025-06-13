@@ -6,6 +6,7 @@ return {
 			"nvim-neotest/nvim-nio",
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
+			"folke/trouble.nvim",
 			"jfpedroza/neotest-elixir",
 		},
 		opts = function()

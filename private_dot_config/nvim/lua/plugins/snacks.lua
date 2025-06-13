@@ -41,6 +41,7 @@ return {
 		},
 		statuscolumn = { enabled = true },
 		words = { enabled = true },
+		terminal = { enabled = false },
 	},
 	keys = {
 		{
@@ -78,7 +79,7 @@ return {
 					open = function(url)
 						vim.fn.setreg("+", url)
 					end,
-					notify = false,
+					notify = true,
 				})
 			end,
 			desc = "Git Browse (copy)",
@@ -113,13 +114,6 @@ return {
 				Snacks.bufdelete.other()
 			end,
 			desc = "Delete Other Buffers",
-		},
-		{
-			"<leader>fT",
-			function()
-				Snacks.terminal()
-			end,
-			desc = "Terminal (cwd)",
 		},
 	},
 }
