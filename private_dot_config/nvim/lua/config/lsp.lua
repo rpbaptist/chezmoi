@@ -1,5 +1,5 @@
 vim.diagnostic.config({
-  enabled = false,
+	enabled = false,
 	signs = {
 		text = {
 			[vim.diagnostic.severity.ERROR] = " ",
@@ -8,7 +8,7 @@ vim.diagnostic.config({
 			[vim.diagnostic.severity.INFO] = " ",
 		},
 	},
- 	update_in_insert = false,
+	update_in_insert = false,
 	underline = true,
 	severity_sort = true,
 	virtual_text = {
@@ -39,38 +39,38 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 vim.lsp.config("*", {
 	capabilities = capabilities,
 	on_attach = function(client, bufnr)
-		local function map(mapping, fn, opts)
+		local function map(modes, mapping, fn, opts)
 			opts = opts or {}
 			opts.buffer = bufnr
-			vim.keymap.set("n", mapping, fn, opts)
+			vim.keymap.set(modes, mapping, fn, opts)
 		end
 
-		map("gd", function()
+		map("n", "gd", function()
 			Snacks.picker.lsp_definitions()
 		end, { desc = "Goto Definition" })
-		map("gr", function()
+		map("n", "gr", function()
 			Snacks.picker.lsp_references()
 		end, { desc = "References", nowait = true })
-		map("gI", function()
+		map("n", "gI", function()
 			Snacks.picker.lsp_implementations()
 		end, { desc = "Goto Implementation" })
-		map("gy", function()
+		map("n", "gy", function()
 			Snacks.picker.lsp_type_definitions()
 		end, { desc = "Goto T[y]pe Definition" })
-		map("<leader>ss", function()
+		map("n", "<leader>ss", function()
 			Snacks.picker.lsp_symbols()
 		end, { desc = "LSP Symbols" })
-		map("<leader>sS", function()
+		map("n", "<leader>sS", function()
 			Snacks.picker.lsp_workspace_symbols()
 		end, { desc = "LSP Workspace Symbols" })
-		map("<leader>cp", function()
+		map({ "n", "v" }, "<leader>cp", function()
 			local params = vim.lsp.util.make_position_params()
 			vim.lsp.buf_request(0, "workspace/executeCommand", {
 				command = "manipulatePipes:serverid",
 				arguments = { "toPipe", params.textDocument.uri, params.position.line, params.position.character },
 			}, params.handler)
 		end, { desc = "To Pipe" })
-		map("<leader>cP", function()
+		map({ "n", "v" }, "<leader>cP", function()
 			local params = vim.lsp.util.make_position_params()
 
 			vim.lsp.buf_request(0, "workspace/executeCommand", {
@@ -98,5 +98,5 @@ vim.lsp.enable({
 	"lua_ls",
 	"marksman",
 	"bashls",
-  "ts_ls"
+	"ts_ls",
 })

@@ -22,8 +22,8 @@ return {
 				output = { open_on_run = true },
 				quickfix = {
 					open = function()
-						require("trouble").open({ mode = "quickfix", focus = false })
-					end,
+      require("trouble").open({ mode = "quickfix", focus = false })
+        end,
 				},
 			}
 		end,
