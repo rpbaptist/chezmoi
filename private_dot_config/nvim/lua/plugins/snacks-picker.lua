@@ -96,14 +96,14 @@ return {
 			desc = "Find Files",
 		},
 		{
-			"<leader>fe",
+			"<leader>fE",
 			function()
-				Snacks.explorer({ layout = { preset = "sidebar" } })
+				Snacks.explorer({ layout = { preset = "sidebar", preview = false } })
 			end,
 			desc = "Find Files",
 		},
 		{
-			"<leader>fE",
+			"<leader>fe",
 			function()
 				Snacks.explorer()
 			end,
