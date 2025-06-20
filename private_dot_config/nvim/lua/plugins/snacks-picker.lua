@@ -225,11 +225,18 @@ return {
 		},
 		-- git
 		{
+			"<leader>gc",
+			function()
+				Snacks.picker.git_branches({ preview = false })
+			end,
+			desc = "Git branches",
+		},
+		{
 			"<leader>gb",
 			function()
-				Snacks.picker.git_log_line()
+				Snacks.picker.git_log()
 			end,
-			desc = "Git Blame Line",
+			desc = "Git Blame",
 		},
 		{
 			"<leader>gf",
