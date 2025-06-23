@@ -232,11 +232,11 @@ return {
 			desc = "Git branches",
 		},
 		{
-			"<leader>gb",
+			"<leader>gl",
 			function()
-				Snacks.picker.git_log()
+				Snacks.picker.git_log_line()
 			end,
-			desc = "Git Blame",
+			desc = "Git log line",
 		},
 		{
 			"<leader>gf",
