@@ -116,19 +116,12 @@ function mf() {
 }
 
 function find-note() {
-  find "$NOTES_PATH" -type f -name "*.md" | awk -F "$NOTES_PATH/" '{print $2}' | fzf --preview 'bat--style=numbers --color=always {}' -q "$1" 
+  find "$NOTES_PATH" -type f -name "*.md" | awk -F "$NOTES_PATH/" '{print $2}' | ff("$1")
 }
 
 function notes() {
   cd $NOTES_PATH
-  if [ -z "$1" ]
-  then
-    $EDITOR -n "$NOTES_PATH"
-  else
-    local file
-    file="$(find-note "$1")"
-    $EDITOR -n "$NOTES_PATH" "$NOTES_PATH/$file"
-  fi
+  $EDITOR -n "$NOTES_PATH"
 }
 
 function note() {
