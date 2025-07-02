@@ -10,7 +10,7 @@ end
 local set = vim.keymap.set
 
 set({ "n", "v" }, "<C-b>", "<C-u><C-u>")
-set({ "n", "v" }, "<PageUp>", "<C-u><C-u>")
+-- set({ "n", "v" }, "<PageUp>", "<C-u><C-u>")
 
 set("n", "<A-v>", "<C-v>")
 
@@ -100,6 +100,10 @@ end, { desc = "Copy relative file path with line" })
 -- set("n", "<leader>td", ":lua TestCurrentDirectory()<CR>", { desc = "Test current file directory" })
 -- set("n", "<leader>tww", ":lua WatchCurrentFile()<CR>", { desc = "Watch current file" })
 -- set("n", "<leader>tws", ":lua StopWatchingCurrentFile()<CR>", { desc = "Stop watching current file" })
+--
+-- better up/down
+-- set({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+-- set({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 --
 
 -- buffers
@@ -196,4 +200,3 @@ set("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
 set("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 set("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 set("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
-
