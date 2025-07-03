@@ -31,6 +31,9 @@ set("n", "[<Tab>", "<cmd>tabprevious<CR>", { desc = "Previous tab", silent = tru
 set("i", "<C-CR>", "<C-o>o", { desc = "Open line below" })
 set("i", "<S-CR>", "<C-o><S-o>", { desc = "Open line above" })
 
+set("n", "<PageUp>", "<C-u>")
+set("n", "<PageDown>", "<C-d>")
+
 set({ "n", "i" }, "<C-BS>", "<C-o>db", { desc = "Delete backspace" })
 
 set("i", "<Tab>", "<C-i>", { desc = "Indent" })
