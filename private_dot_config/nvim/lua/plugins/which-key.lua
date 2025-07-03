@@ -10,7 +10,6 @@ return {
 				mode = { "n", "v" },
 				{ "<leader>tj", group = "Jump to test file" },
 				{ "<leader>a", group = "AI" },
-				{ "<leader>m", group = "Trailblazer" },
 				{ "<leader>r", group = "Macro recorder" },
 				{ "<leader>.", group = "Toggle scratch buffer" },
 				{ "<leader><tab>", group = "tabs" },
@@ -47,8 +46,8 @@ return {
 				-- better descriptions
 				{ "gx", desc = "Open with system app" },
 			},
-      { "<BS>", desc = "Decrement Selection", mode = "x" },
-      { "<c-space>", desc = "Increment Selection", mode = { "x", "n" } },
+			{ "<BS>", desc = "Decrement Selection", mode = "x" },
+			{ "<c-space>", desc = "Increment Selection", mode = { "x", "n" } },
 		},
 	},
 	keys = {
