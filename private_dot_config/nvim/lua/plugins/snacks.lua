@@ -41,6 +41,7 @@ return {
 		},
 		statuscolumn = { enabled = true },
 		words = { enabled = true },
+		terminal = { enabled = true },
 	},
 	keys = {
 		{
