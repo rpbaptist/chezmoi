@@ -2,7 +2,6 @@ return {
 	{
 		"saghen/blink.cmp",
 		version = "1.*",
-		-- version = "*",
 		build = "cargo build --release",
 		opts_extend = {
 			"sources.completion.enabled_providers",
@@ -11,7 +10,8 @@ return {
 		},
 		dependencies = {
 			"rafamadriz/friendly-snippets",
-			"giuxtaposition/blink-cmp-copilot",
+			"milanglacier/minuet-ai.nvim",
+			-- "giuxtaposition/blink-cmp-copilot",
 			{
 				"saghen/blink.compat",
 				optional = true, -- make optional so it's only enabled if any extras need it
@@ -35,6 +35,9 @@ return {
 				nerd_font_variant = "mono",
 			},
 			completion = {
+				trigger = {
+					prefetch_on_insert = true,
+				},
 				keyword = {
 					range = "full",
 				},
@@ -66,8 +69,8 @@ return {
 			sources = {
 				-- adding any nvim-cmp sources here will enable them
 				-- with blink.compat
-				compat = {},
 				default = { "lsp", "path", "snippets", "buffer", "copilot", "lazydev" },
+				-- default = { "lsp", "path", "snippets", "buffer", "lazydev", "minuet" },
 				providers = {
 					copilot = {
 						name = "copilot",
@@ -76,6 +79,14 @@ return {
 						score_offset = 100,
 						async = true,
 					},
+					-- minuet = {
+					-- 	name = "minuet",
+					-- 	module = "minuet.blink",
+					-- 	async = true,
+          --  kind = "Claude",
+					-- 	timeout_ms = 2000,
+					-- 	score_offset = 100,
+					-- },
 					lazydev = {
 						name = "LazyDev",
 						module = "lazydev.integrations.blink",
@@ -92,7 +103,6 @@ return {
 				["<Esc"] = { "hide", "fallback" },
 			},
 		},
-		---@param opts blink.cmp.Config | { sources: { compat: string[] } }
 		config = function(_, opts)
 			-- setup compat sources
 			local enabled = opts.sources.default
@@ -112,19 +122,14 @@ return {
 
 			-- check if we need to override symbol kinds
 			for _, provider in pairs(opts.sources.providers or {}) do
-				---@cast provider blink.cmp.SourceProviderConfig|{kind?:string}
 				if provider.kind then
 					local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
 					local kind_idx = #CompletionItemKind + 1
 
 					CompletionItemKind[kind_idx] = provider.kind
-					---@diagnostic disable-next-line: no-unknown
 					CompletionItemKind[provider.kind] = kind_idx
 
-					---@type fun(ctx: blink.cmp.Context, items: blink.cmp.CompletionItem[]): blink.cmp.CompletionItem[]
 					local transform_items = provider.transform_items
-					---@param ctx blink.cmp.Context
-					---@param items blink.cmp.CompletionItem[]
 					provider.transform_items = function(ctx, items)
 						items = transform_items and transform_items(ctx, items) or items
 						for _, item in ipairs(items) do

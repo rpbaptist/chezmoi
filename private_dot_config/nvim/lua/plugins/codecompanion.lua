@@ -13,9 +13,10 @@ return {
 	opts = {
 		strategies = {
 			chat = {
-				adapter = "copilot",
+				adapter = "anthropic",
 				roles = {
-					llm = "  Copilot",
+					-- llm = "  Copilot",
+					llm = "  Claude",
 					user = "  Prompt",
 				},
 				slash_commands = {
@@ -58,8 +59,8 @@ return {
 					},
 				},
 			},
-			inline = { adapter = "copilot" },
-			agent = { adapter = "copilot" },
+			inline = { adapter = "anthropic" },
+			agent = { adapter = "anthropic" },
 		},
 		display = {
 			action_palette = {
