@@ -18,6 +18,7 @@ vim.g.custom_icons = {
 		Array = " ",
 		Boolean = "󰨙 ",
 		Class = " ",
+    Claude = "󰋦 ",
 		Codeium = "󰘦 ",
 		Color = " ",
 		Control = " ",
