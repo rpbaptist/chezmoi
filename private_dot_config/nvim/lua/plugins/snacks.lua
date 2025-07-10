@@ -82,6 +82,7 @@ return {
 					notify = true,
 				})
 			end,
+			mode = { "n", "v" },
 			desc = "Git Browse (copy)",
 		},
 		{
@@ -89,6 +90,7 @@ return {
 			function()
 				Snacks.gitbrowse()
 			end,
+			mode = { "n", "v" },
 			desc = "Git Browse (open)",
 		},
 		{
