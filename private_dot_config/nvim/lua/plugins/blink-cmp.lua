@@ -83,7 +83,7 @@ return {
 					-- 	name = "minuet",
 					-- 	module = "minuet.blink",
 					-- 	async = true,
-          --  kind = "Claude",
+					--       kind = "Claude",
 					-- 	timeout_ms = 2000,
 					-- 	score_offset = 100,
 					-- },

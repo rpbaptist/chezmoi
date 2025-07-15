@@ -8,7 +8,7 @@ return {
 	-- 	request_timeout = 2,
 	-- 	context_window = 384,
 	-- 	provider = "claude",
-	-- 	notify = "debug",
+	-- 	-- notify = "debug",
 	-- 	provider_options = {
 	-- 		claude = {
 	-- 			-- model = "claude-3-5-sonnet-20240620",

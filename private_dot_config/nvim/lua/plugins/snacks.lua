@@ -117,5 +117,12 @@ return {
 			end,
 			desc = "Delete Other Buffers",
 		},
+    {
+      "<c-/>",
+      function()
+        Snacks.terminal()
+      end,
+      desc = "Toggle terminal"
+    }
 	},
 }
