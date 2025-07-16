@@ -69,24 +69,8 @@ return {
 			sources = {
 				-- adding any nvim-cmp sources here will enable them
 				-- with blink.compat
-				default = { "lsp", "path", "snippets", "buffer", "copilot", "lazydev" },
-				-- default = { "lsp", "path", "snippets", "buffer", "lazydev", "minuet" },
+				default = { "lsp", "path", "snippets", "buffer", "lazydev" },
 				providers = {
-					copilot = {
-						name = "copilot",
-						module = "blink-cmp-copilot",
-						kind = "Copilot",
-						score_offset = 100,
-						async = true,
-					},
-					-- minuet = {
-					-- 	name = "minuet",
-					-- 	module = "minuet.blink",
-					-- 	async = true,
-					--       kind = "Claude",
-					-- 	timeout_ms = 2000,
-					-- 	score_offset = 100,
-					-- },
 					lazydev = {
 						name = "LazyDev",
 						module = "lazydev.integrations.blink",
