@@ -10,8 +10,6 @@ return {
 		},
 		dependencies = {
 			"rafamadriz/friendly-snippets",
-			"milanglacier/minuet-ai.nvim",
-			-- "giuxtaposition/blink-cmp-copilot",
 			{
 				"saghen/blink.compat",
 				optional = true, -- make optional so it's only enabled if any extras need it
