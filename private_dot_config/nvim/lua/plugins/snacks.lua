@@ -29,6 +29,12 @@ return {
 			},
 		},
 		scratch = {
+			name = "Note",
+			ft = "markdown",
+			root = vim.env.NOTES_PATH,
+			filekey = {
+				branch = false,
+			},
 			styles = {
 				height = 50,
 			},
@@ -41,7 +47,6 @@ return {
 		},
 		statuscolumn = { enabled = true },
 		words = { enabled = true },
-		terminal = { enabled = true },
 	},
 	keys = {
 		{
@@ -117,12 +122,5 @@ return {
 			end,
 			desc = "Delete Other Buffers",
 		},
-    {
-      "<c-/>",
-      function()
-        Snacks.terminal()
-      end,
-      desc = "Toggle terminal"
-    }
 	},
 }
