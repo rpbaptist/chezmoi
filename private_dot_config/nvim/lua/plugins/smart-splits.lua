@@ -17,10 +17,10 @@ return {
       local splits = require("smart-splits")
 
       return {
-        { "<C-A-n>", splits.move_cursor_left, desc = "Move left" },
-        { "<C-A-i>", splits.move_cursor_right, desc = "Move right" },
-        { "<C-A-u>", splits.move_cursor_up, desc = "Move up" },
-        { "<C-A-e>", splits.move_cursor_down, desc = "Move down" },
+        { "<C-A-n>", splits.move_cursor_left, desc = "Move left", mode = {"n", "i", "v", "t"} },
+        { "<C-A-i>", splits.move_cursor_right, desc = "Move right", mode = {"n", "i", "v", "t"} },
+        { "<C-A-u>", splits.move_cursor_up, desc = "Move up", mode = {"n", "i", "v", "t"} },
+        { "<C-A-e>", splits.move_cursor_down, desc = "Move down", mode = {"n", "i", "v", "t"} },
 
         {
           "<A-S-n>",
