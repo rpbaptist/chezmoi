@@ -1,18 +1,15 @@
 return {
-	"coder/claudecode.nvim",
-	dependencies = { "folke/snacks.nvim" },
+
+  dir = "~/code/claudecode.nvim",
+	-- "rpbaptist/claudecode.nvim",
+  branch = "add-ergoterm",
+  dependencies = {
+    "waiting-for-dev/ergoterm.nvim",
+  },
 	event = "VeryLazy",
-	cmd = {
-		"ClaudeCode",
-		"ClaudeCodeFocus",
-		"ClaudeCodeSend",
-		"ClaudeCodeAdd",
-		"ClaudeCodeDiffAccept",
-		"ClaudeCodeDiffDeny",
-	},
 	opts = {
 		terminal = {
-			provider = "snacks",
+			provider = "ergoterm",
 		},
 	},
 	keys = {
@@ -26,7 +23,7 @@ return {
 			"<leader>as",
 			"<cmd>ClaudeCodeTreeAdd<cr>",
 			desc = "Add file",
-			ft = { "NvimTree", "neo-tree", "oil" },
+			ft = { "snacks_picker_list" },
 		},
 		-- Diff management
 		{ "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
