@@ -9,9 +9,6 @@ end
 
 local set = vim.keymap.set
 
-set({ "n", "v" }, "<C-b>", "<C-u><C-u>")
--- set({ "n", "v" }, "<PageUp>", "<C-u><C-u>")
-
 set("n", "<A-v>", "<C-v>")
 
 set("v", "<F9>", ":sort<CR>")
@@ -148,14 +145,13 @@ set("n", "<leader>uI", function()
 end, { desc = "Inspect Tree" })
 
 -- Terminal Mappings
--- set("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
-set("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
---
+-- set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
 -- windows
 set("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
 set("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
 set("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
--- --
+
 -- tabs
 set("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
 set("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
