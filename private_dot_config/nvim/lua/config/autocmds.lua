@@ -147,3 +147,13 @@ vim.api.nvim_create_autocmd("CursorMoved", {
 		end
 	end,
 })
+
+-- Auto enter insert mode when focusing terminal buffers
+vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter" }, {
+	group = augroup("terminal_insert_mode"),
+	callback = function()
+		if vim.bo.buftype == "terminal" then
+			vim.cmd("startinsert")
+		end
+	end,
+})
