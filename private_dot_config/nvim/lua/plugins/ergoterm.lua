@@ -21,6 +21,7 @@ return {
 				function()
 					iex_tests.toggle()
 				end,
+        desc = "Toggle IexTests",
 			},
 			{
 				"<leader>tf",
@@ -29,6 +30,7 @@ return {
 					local file_path = vim.fn.expand("%")
 					iex_tests:send({ 'IexTests.test("' .. file_path .. '")' }, { action = "visible" })
 				end,
+        desc = "Test file",
 			},
 			{
 				"<leader>tt",
@@ -41,6 +43,7 @@ return {
 						{ action = "visible" }
 					)
 				end,
+        desc = "Test line",
 			},
 			{
 				"<leader>twf",
@@ -49,6 +52,7 @@ return {
 					local file_path = vim.fn.expand("%")
 					iex_tests:send({ 'IexTests.test_watch("' .. file_path .. '")' }, { action = "visible" })
 				end,
+        desc = "Watch test file",
 			},
 			{
 				"<leader>twt",
@@ -61,6 +65,7 @@ return {
 						{ action = "visible" }
 					)
 				end,
+        desc = "Watch test on line",
 			},
 			{
 				"<leader>tws",
@@ -68,6 +73,7 @@ return {
 					iex_tests.start()
 					iex_tests:send({ "IexTests.stop_watch()" }, { action = "hidden" })
 				end,
+        desc = "Stop test watch",
 			},
 		}
 	end,

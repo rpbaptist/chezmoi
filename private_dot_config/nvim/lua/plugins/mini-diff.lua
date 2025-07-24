@@ -1,6 +1,6 @@
 return {
 	"echasnovski/mini.diff",
-  event = "VeryLazy",
+	event = "VeryLazy",
 	opts = {
 		view = {
 			style = "sign",
@@ -12,6 +12,7 @@ return {
 		},
 	},
 	keys = {
+		{ "<leader>g", group = "git" },
 		{
 			"<leader>gd",
 			function()
@@ -21,4 +22,3 @@ return {
 		},
 	},
 }
-

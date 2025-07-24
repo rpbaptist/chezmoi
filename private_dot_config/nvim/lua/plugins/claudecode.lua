@@ -1,11 +1,11 @@
 return {
 
-  dir = "~/code/claudecode.nvim",
+	dir = "~/code/claudecode.nvim",
 	-- "rpbaptist/claudecode.nvim",
-  branch = "add-ergoterm",
-  dependencies = {
-    "waiting-for-dev/ergoterm.nvim",
-  },
+	branch = "add-ergoterm",
+	dependencies = {
+		"waiting-for-dev/ergoterm.nvim",
+	},
 	event = "VeryLazy",
 	opts = {
 		terminal = {
@@ -13,6 +13,7 @@ return {
 		},
 	},
 	keys = {
+		{ "<leader>a", group = "AI" },
 		{ "<leader>at", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
 		{ "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
 		{ "<leader>aR", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
