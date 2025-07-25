@@ -9,9 +9,9 @@ return {
 			cmd = "iex -S mix",
 			name = "IexTests",
 			layout = "right",
-      dir = "git_dir",
+			dir = "git_dir",
 			selectable = false,
-      start_in_insert = false,
+			start_in_insert = false,
 			env = {
 				MIX_ENV = "test",
 			},
@@ -21,23 +21,23 @@ return {
 			{
 				"<leader>tg",
 				function()
-					iex_tests.toggle()
+					iex_tests:toggle()
 				end,
-        desc = "Toggle IexTests",
+				desc = "Toggle IexTests",
 			},
 			{
 				"<leader>tf",
 				function()
-					iex_tests.start()
+					iex_tests:start()
 					local file_path = vim.fn.expand("%")
 					iex_tests:send({ 'IexTests.test("' .. file_path .. '")' }, { action = "visible" })
 				end,
-        desc = "Test file",
+				desc = "Test file",
 			},
 			{
 				"<leader>tt",
 				function()
-					iex_tests.start()
+					iex_tests:start()
 					local file_path = vim.fn.expand("%")
 					local line_number = vim.fn.line(".")
 					iex_tests:send(
@@ -45,21 +45,21 @@ return {
 						{ action = "visible" }
 					)
 				end,
-        desc = "Test line",
+				desc = "Test line",
 			},
 			{
 				"<leader>twf",
 				function()
-					iex_tests.start()
+					iex_tests:start()
 					local file_path = vim.fn.expand("%")
 					iex_tests:send({ 'IexTests.test_watch("' .. file_path .. '")' }, { action = "visible" })
 				end,
-        desc = "Watch test file",
+				desc = "Watch test file",
 			},
 			{
 				"<leader>twt",
 				function()
-					iex_tests.start()
+					iex_tests:start()
 					local file_path = vim.fn.expand("%")
 					local line_number = vim.fn.line(".")
 					iex_tests:send(
@@ -67,15 +67,15 @@ return {
 						{ action = "visible" }
 					)
 				end,
-        desc = "Watch test on line",
+				desc = "Watch test on line",
 			},
 			{
 				"<leader>tws",
 				function()
-					iex_tests.start()
+					iex_tests:start()
 					iex_tests:send({ "IexTests.stop_watch()" }, { action = "hidden" })
 				end,
-        desc = "Stop test watch",
+				desc = "Stop test watch",
 			},
 		}
 	end,
