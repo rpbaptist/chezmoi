@@ -78,3 +78,5 @@ alias cma="cmall && chezmoi apply"
 alias cmd="cmall && chezmoi diff"
 alias cme="chezmoi edit"
 alias cmf="chezmoi forget"
+
+alias nvc="c $HOME/.config/nvim"
