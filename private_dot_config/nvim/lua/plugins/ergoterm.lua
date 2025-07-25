@@ -10,8 +10,8 @@ return {
 			name = "IexTests",
 			layout = "right",
 			dir = "git_dir",
-			selectable = false,
 			start_in_insert = false,
+			close_on_job_exit = false,
 			env = {
 				MIX_ENV = "test",
 			},
