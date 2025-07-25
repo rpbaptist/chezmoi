@@ -9,7 +9,9 @@ return {
 			cmd = "iex -S mix",
 			name = "IexTests",
 			layout = "right",
+      dir = "git_dir",
 			selectable = false,
+      start_in_insert = false,
 			env = {
 				MIX_ENV = "test",
 			},
