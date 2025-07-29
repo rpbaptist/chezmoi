@@ -1,7 +1,12 @@
 return {
 	"waiting-for-dev/ergoterm.nvim",
 	event = "VeryLazy",
-	opts = {},
+	opts = {
+		size = {
+			right = 100,
+			below = 5,
+		},
+	},
 	keys = function()
 		local terms = require("ergoterm.terminal")
 
@@ -12,9 +17,15 @@ return {
 			dir = "git_dir",
 			start_in_insert = false,
 			close_on_job_exit = false,
+			size = { right = 80 },
 			env = {
 				MIX_ENV = "test",
 			},
+		})
+
+		local quick_term = terms.Terminal:new({
+			layout = "below",
+			size = { below = 15 },
 		})
 
 		return {
@@ -76,6 +87,14 @@ return {
 					iex_tests:send({ "IexTests.stop_watch()" }, { action = "hidden" })
 				end,
 				desc = "Stop test watch",
+			},
+			{
+				"<C-/>",
+				function()
+					quick_term:toggle()
+				end,
+				desc = "Terminal float",
+				mode = { "n", "i", "x", "t" },
 			},
 		}
 	end,

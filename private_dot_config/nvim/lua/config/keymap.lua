@@ -144,9 +144,6 @@ set("n", "<leader>uI", function()
 	vim.api.nvim_input("I")
 end, { desc = "Inspect Tree" })
 
--- Terminal Mappings
--- set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-
 -- windows
 set("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
 set("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
