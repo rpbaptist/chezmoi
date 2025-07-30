@@ -20,7 +20,6 @@ local function build_terminal_opts(config, env_table, cmd_string, focus)
 		name = "claude-code",
 		cmd = cmd_string,
 		layout = layout,
-		start_in_insert = focus,
 		auto_scroll = true,
 		selectable = true,
 		env = env_table,
@@ -58,10 +57,7 @@ function M.open(cmd_string, env_table, config, focus)
 		terminal = require("ergoterm.terminal").Terminal:new(opts)
 	end
 
-	terminal:open()
-	if focus then
-		terminal:focus()
-	end
+	terminal:focus()
 end
 
 function M.close()
