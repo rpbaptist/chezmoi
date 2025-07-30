@@ -54,6 +54,7 @@ function M.open(cmd_string, env_table, config, focus)
 		terminal = require("ergoterm.terminal").Terminal:new(opts)
 	end
 
+  terminal:open()
 	return focus and terminal:focus()
 end
 
