@@ -4,6 +4,7 @@
 local M = {}
 
 local terminal = nil
+local ergoterm = nil
 
 --- Normalize focus parameter
 --- @param focus boolean|nil
@@ -42,12 +43,15 @@ local function build_terminal_opts(config, env_table, cmd_string, focus)
 end
 
 function M.is_available()
-	local ergoterm_available, ergoterm = pcall(require, "ergoterm.terminal")
-	return ergoterm_available and ergoterm and ergoterm.Terminal
+	local ergoterm_available, _ergoterm = pcall(require, "ergoterm.terminal")
+	return ergoterm_available
 end
 
 function M.setup()
-	-- No specific setup needed for ergoterm provider
+	if not M.is_available() then
+		vim.notify("Failed to load ergoterm.terminal", vim.log.levels.ERROR)
+		return
+	end
 end
 
 --- @param cmd_string string
@@ -74,14 +78,8 @@ function M.open(cmd_string, env_table, config, focus)
 	end
 
 	-- Create new terminal
-	local ergoterm_available, ergoterm = pcall(require, "ergoterm.terminal")
-	if not ergoterm_available or not ergoterm or not ergoterm.Terminal then
-		vim.notify("Failed to load ergoterm.terminal", vim.log.levels.ERROR)
-		return
-	end
-
 	local opts = build_terminal_opts(config, env_table, cmd_string, focus)
-	terminal = ergoterm.Terminal:new(opts)
+	terminal = require("ergoterm.terminal").Terminal:new(opts)
 
 	-- Start and open the terminal
 	terminal:start()
@@ -92,9 +90,6 @@ function M.open(cmd_string, env_table, config, focus)
 end
 
 function M.close()
-	if not M.is_available() then
-		return
-	end
 	if terminal and terminal:is_started() then
 		terminal:close()
 	end
@@ -105,11 +100,6 @@ end
 --- @param env_table table
 --- @param config table
 function M.simple_toggle(cmd_string, env_table, config)
-	if not M.is_available() then
-		vim.notify("Ergoterm terminal provider selected but ergoterm.nvim not available.", vim.log.levels.ERROR)
-		return
-	end
-
 	if terminal and terminal:is_started() then
 		if terminal:is_open() then
 			-- Terminal is visible, close it
@@ -130,11 +120,6 @@ end
 --- @param env_table table
 --- @param config table
 function M.focus_toggle(cmd_string, env_table, config)
-	if not M.is_available() then
-		vim.notify("Ergoterm terminal provider selected but ergoterm.nvim not available.", vim.log.levels.ERROR)
-		return
-	end
-
 	if terminal and terminal:is_started() then
 		if terminal:is_open() then
 			-- Terminal is visible - check if focused
