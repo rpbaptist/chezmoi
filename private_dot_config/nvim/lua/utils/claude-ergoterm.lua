@@ -53,8 +53,6 @@ end
 --- @param config table
 --- @param focus boolean|nil
 function M.open(cmd_string, env_table, config, focus)
-	local focus = focus or true
-
 	if not terminal then
 		local opts = build_terminal_opts(config, env_table, cmd_string, focus)
 		terminal = require("ergoterm.terminal").Terminal:new(opts)
