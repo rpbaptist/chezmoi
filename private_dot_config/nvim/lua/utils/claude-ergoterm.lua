@@ -62,27 +62,13 @@ function M.open(cmd_string, env_table, config, focus)
 	focus = normalize_focus(focus)
 
 	if terminal and terminal:is_started() then
-		if not terminal:is_open() then
-			-- Terminal is hidden, show it
-			terminal:open()
-			if focus then
-				terminal:focus()
-			end
-		else
-			-- Terminal is already visible
-			if focus then
-				terminal:focus()
-			end
-		end
-		return
+		return focus and terminal:focus()
 	end
 
 	-- Create new terminal
 	local opts = build_terminal_opts(config, env_table, cmd_string, focus)
 	terminal = require("ergoterm.terminal").Terminal:new(opts)
 
-	-- Start and open the terminal
-	terminal:start()
 	terminal:open()
 	if focus then
 		terminal:focus()
@@ -102,15 +88,11 @@ end
 function M.simple_toggle(cmd_string, env_table, config)
 	if terminal and terminal:is_started() then
 		if terminal:is_open() then
-			-- Terminal is visible, close it
 			terminal:close()
 		else
-			-- Terminal exists but not visible, show it
-			terminal:open()
 			terminal:focus()
 		end
 	else
-		-- No terminal exists, create new one
 		M.open(cmd_string, env_table, config, true)
 	end
 end
@@ -121,22 +103,12 @@ end
 --- @param config table
 function M.focus_toggle(cmd_string, env_table, config)
 	if terminal and terminal:is_started() then
-		if terminal:is_open() then
-			-- Terminal is visible - check if focused
-			if terminal:is_focused() then
-				-- Currently focused, hide it
-				terminal:close()
-			else
-				-- Not focused, focus it
-				terminal:focus()
-			end
+		if terminal:is_focused() then
+			terminal:close()
 		else
-			-- Terminal exists but not visible, show and focus it
-			terminal:open()
 			terminal:focus()
 		end
 	else
-		-- No terminal exists, create new one
 		M.open(cmd_string, env_table, config, true)
 	end
 end
