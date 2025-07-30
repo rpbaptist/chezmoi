@@ -6,8 +6,8 @@ return {
 	event = "VeryLazy",
 	opts = {
 		terminal = {
-      provider = "native",
-    },
+			provider = require("terminal.ergoterm"),
+		},
 	},
 	keys = {
 		{ "<leader>a", group = "AI" },
