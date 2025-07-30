@@ -59,7 +59,7 @@ function M.open(cmd_string, env_table, config, focus)
 end
 
 function M.close()
-	if M.is_started() then
+	if terminal and terminal:is_open() then
 		terminal:close()
 	end
 end
