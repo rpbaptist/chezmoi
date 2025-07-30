@@ -1,16 +1,13 @@
 return {
-
-	dir = "~/code/claudecode.nvim",
-	-- "rpbaptist/claudecode.nvim",
-	branch = "add-ergoterm",
+	"coder/claudecode.nvim",
 	dependencies = {
 		"waiting-for-dev/ergoterm.nvim",
 	},
 	event = "VeryLazy",
 	opts = {
 		terminal = {
-			provider = "ergoterm",
-		},
+      provider = "native",
+    },
 	},
 	keys = {
 		{ "<leader>a", group = "AI" },
@@ -30,4 +27,4 @@ return {
 		{ "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
 		{ "<leader>ar", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Reject diff" },
 	},
-} 
+}
