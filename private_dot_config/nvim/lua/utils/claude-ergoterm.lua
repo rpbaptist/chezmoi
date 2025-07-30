@@ -11,7 +11,7 @@ local terminal = nil
 --- @param cmd_string string Command to run in terminal
 --- @param focus boolean|nil Whether to focus the terminal when opened (defaults to true)
 --- @return table Ergoterm Terminal configuration
-local function build_terminal_opts(config, env_table, cmd_string, focus)
+local function build_terminal_opts(config, env_table, cmd_string, _focus)
 	local layout = config.split_side == "left" and "left" or "right"
 	local width_percentage = string.format("%.0f%%", config.split_width_percentage * 100)
 	local close_on_exit = config.auto_close or false
@@ -20,8 +20,6 @@ local function build_terminal_opts(config, env_table, cmd_string, focus)
 		name = "claude-code",
 		cmd = cmd_string,
 		layout = layout,
-		auto_scroll = true,
-		selectable = true,
 		env = env_table,
 		close_on_job_exit = close_on_exit,
 		size = {
@@ -40,7 +38,7 @@ function M.is_started()
 	return terminal and terminal:is_started()
 end
 
-function M.setup()
+function M.setup(config)
 	if not M.is_available() then
 		vim.notify("Failed to load ergoterm.terminal", vim.log.levels.ERROR)
 		return
