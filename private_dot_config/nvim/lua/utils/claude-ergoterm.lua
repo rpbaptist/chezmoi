@@ -4,14 +4,6 @@
 local M = {}
 
 local terminal = nil
-local ergoterm = nil
-
---- Normalize focus parameter
---- @param focus boolean|nil
---- @return boolean
-local function normalize_focus(focus)
-	return focus or true
-end
 
 --- Builds ergoterm Terminal options
 --- @param config table Terminal configuration (split_side, split_width_percentage, etc.)
@@ -20,8 +12,6 @@ end
 --- @param focus boolean|nil Whether to focus the terminal when opened (defaults to true)
 --- @return table Ergoterm Terminal configuration
 local function build_terminal_opts(config, env_table, cmd_string, focus)
-	focus = normalize_focus(focus)
-
 	local layout = config.split_side == "left" and "left" or "right"
 	local width_percentage = string.format("%.0f%%", config.split_width_percentage * 100)
 	local close_on_exit = config.auto_close or false
@@ -63,15 +53,12 @@ end
 --- @param config table
 --- @param focus boolean|nil
 function M.open(cmd_string, env_table, config, focus)
-	focus = normalize_focus(focus)
+	local focus = focus or true
 
-	if M.is_started() then
-		return focus and terminal:focus()
+	if not terminal then
+		local opts = build_terminal_opts(config, env_table, cmd_string, focus)
+		terminal = require("ergoterm.terminal").Terminal:new(opts)
 	end
-
-	-- Create new terminal
-	local opts = build_terminal_opts(config, env_table, cmd_string, focus)
-	terminal = require("ergoterm.terminal").Terminal:new(opts)
 
 	terminal:open()
 	if focus then
