@@ -47,6 +47,10 @@ function M.is_available()
 	return ergoterm_available
 end
 
+function M.is_started()
+	return terminal and terminal:is_started()
+end
+
 function M.setup()
 	if not M.is_available() then
 		vim.notify("Failed to load ergoterm.terminal", vim.log.levels.ERROR)
@@ -61,7 +65,7 @@ end
 function M.open(cmd_string, env_table, config, focus)
 	focus = normalize_focus(focus)
 
-	if terminal and terminal:is_started() then
+	if M.is_started() then
 		return focus and terminal:focus()
 	end
 
@@ -76,7 +80,7 @@ function M.open(cmd_string, env_table, config, focus)
 end
 
 function M.close()
-	if terminal and terminal:is_started() then
+	if M.is_started() then
 		terminal:close()
 	end
 end
@@ -86,7 +90,7 @@ end
 --- @param env_table table
 --- @param config table
 function M.simple_toggle(cmd_string, env_table, config)
-	if terminal and terminal:is_started() then
+	if M.is_started() then
 		if terminal:is_open() then
 			terminal:close()
 		else
@@ -102,7 +106,7 @@ end
 --- @param env_table table
 --- @param config table
 function M.focus_toggle(cmd_string, env_table, config)
-	if terminal and terminal:is_started() then
+	if M.is_started() then
 		if terminal:is_focused() then
 			terminal:close()
 		else
@@ -123,7 +127,7 @@ end
 
 --- @return number|nil
 function M.get_active_bufnr()
-	if terminal and terminal:is_started() then
+	if M.is_started() then
 		-- ergoterm doesn't expose buffer directly, but we can try to get it
 		-- from the terminal's internal state if available
 		if terminal.buf and vim.api.nvim_buf_is_valid(terminal.buf) then
