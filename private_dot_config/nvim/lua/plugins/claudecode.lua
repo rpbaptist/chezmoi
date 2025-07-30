@@ -6,7 +6,7 @@ return {
 	event = "VeryLazy",
 	opts = {
 		terminal = {
-			provider = require("terminal.ergoterm"),
+			provider = require("utils.claude-ergoterm"),
 		},
 	},
 	keys = {
