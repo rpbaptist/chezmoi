@@ -9,9 +9,8 @@ local terminal = nil
 --- @param config table Terminal configuration (split_side, split_width_percentage, etc.)
 --- @param env_table table Environment variables to set for the terminal process
 --- @param cmd_string string Command to run in terminal
---- @param focus boolean|nil Whether to focus the terminal when opened (defaults to true)
 --- @return table Ergoterm Terminal configuration
-local function build_terminal_opts(config, env_table, cmd_string, _focus)
+local function build_terminal_opts(config, env_table, cmd_string)
 	local layout = config.split_side == "left" and "left" or "right"
 	local width_percentage = string.format("%.0f%%", config.split_width_percentage * 100)
 	local close_on_exit = config.auto_close or false
@@ -38,7 +37,7 @@ function M.is_started()
 	return terminal and terminal:is_started()
 end
 
-function M.setup(config)
+function M.setup()
 	if not M.is_available() then
 		vim.notify("Failed to load ergoterm.terminal", vim.log.levels.ERROR)
 		return
@@ -51,11 +50,11 @@ end
 --- @param focus boolean|nil
 function M.open(cmd_string, env_table, config, focus)
 	if not terminal then
-		local opts = build_terminal_opts(config, env_table, cmd_string, focus)
+		local opts = build_terminal_opts(config, env_table, cmd_string)
 		terminal = require("ergoterm.terminal").Terminal:new(opts)
 	end
 
-	terminal:focus()
+	return focus and terminal:focus()
 end
 
 function M.close()
