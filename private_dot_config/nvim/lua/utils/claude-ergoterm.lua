@@ -104,14 +104,6 @@ function M.focus_toggle(cmd_string, env_table, config)
 	end
 end
 
---- Legacy toggle function for backward compatibility (defaults to simple_toggle)
---- @param cmd_string string
---- @param env_table table
---- @param config table
-function M.toggle(cmd_string, env_table, config)
-	M.simple_toggle(cmd_string, env_table, config)
-end
-
 --- @return number|nil
 function M.get_active_bufnr()
 	if M.is_started() then
