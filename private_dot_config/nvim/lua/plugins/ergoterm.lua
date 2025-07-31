@@ -2,6 +2,9 @@ return {
 	"waiting-for-dev/ergoterm.nvim",
 	event = "VeryLazy",
 	opts = {
+		picker = {
+			picker = "vim-ui-select",
+		},
 		size = {
 			right = 100,
 			below = 5,
@@ -29,6 +32,11 @@ return {
 		})
 
 		return {
+			{
+				"<leader>tl",
+				"<CMD>TermSelect<CR>",
+				desc = "List terminals",
+			},
 			{
 				"<leader>tg",
 				function()
