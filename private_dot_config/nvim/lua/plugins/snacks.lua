@@ -30,10 +30,11 @@ return {
 		},
 		scratch = {
 			name = "Note",
-			ft = "markdown",
+			ft = "md",
 			root = vim.env.NOTES_PATH,
 			filekey = {
-				branch = false,
+        cwd = false,
+				branch = true,
 			},
 			styles = {
 				height = 50,
