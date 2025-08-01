@@ -11,6 +11,4 @@ return {
 		event = "VeryLazy",
 		opts = {},
 	},
-	{ "MunifTanjim/nui.nvim" },
-	-- { "nacro90/numb.nvim", opts = {} },
 }
