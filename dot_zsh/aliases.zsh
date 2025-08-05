@@ -67,8 +67,6 @@ alias localtunnel="$HOME/.local/bin/lt"
 alias qmku="cd $HOME/code/qmk_userspace"
 alias qmkf="cd $HOME/code/qmk_firmware"
 
-alias nvl="NVIM_APPNAME=nvim-lazy nvim"
-
 # chezmoi
 alias dot="chezmoi cd"
 
