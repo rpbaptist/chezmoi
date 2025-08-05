@@ -38,13 +38,13 @@ function M.is_started()
 end
 
 function M.ensure_visible()
-  if terminal and not terminal.is_open() then
-    terminal.open()
-  end
+	if terminal and not terminal:is_open() then
+		terminal:open()
+	end
 end
 
 function M.toggle_open_no_focus()
-  M.ensure_visible()
+	M.ensure_visible()
 end
 
 function M.setup()
