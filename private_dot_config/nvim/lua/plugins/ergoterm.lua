@@ -19,7 +19,7 @@ return {
 			layout = "right",
 			dir = "git_dir",
 			start_in_insert = false,
-			close_on_job_exit = false,
+			close_on_job_exit = true,
 			size = { right = 80 },
 			env = {
 				MIX_ENV = "test",

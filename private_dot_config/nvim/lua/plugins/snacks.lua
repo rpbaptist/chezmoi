@@ -46,6 +46,7 @@ return {
 				duration = { step = 15, total = 160 },
 			},
 		},
+    rename = { enabled = true },
 		statuscolumn = { enabled = true },
 		words = { enabled = true },
 	},
@@ -123,5 +124,12 @@ return {
 			end,
 			desc = "Delete Other Buffers",
 		},
+    {
+      "<leader>cR",
+      function()
+        Snacks.rename.rename_file()
+      end,
+      desc = "Rename file",
+    }
 	},
 }

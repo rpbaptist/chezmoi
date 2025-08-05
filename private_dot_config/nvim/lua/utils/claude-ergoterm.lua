@@ -37,6 +37,16 @@ function M.is_started()
 	return terminal and terminal:is_started()
 end
 
+function M.ensure_visible()
+  if terminal and not terminal.is_open() then
+    terminal.open()
+  end
+end
+
+function M.toggle_open_no_focus()
+  M.ensure_visible()
+end
+
 function M.setup()
 	if not M.is_available() then
 		vim.notify("Failed to load ergoterm.terminal", vim.log.levels.ERROR)
@@ -54,8 +64,10 @@ function M.open(cmd_string, env_table, config, focus)
 		terminal = require("ergoterm.terminal").Terminal:new(opts)
 	end
 
-  terminal:open()
-	return focus and terminal:focus()
+	terminal:open()
+	if focus then
+		terminal:focus()
+	end
 end
 
 function M.close()
