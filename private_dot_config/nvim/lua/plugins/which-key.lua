@@ -8,6 +8,19 @@ return {
 		spec = {
 			{
 				mode = { "n", "v" },
+        -- ClaudeCode
+        { "<leader>a", group = "AI" },
+        -- mini-diff
+        { "<leader>g", group = "git" },
+        -- projectionist
+        { "<leader>tj", group = "Jump to test file" },
+        -- recorder
+        { "<leader>r", group = "Macro recorder" },
+        -- mini-surround
+        { "gs", group = "surround" },
+        -- tabby
+        { "<leader><tab>", group = "tabs" },
+
 				{ "<leader>c", group = "code" },
 				{ "<leader>d", group = "debug" },
 				{ "<leader>dp", group = "profiler" },

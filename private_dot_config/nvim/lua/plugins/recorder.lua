@@ -12,7 +12,6 @@ return {
 		},
 	},
 	keys = {
-		{ "<leader>r", group = "Macro recorder" },
 		{ "<leader>rr", desc = "Start/stop recording" },
 		{ "<leader>rs", desc = "Switch slot" },
 		{ "<leader>re", desc = "Edit macro" },

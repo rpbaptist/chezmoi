@@ -37,7 +37,4 @@ return {
 			}
 		end,
 	},
-	keys = {
-		{ "<leader><tab>", group = "tabs" },
-	},
 }

@@ -12,7 +12,6 @@ return {
 		},
 	},
 	keys = {
-		{ "<leader>g", group = "git" },
 		{
 			"<leader>gd",
 			function()
