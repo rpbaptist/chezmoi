@@ -19,7 +19,7 @@ return {
 			layout = "right",
 			dir = "git_dir",
 			start_in_insert = false,
-			close_on_job_exit = true,
+			close_on_job_exit = false,
 			size = { right = 80 },
 			env = {
 				MIX_ENV = "test",
@@ -27,6 +27,7 @@ return {
 		})
 
 		local quick_term = terms.Terminal:new({
+      name = "QuickTerm",
 			layout = "below",
 			size = { below = 15 },
 		})
