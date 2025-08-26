@@ -17,14 +17,15 @@ return {
         ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
         ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝]],
 				keys = {
-					{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.picker.files()" },
+					{ icon = " ", key = "/", desc = "Find Text", action = ":lua Snacks.picker.grep()" },
+          { icon = "󰱽 ", key = "f", desc = "Find File", action = ":lua Snacks.picker.files()" },
 					{
 						icon = " ",
 						key = "r",
 						desc = "Recent Files",
 						action = ":lua Snacks.dashboard.pick('oldfiles')",
 					},
-					{ icon = " ", key = "g", desc = "Git status", action = ":Fugit2" },
+					{ icon = " ", key = "g", desc = "Git Status", action = ":Fugit2" },
 					{
 						icon = " ",
 						key = "c",
