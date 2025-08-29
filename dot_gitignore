@@ -1,9 +1,8 @@
 .gitconfig
+.expert/*
 .tags
 .tags-tmp
 .tags_lock/*
-*.sublime-project
-*.sublime-workspace
 .envrc
 .rake_tasks
 .mix_tasks
