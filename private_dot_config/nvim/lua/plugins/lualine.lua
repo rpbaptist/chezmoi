@@ -2,7 +2,7 @@ return {
 	"nvim-lualine/lualine.nvim",
 	depencencies = {
 		"chrisgrieser/nvim-recorder",
-		"echasnovski/mini.diff",
+		"nvim-mini/mini.diff",
 		"SmiteshP/nvim-navic",
 	},
 	opts = function()
