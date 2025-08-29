@@ -17,7 +17,7 @@ return {
     event = "VeryLazy",
 		opts = {
 			ensure_installed = {
-				-- "elixirls",
+				"elixirls",
 				"lua_ls",
 				"marksman",
         "yamlls"
