@@ -94,7 +94,8 @@ vim.lsp.config("*", {
 })
 
 vim.lsp.enable({
-	"elixirls",
+  "expert",
+	-- "elixirls",
 	"lua_ls",
 	"marksman",
 	"bashls",
