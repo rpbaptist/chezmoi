@@ -10,8 +10,9 @@ return {
 			{ "<bs>", desc = "Decrement Selection", mode = "x" },
 		},
 		cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
-		opts = {
-			ensure_installed = {
+		config = function()
+			local TS = require("nvim-treesitter")
+			TS.install({
 				"bash",
 				"c",
 				"diff",
@@ -45,49 +46,7 @@ return {
 				"xml",
 				"yaml",
 				"git_config",
-			},
-			highlight = { enable = true },
-			indent = { enable = true },
-			-- incremental_selection = {
-			-- 	enable = true,
-			-- 	keymaps = {
-			-- 		init_selection = "<C-space>",
-			-- 		node_incremental = "<C-space>",
-			-- 		scope_incremental = false,
-			-- 		node_decremental = "<bs>",
-			-- 	},
-			-- },
-			-- textobjects = {
-			-- 	move = {
-			-- 		enable = true,
-			-- 		goto_next_start = {
-			-- 			["]f"] = "@function.outer",
-			-- 			["]c"] = "@class.outer",
-			-- 			["]a"] = "@parameter.inner",
-			-- 		},
-			-- 		goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
-			-- 		goto_previous_start = {
-			-- 			["[f"] = "@function.outer",
-			-- 			["[c"] = "@class.outer",
-			-- 			["[a"] = "@parameter.inner",
-			-- 		},
-			-- 		goto_previous_end = {
-			-- 			["[F"] = "@function.outer",
-			-- 			["[C"] = "@class.outer",
-			-- 			["[A"] = "@parameter.inner",
-			-- 		},
-			-- 	},
-			-- 	swap = {
-			-- 		enable = false,
-			-- 	},
-			-- },
-		},
-		config = function(_, opts)
-			local ts_utils = require("utils.treesitter")
-
-			require("nvim-treesitter").setup(opts)
-
-			ts_utils.install(opts.ensure_installed)
+			})
 
 			vim.filetype.add({
 				extension = { rasi = "rasi", rofi = "rasi", wofi = "rasi" },
@@ -102,21 +61,30 @@ return {
 			vim.treesitter.language.register("bash", "kitty")
 			vim.treesitter.language.register("markdown", "livebook")
 
-			-- highlights
-			local parsersInstalled = require("nvim-treesitter.config").get_installed("parsers")
-			for _, parser in pairs(parsersInstalled) do
-				local filetypes = vim.treesitter.language.get_filetypes(parser)
-				vim.api.nvim_create_autocmd({ "FileType" }, {
-					pattern = filetypes,
-					callback = function()
-						vim.treesitter.start()
-						vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-						vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-					end,
-				})
-			end
+			vim.api.nvim_create_autocmd("FileType", {
+				group = vim.api.nvim_create_augroup("treesitter.setup", {}),
+				callback = function(args)
+					local buf = args.buf
+					local filetype = args.match
 
-			require("nvim-treesitter").update()
+					-- you need some mechanism to avoid running on buffers that do not
+					-- correspond to a language (like oil.nvim buffers), this implementation
+					-- checks if a parser exists for the current language
+					local language = vim.treesitter.language.get_lang(filetype) or filetype
+					if not vim.treesitter.language.add(language) then
+						return
+					end
+
+					-- highlight
+					vim.treesitter.start(buf, language)
+
+					-- indent
+					vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+					-- fold
+					vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+				end,
+			})
 		end,
 	},
 	{
