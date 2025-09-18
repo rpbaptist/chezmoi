@@ -11,8 +11,7 @@ return {
 		},
 		cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
 		config = function()
-			local TS = require("nvim-treesitter")
-			TS.install({
+			require("nvim-treesitter").install({
 				"bash",
 				"c",
 				"diff",
@@ -82,6 +81,7 @@ return {
 					vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 
 					-- fold
+          vim.wo.foldmethod = "expr"
 					vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 				end,
 			})
