@@ -131,6 +131,22 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-- -- Treesitter
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	group = vim.api.nvim_create_augroup("treesitter", { clear = true }),
+-- 	pattern = { "<filetype>" },
+-- 	callback = function()
+-- 		vim.treesitter.start()
+--
+-- 		-- indents
+-- 		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+--
+-- 		-- folds
+-- 		-- vim.wo.foldmethod = "expr"
+-- 		vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- 	end,
+-- })
+
 -- Auto create dir when saving a file, in case some intermediate directory does not exist
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 	group = augroup("auto_create_dir"),
