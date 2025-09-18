@@ -83,7 +83,6 @@ opt.fillchars = {
 	eob = " ",
 }
 opt.foldlevel = 99
-opt.formatexpr = "v:lua.require'lazyvim.util'.format.formatexpr()"
 opt.formatoptions = "jcroqlnt" -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
@@ -124,8 +123,6 @@ opt.winminwidth = 5 -- Minimum window width
 opt.wrap = false -- Disable line wrap
 
 opt.smoothscroll = true
-opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
-opt.foldmethod = "expr"
 opt.foldtext = ""
 
 -- Fix markdown indentation settings
