@@ -1,16 +1,16 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
+		lazy = false,
 		version = false,
 		build = ":TSUpdate",
 		keys = {
 			{ "<c-space>", desc = "Increment Selection" },
 			{ "<bs>", desc = "Decrement Selection", mode = "x" },
 		},
+		cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
 		opts = {
-			highlight = {
-				enable = true,
-			},
 			ensure_installed = {
 				"bash",
 				"c",
@@ -46,42 +46,49 @@ return {
 				"yaml",
 				"git_config",
 			},
+			highlight = { enable = true },
 			indent = { enable = true },
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "<C-space>",
-					node_incremental = "<C-space>",
-					scope_incremental = false,
-					node_decremental = "<bs>",
-				},
-			},
-			textobjects = {
-				move = {
-					enable = true,
-					goto_next_start = {
-						["]f"] = "@function.outer",
-						["]c"] = "@class.outer",
-						["]a"] = "@parameter.inner",
-					},
-					goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
-					goto_previous_start = {
-						["[f"] = "@function.outer",
-						["[c"] = "@class.outer",
-						["[a"] = "@parameter.inner",
-					},
-					goto_previous_end = {
-						["[F"] = "@function.outer",
-						["[C"] = "@class.outer",
-						["[A"] = "@parameter.inner",
-					},
-				},
-				swap = {
-					enable = false,
-				},
-			},
+			-- incremental_selection = {
+			-- 	enable = true,
+			-- 	keymaps = {
+			-- 		init_selection = "<C-space>",
+			-- 		node_incremental = "<C-space>",
+			-- 		scope_incremental = false,
+			-- 		node_decremental = "<bs>",
+			-- 	},
+			-- },
+			-- textobjects = {
+			-- 	move = {
+			-- 		enable = true,
+			-- 		goto_next_start = {
+			-- 			["]f"] = "@function.outer",
+			-- 			["]c"] = "@class.outer",
+			-- 			["]a"] = "@parameter.inner",
+			-- 		},
+			-- 		goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
+			-- 		goto_previous_start = {
+			-- 			["[f"] = "@function.outer",
+			-- 			["[c"] = "@class.outer",
+			-- 			["[a"] = "@parameter.inner",
+			-- 		},
+			-- 		goto_previous_end = {
+			-- 			["[F"] = "@function.outer",
+			-- 			["[C"] = "@class.outer",
+			-- 			["[A"] = "@parameter.inner",
+			-- 		},
+			-- 	},
+			-- 	swap = {
+			-- 		enable = false,
+			-- 	},
+			-- },
 		},
 		config = function(_, opts)
+			local ts_utils = require("utils.treesitter")
+
+			require("nvim-treesitter").setup(opts)
+
+			ts_utils.install(opts.ensure_installed)
+
 			vim.filetype.add({
 				extension = { rasi = "rasi", rofi = "rasi", wofi = "rasi" },
 				filename = {
@@ -93,37 +100,25 @@ return {
 				},
 			})
 			vim.treesitter.language.register("bash", "kitty")
-			require("nvim-treesitter.configs").setup(opts)
-		end,
-	},
-	{
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-		},
-		event = "VeryLazy",
-		enabled = true,
-		config = function()
-			-- When in diff mode, we want to use the default
-			-- vim text objects c & C instead of the treesitter ones.
-			local move = require("nvim-treesitter.textobjects.move") ---@type table<string,fun(...)>
-			local configs = require("nvim-treesitter.configs")
-			for name, fn in pairs(move) do
-				if name:find("goto") == 1 then
-					move[name] = function(q, ...)
-						if vim.wo.diff then
-							local config = configs.get_module("textobjects.move")[name] ---@type table<string,string>
-							for key, query in pairs(config or {}) do
-								if q == query and key:find("[%]%[][cC]") then
-									vim.cmd("normal! " .. key)
-									return
-								end
-							end
-						end
-						return fn(q, ...)
+			vim.treesitter.language.register("markdown", "livebook")
+
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = opts.ensure_installed,
+				callback = function(ctx)
+					-- highlights
+					vim.treesitter.start()
+
+					if ts_utils.have(ctx.match) then
+						-- indents
+						vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+						-- folds
+						vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 					end
-				end
-			end
+				end,
+			})
+
+			require("nvim-treesitter").update()
 		end,
 	},
 	{
