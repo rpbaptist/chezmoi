@@ -102,21 +102,19 @@ return {
 			vim.treesitter.language.register("bash", "kitty")
 			vim.treesitter.language.register("markdown", "livebook")
 
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = opts.ensure_installed,
-				callback = function(ctx)
-					-- highlights
-					vim.treesitter.start()
-
-					if ts_utils.have(ctx.match) then
-						-- indents
+			-- highlights
+			local parsersInstalled = require("nvim-treesitter.config").get_installed("parsers")
+			for _, parser in pairs(parsersInstalled) do
+				local filetypes = vim.treesitter.language.get_filetypes(parser)
+				vim.api.nvim_create_autocmd({ "FileType" }, {
+					pattern = filetypes,
+					callback = function()
+						vim.treesitter.start()
 						vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-
-						-- folds
 						vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-					end
-				end,
-			})
+					end,
+				})
+			end
 
 			require("nvim-treesitter").update()
 		end,
