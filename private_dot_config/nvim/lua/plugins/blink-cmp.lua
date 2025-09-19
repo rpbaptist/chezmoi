@@ -67,7 +67,13 @@ return {
 			sources = {
 				-- adding any nvim-cmp sources here will enable them
 				-- with blink.compat
-				default = { "lsp", "path", "snippets", "buffer", "lazydev" },
+				default = { "lsp", "path", "snippets", "buffer"},
+        per_filetype = {
+          lua = {
+            inherit_defaults = true,
+            "lazydev",
+          },
+        },
 				providers = {
 					lazydev = {
 						name = "LazyDev",
