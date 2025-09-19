@@ -3,19 +3,8 @@ return {
 		"saghen/blink.cmp",
 		version = "1.*",
 		build = "cargo build --release",
-		opts_extend = {
-			"sources.completion.enabled_providers",
-			"sources.compat",
-			"sources.default",
-		},
 		dependencies = {
 			"rafamadriz/friendly-snippets",
-			{
-				"saghen/blink.compat",
-				optional = true, -- make optional so it's only enabled if any extras need it
-				opts = {},
-				version = "*",
-			},
 		},
 		event = { "InsertEnter", "CmdlineEnter" },
 		opts = {
@@ -65,15 +54,13 @@ return {
 				},
 			},
 			sources = {
-				-- adding any nvim-cmp sources here will enable them
-				-- with blink.compat
-				default = { "lsp", "path", "snippets", "buffer"},
-        per_filetype = {
-          lua = {
-            inherit_defaults = true,
-            "lazydev",
-          },
-        },
+				default = { "lsp", "path", "snippets", "buffer" },
+				per_filetype = {
+					lua = {
+						inherit_defaults = true,
+						"lazydev",
+					},
+				},
 				providers = {
 					lazydev = {
 						name = "LazyDev",
@@ -104,22 +91,6 @@ return {
 			},
 		},
 		config = function(_, opts)
-			-- setup compat sources
-			local enabled = opts.sources.default
-			for _, source in ipairs(opts.sources.compat or {}) do
-				opts.sources.providers[source] = vim.tbl_deep_extend(
-					"force",
-					{ name = source, module = "blink.compat.source" },
-					opts.sources.providers[source] or {}
-				)
-				if type(enabled) == "table" and not vim.tbl_contains(enabled, source) then
-					table.insert(enabled, source)
-				end
-			end
-
-			-- Unset custom prop to pass blink.cmp validation
-			opts.sources.compat = nil
-
 			-- check if we need to override symbol kinds
 			for _, provider in pairs(opts.sources.providers or {}) do
 				if provider.kind then
