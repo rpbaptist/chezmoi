@@ -17,7 +17,7 @@ return {
 				version = "*",
 			},
 		},
-		event = "InsertEnter",
+		event = { "InsertEnter", "CmdlineEnter" },
 		opts = {
 			fuzzy = { implementation = "prefer_rust_with_warning" },
 			snippets = {
@@ -78,7 +78,19 @@ return {
 				},
 			},
 			cmdline = {
-				enabled = false,
+				enabled = true,
+				keymap = {
+					preset = "cmdline",
+				},
+				completion = {
+					list = { selection = { preselect = false } },
+					menu = {
+						auto_show = function(ctx)
+							return vim.fn.getcmdtype() == ":"
+						end,
+					},
+					ghost_text = { enabled = true },
+				},
 			},
 			keymap = {
 				preset = "super-tab",
