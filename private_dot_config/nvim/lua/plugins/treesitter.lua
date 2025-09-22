@@ -62,77 +62,20 @@ return {
 			vim.treesitter.language.register("bash", "kitty")
 			vim.treesitter.language.register("markdown", "livebook")
 
-			vim.api.nvim_create_autocmd("FileType", {
-				group = vim.api.nvim_create_augroup("treesitter.setup", {}),
-				callback = function(args)
-					local buf = args.buf
-					local filetype = args.match
-
-					-- you need some mechanism to avoid running on buffers that do not
-					-- correspond to a language (like oil.nvim buffers), this implementation
-					-- checks if a parser exists for the current language
-					local language = vim.treesitter.language.get_lang(filetype) or filetype
-					if not vim.treesitter.language.add(language) then
-						return
+			vim.api.nvim_create_autocmd("FileType", { -- enable treesitter highlighting and indents
+				group = vim.api.nvim_create_augroup("treesitter-config", { clear = true }),
+				callback = function(ev)
+					local filetype = ev.match
+					local lang = vim.treesitter.language.get_lang(filetype)
+					if vim.treesitter.language.add(lang) then
+						vim.wo.foldmethod = "expr"
+						vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+						vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+						vim.treesitter.start()
 					end
-
-					-- highlight
-					vim.treesitter.start(buf, language)
-
-					-- indent
-					vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-
-					-- fold
-					vim.wo.foldmethod = "expr"
-					vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 				end,
 			})
 		end,
-	},
-	{
-		"MeanderingProgrammer/treesitter-modules.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		lazy = false,
-		opts = {
-			ensure_installed = {
-				"bash",
-				"c",
-				"diff",
-				"eex",
-				"elixir",
-				"git_rebase",
-				"gitattributes",
-				"gitcommit",
-				"gitignore",
-				"heex",
-				"html",
-				"javascript",
-				"jsdoc",
-				"json",
-				"jsonc",
-				"lua",
-				"luadoc",
-				"luap",
-				"markdown",
-				"markdown_inline",
-				"printf",
-				"python",
-				"query",
-				"regex",
-				"sql",
-				"toml",
-				"tsx",
-				"typescript",
-				"vim",
-				"vimdoc",
-				"xml",
-				"yaml",
-				"git_config",
-			},
-			fold = { enable = true },
-			highlight = { enable = true },
-			indent = { enable = true },
-		},
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
