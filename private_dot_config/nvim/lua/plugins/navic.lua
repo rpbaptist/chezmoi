@@ -1,7 +1,6 @@
 return {
 	"SmiteshP/nvim-navic",
   event = "VeryLazy",
-  dependencies = { "neovim/nvim-lspconfig" },
 	opts = function()
 		return {
 			depth_limit_indicator = "…",
