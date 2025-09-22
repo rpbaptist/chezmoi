@@ -30,7 +30,7 @@ return {
 				},
 				list = {
 					selection = {
-						preselect = function(_ctx)
+						preselect = function()
 							return not require("blink.cmp").snippet_active({ direction = 1 })
 						end,
 					},
@@ -73,12 +73,13 @@ return {
 			cmdline = {
 				enabled = true,
 				keymap = {
-					preset = "cmdline",
+        ['<Tab>'] = { 'show', 'accept' },
+					-- preset = "inherit",
 				},
 				completion = {
 					list = { selection = { preselect = false } },
 					menu = {
-						auto_show = function(ctx)
+						auto_show = function()
 							return vim.fn.getcmdtype() == ":"
 						end,
 					},
