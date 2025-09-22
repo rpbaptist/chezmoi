@@ -1,6 +1,6 @@
 return {
 	"gbprod/yanky.nvim",
-  dependencies = { "folke/snacks.nvim" },
+	dependencies = { "folke/snacks.nvim" },
 	recommended = true,
 	desc = "Better Yank/Paste",
 	event = "VeryLazy",
@@ -8,15 +8,15 @@ return {
 		highlight = { timer = 150 },
 	},
 	keys = {
-  {
-    "<leader>p",
-    function()
-        Snacks.picker.yanky()
-    end,
-    mode = { "n", "x" },
-    desc = "Open Yank History",
-  },
-    { "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank Text" },
+		{
+			"<leader>p",
+			function()
+				Snacks.picker.yanky()
+			end,
+			mode = { "n", "x" },
+			desc = "Open Yank History",
+		},
+		{ "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank Text" },
 		{ "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = "Put Text After Cursor" },
 		{ "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" }, desc = "Put Text Before Cursor" },
 		{ "gp", "<Plug>(YankyGPutAfter)", mode = { "n", "x" }, desc = "Put Text After Selection" },
