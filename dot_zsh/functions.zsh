@@ -8,23 +8,6 @@ function source-plugin() {
   source "$ZSH_PLUGINS/$plugin/$plugin.plugin.zsh"
 }
 
-# function mysql-restore() {
-#     (
-#         echo "SET AUTOCOMMIT=0;"
-#         echo "SET UNIQUE_CHECKS=0;"
-#         echo "SET FOREIGN_KEY_CHECKS=0;"
-#         cat "$1"
-#         echo "SET FOREIGN_KEY_CHECKS=1;"
-#         echo "SET UNIQUE_CHECKS=1;"
-#         echo "SET AUTOCOMMIT=1;"
-#         echo "COMMIT;"
-#     ) | mysql -u root -h 127.0.0.1 -p "$2"
-# }
-
-#
-# Some usefull kubectl commands
-#
-#
 # fg-bg toggle via c-z
 function fg-bg {
     if [[ $#BUFFER -eq 0 ]]; then
@@ -150,29 +133,3 @@ function incident() {
   $EDITOR "$filename"
 }
 
-# function shorthand-find-function() {
-#   local path
-#   local name
-#   local type
-#
-#   type="$1"
-#
-#   if [ -z "$3" ]
-#   then
-#     path="."
-#     name="$2"
-#   else
-#     path="$2"
-#     name="$3"
-#   fi
-#
-#   /usr/bin/find "$path" -type "$type" -name "$name"
-# }
-#
-# function ff() {
-#   shorthand-find-function "f" "$1" "$2"
-# }
-#
-# function fd() {
-#   shorthand-find-function "d" "$1" "$2"
-# }
