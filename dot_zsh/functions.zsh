@@ -138,6 +138,18 @@ function note() {
   fi
 }
 
+function incident() {
+  local filename 
+  local date
+
+  date=$(date +%Y-%m-%d)
+  filename="$date-$1.md"
+
+  cd $INCIDENT_PATH
+  touch "$filename"
+  $EDITOR "$filename"
+}
+
 # function shorthand-find-function() {
 #   local path
 #   local name
