@@ -133,3 +133,7 @@ function incident() {
   $EDITOR "$filename"
 }
 
+function incidents() {
+  $EDITOR "$INCIDENT_PATH"
+}
+
