@@ -93,10 +93,4 @@ vim.lsp.config("*", {
 	end,
 })
 
-vim.lsp.enable({
-	"elixirls",
-	"lua_ls",
-	"marksman",
-	"bashls",
-	"ts_ls",
-})
+vim.lsp.enable(vim.g.language_servers)

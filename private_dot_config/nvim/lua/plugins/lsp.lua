@@ -1,7 +1,7 @@
 return {
 	{
 		"mason-org/mason.nvim",
-    lazy = true,
+		lazy = true,
 		cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonLog", "MasonUpdate", "MasonUninstallAll" },
 		opts = {
 			ensure_installed = {
@@ -14,14 +14,9 @@ return {
 	},
 	{
 		"mason-org/mason-lspconfig.nvim",
-    event = "VeryLazy",
+		event = "VeryLazy",
 		opts = {
-			ensure_installed = {
-				"elixirls",
-				"lua_ls",
-				"marksman",
-        "yamlls"
-			},
+			ensure_installed = vim.g.language_servers,
 		},
 		dependencies = {
 			"neovim/nvim-lspconfig",

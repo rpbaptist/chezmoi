@@ -8,6 +8,14 @@ vim.g.kitty_navigator_password = "nvimwindows"
 
 vim.o.background = "dark"
 
+vim.g.language_servers = {
+	"elixirls",
+	"lua_ls",
+	"marksman",
+	"ts_ls",
+	"yamlls",
+}
+
 vim.g.custom_icons = {
 	modified = {
 		added = " ",
@@ -18,7 +26,7 @@ vim.g.custom_icons = {
 		Array = " ",
 		Boolean = "󰨙 ",
 		Class = " ",
-    Claude = " ",
+		Claude = " ",
 		Codeium = "󰘦 ",
 		Color = " ",
 		Control = " ",
