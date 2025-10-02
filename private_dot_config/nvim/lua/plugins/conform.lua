@@ -9,10 +9,9 @@ return {
 			["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
 			sh = { "shfmt" },
 		},
-		format_on_save = {
-			timeout_ms = 500,
+    format_after_save = {
 			lsp_format = "fallback",
-		},
+    },
 		["markdown-toc"] = {
 			condition = function(_, ctx)
 				for _, line in ipairs(vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, false)) do
