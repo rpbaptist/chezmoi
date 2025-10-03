@@ -7,7 +7,7 @@ return {
 	opts = {
 		explorer = { enabled = true },
 		picker = {
-      ui_select = true,
+			ui_select = true,
 			win = {
 				input = {
 					keys = {
@@ -184,7 +184,7 @@ return {
 		{
 			"<leader>fc",
 			function()
-				local opts = require("utils.chezmoi-snacks-picker").picker_opts(".config/nvim/")
+				local opts = require("utils.chezmoi-custom").picker_opts(".config/nvim/")
 				Snacks.picker.pick(opts)
 			end,
 			desc = "Find Config File",
@@ -434,7 +434,7 @@ return {
 		{
 			"<leader>sz",
 			function()
-				local opts = require("utils.chezmoi-snacks-picker").picker_opts()
+				local opts = require("utils.chezmoi-custom").picker_opts()
 				Snacks.picker.pick(opts)
 			end,
 			desc = "Chezmoi",

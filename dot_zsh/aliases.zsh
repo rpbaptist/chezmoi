@@ -71,9 +71,8 @@ alias qmkf="cd $HOME/code/qmk_firmware"
 alias dot="chezmoi cd"
 
 alias cm="chezmoi"
-alias cmall="chezmoi add $HOME/.config/nvim/lazy-lock.json"
-alias cma="cmall && chezmoi apply"
-alias cmd="cmall && chezmoi diff"
+alias cma="chezmoi apply"
+alias cmd="chezmoi diff"
 alias cme="chezmoi edit"
 alias cmf="chezmoi forget"
 

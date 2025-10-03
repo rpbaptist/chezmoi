@@ -18,7 +18,7 @@ return {
         ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝]],
 				keys = {
 					{ icon = " ", key = "/", desc = "Find Text", action = ":lua Snacks.picker.grep()" },
-          { icon = "󰱽 ", key = "f", desc = "Find File", action = ":lua Snacks.picker.files()" },
+					{ icon = "󰱽 ", key = "f", desc = "Find File", action = ":lua Snacks.picker.files()" },
 					{
 						icon = " ",
 						key = "r",
@@ -31,7 +31,7 @@ return {
 						key = "c",
 						desc = "Config",
 						action = function()
-							local opts = require("utils.chezmoi-snacks-picker").picker_opts(".config/nvim/")
+							local opts = require("utils.chezmoi-custom").picker_opts(".config/nvim/")
 							Snacks.picker.pick(opts)
 						end,
 					},

@@ -1,5 +1,6 @@
 return {
 	"xvzc/chezmoi.nvim",
+	event = "VeryLazy",
 	cmd = { "ChezmoiEdit" },
 	opts = {
 		edit = {

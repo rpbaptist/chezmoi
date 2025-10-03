@@ -177,3 +177,12 @@ vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter" }, {
 		end
 	end,
 })
+
+-- Add lazy lock file after update
+vim.api.nvim_create_autocmd("User", {
+	pattern = "LazyUpdate",
+	group = augroup("chezmoi_update_lock"),
+	callback = function()
+		vim.fn.system("chezmoi add " .. vim.fn.stdpath("config") .. "/lazy-lock.json")
+	end,
+})
