@@ -8,9 +8,9 @@ return {
 		terminal = {
 			provider = require("utils.claude-ergoterm"),
 		},
-    diff_opts = {
-      keep_terminal_focus = true, 
-    },
+		diff_opts = {
+			keep_terminal_focus = true,
+		},
 	},
 	keys = {
 		{ "<leader>at", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
