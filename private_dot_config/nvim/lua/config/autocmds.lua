@@ -184,6 +184,8 @@ vim.api.nvim_create_autocmd("User", {
 	pattern = { "LazyUpdate", "LazySync", "LazyClean" },
 	group = augroup("chezmoi_update_lock"),
 	callback = function()
-		vim.fn.system("chezmoi add " .. vim.fn.stdpath("config") .. "/lazy-lock.json")
+		vim.schedule(function()
+			vim.fn.system("chezmoi add " .. vim.fn.stdpath("config") .. "/lazy-lock.json")
+		end)
 	end,
 })
