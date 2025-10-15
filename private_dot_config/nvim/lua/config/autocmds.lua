@@ -35,7 +35,7 @@ vim.api.nvim_create_autocmd("VimResized", {
 })
 
 -- resize splits when terminal is opened (ergoterm support)
-vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
+vim.api.nvim_create_autocmd({ "WinNew", "BufAdd", "TermOpen", "BufEnter" }, {
 	group = augroup("terminal_resize_splits"),
 	callback = function()
 		if vim.bo.buftype == "terminal" then

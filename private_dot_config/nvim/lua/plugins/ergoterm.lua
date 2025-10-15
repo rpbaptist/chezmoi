@@ -27,7 +27,7 @@ return {
 		})
 
 		local quick_term = terms.Terminal:new({
-      name = "QuickTerm",
+			name = "QuickTerm",
 			layout = "below",
 			size = { below = 15 },
 		})
@@ -50,7 +50,7 @@ return {
 				function()
 					iex_tests:start()
 					local file_path = vim.fn.expand("%")
-					iex_tests:send({ 'IexTests.test("' .. file_path .. '")' }, { action = "visible" })
+					iex_tests:send({ 'IexTests.test("' .. file_path .. '")' }, { action = "open" })
 				end,
 				desc = "Test file",
 			},
