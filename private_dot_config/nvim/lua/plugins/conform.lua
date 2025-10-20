@@ -9,7 +9,7 @@ return {
 			["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
 			sh = { "shfmt" },
 		},
-		format_after_save = {
+		format_on_save = {
 			timeout_ms = 500,
 			lsp_format = "fallback",
 		},
