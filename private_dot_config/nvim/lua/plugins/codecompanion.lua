@@ -2,15 +2,7 @@ return {
 	"olimorris/codecompanion.nvim",
 	lazy = true,
 	dependencies = {
-		{
-			"nvim-mini/mini.diff",
-			config = function()
-				local diff = require("mini.diff")
-				diff.setup({
-					source = diff.gen_source.none(),
-				})
-			end,
-		},
+		"nvim-mini/mini.diff",
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",
 		"saghen/blink.cmp",
@@ -128,14 +120,7 @@ return {
 	keys = {
 		{ "<leader>aa", "<cmd>CodeCompanionActions<CR>", desc = "CodeCompanion actions", mode = { "n", "v" } },
 		{ "<leader>ac", "<cmd>CodeCompanionChat<CR>", desc = "CodeCompanion chat", mode = { "n", "v" } },
-		{
-			"<leader>ai",
-			function()
-				require("codecompanion").prompt("buffer")
-			end,
-			desc = "CodeCompanion chat inline",
-			mode = { "n", "v" },
-		},
+		-- { "<leader>ai", "<cmd>CodeCompanion<CR>", desc = "CodeCompanion chat inline", mode = { "n", "v" } },
 		{ "<leader>at", "<cmd>CodeCompanionChat Toggle<CR>", desc = "CodeCompanion chat toggle", mode = { "n", "v" } },
 		{ "<leader>ae", "<cmd>CodeCompanionChat Add<CR>", desc = "CodeCompanion chat add", mode = { "n", "v" } },
 	},
