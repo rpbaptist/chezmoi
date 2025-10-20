@@ -11,7 +11,7 @@ return {
 		},
 	},
 	keys = function()
-		local terms = require("ergoterm.terminal")
+		local terms = require("ergoterm")
 
 		local iex_tests = terms.Terminal:new({
 			cmd = "iex -S mix",
@@ -62,7 +62,7 @@ return {
 					local line_number = vim.fn.line(".")
 					iex_tests:send(
 						{ 'IexTests.test("' .. file_path .. ":" .. line_number .. '")' },
-						{ action = "visible" }
+						{ action = "open" }
 					)
 				end,
 				desc = "Test line",
@@ -72,7 +72,7 @@ return {
 				function()
 					iex_tests:start()
 					local file_path = vim.fn.expand("%")
-					iex_tests:send({ 'IexTests.test_watch("' .. file_path .. '")' }, { action = "visible" })
+					iex_tests:send({ 'IexTests.test_watch("' .. file_path .. '")' }, { action = "open" })
 				end,
 				desc = "Watch test file",
 			},
