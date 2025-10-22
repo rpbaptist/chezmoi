@@ -73,8 +73,8 @@ return {
 			cmdline = {
 				enabled = true,
 				keymap = {
-        ['<Tab>'] = { 'show', 'accept' },
-					-- preset = "inherit",
+					["<Tab>"] = { "show", "accept" },
+					preset = "inherit",
 				},
 				completion = {
 					list = { selection = { preselect = false } },
@@ -89,6 +89,13 @@ return {
 			keymap = {
 				preset = "super-tab",
 				["<Esc"] = { "hide", "fallback" },
+				["<Tab>"] = {
+					"snippet_forward",
+					function()
+						return require("sidekick").nes_jump_or_apply()
+					end,
+					"fallback",
+				},
 			},
 		},
 		config = function(_, opts)
