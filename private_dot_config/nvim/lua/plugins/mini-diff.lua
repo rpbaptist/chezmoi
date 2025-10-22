@@ -20,4 +20,10 @@ return {
 			desc = "Toggle mini.diff overlay",
 		},
 	},
+	-- config = function()
+	-- 	local diff = require("mini.diff")
+	-- 	diff.setup({
+	-- 		source = diff.gen_source.none(),
+	-- 	})
+	-- end,
 }
