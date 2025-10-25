@@ -23,6 +23,7 @@ return {
 			},
 			completion = {
 				trigger = {
+					-- show_in_snippet = false,
 					prefetch_on_insert = true,
 				},
 				keyword = {
@@ -33,6 +34,7 @@ return {
 						preselect = function()
 							return not require("blink.cmp").snippet_active({ direction = 1 })
 						end,
+						-- auto_insert = true,
 					},
 				},
 				accept = {
@@ -90,10 +92,17 @@ return {
 				preset = "super-tab",
 				["<Esc"] = { "hide", "fallback" },
 				["<Tab>"] = {
-					"snippet_forward",
-					function()
-						return require("sidekick").nes_jump_or_apply()
+					function(cmp)
+						if cmp.snippet_active() then
+							return cmp.accept()
+						else
+							return cmp.select_and_accept()
+						end
 					end,
+					"snippet_forward",
+					-- function()
+					-- 	return require("sidekick").nes_jump_or_apply()
+					-- end,
 					"fallback",
 				},
 			},

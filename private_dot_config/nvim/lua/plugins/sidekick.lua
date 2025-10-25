@@ -1,6 +1,9 @@
 return {
 	"folke/sidekick.nvim",
 	opts = {
+    nes = {
+      enabled = false,
+    },
 		keys = {
 			buffers = { "<c-b>", "buffers", mode = "nt", desc = "open buffer picker" },
 			files = { "<c-f>", "files", mode = "nt", desc = "open file picker" },
@@ -20,18 +23,18 @@ return {
 		},
 	},
 	keys = {
-		{
-			"<tab>",
-			function()
-				-- if there is a next edit, jump to it, otherwise apply it if any
-				if not require("sidekick").nes_jump_or_apply() then
-					return "<Tab>" -- fallback to normal tab
-				end
-			end,
-			mode = { "i", "n" },
-			expr = true,
-			desc = "Goto/Apply Next Edit Suggestion",
-		},
+		-- {
+		-- 	"<tab>",
+		-- 	function()
+		-- 		-- if there is a next edit, jump to it, otherwise apply it if any
+		-- 		if not require("sidekick").nes_jump_or_apply() then
+		-- 			return "<Tab>" -- fallback to normal tab
+		-- 		end
+		-- 	end,
+		-- 	mode = { "i", "n" },
+		-- 	expr = true,
+		-- 	desc = "Goto/Apply Next Edit Suggestion",
+		-- },
 		{
 			"<c-.>",
 			function()
