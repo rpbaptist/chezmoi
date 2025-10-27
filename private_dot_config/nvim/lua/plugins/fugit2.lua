@@ -2,8 +2,7 @@ return {
 	"SuperBo/fugit2.nvim",
 	lazy = true,
 	dependencies = {
-		-- "MunifTanjim/nui.nvim",
-		{ dir = "~/code/nui.nvim" },
+		"rpbaptist/nui.nvim",
 		"nvim-lua/plenary.nvim",
 	},
 	cmd = { "Fugit2", "Fugit2Diff", "Fugit2Graph" },
