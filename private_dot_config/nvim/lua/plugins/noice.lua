@@ -3,7 +3,7 @@ return {
 	event = "VeryLazy",
 	dependencies = {
 		-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-		"rpbaptist/nui.nvim",
+		{ "rpbaptist/nui.nvim", branch = "fix-invalid-window-id" },
 		"rcarriga/nvim-notify",
 	},
 	opts = {

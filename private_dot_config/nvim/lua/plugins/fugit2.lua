@@ -2,7 +2,7 @@ return {
 	"SuperBo/fugit2.nvim",
 	lazy = true,
 	dependencies = {
-		"rpbaptist/nui.nvim",
+		{ "rpbaptist/nui.nvim", branch = "fix-invalid-window-id" },
 		"nvim-lua/plenary.nvim",
 	},
 	cmd = { "Fugit2", "Fugit2Diff", "Fugit2Graph" },
