@@ -5,7 +5,15 @@ return {
 		bigfile = { enabled = true },
 		quickfile = { enabled = true },
 		input = { enabled = true },
-		indent = {enabled = false},
+		indent = {
+			indent = {
+				hl = "GruvboxBg1",
+			},
+			scope = {
+				only_current = true,
+				hl = "GruvboxBg3",
+			},
+		},
 		notifier = {
 			timeout = 5000,
 			style = "compact",
@@ -25,7 +33,7 @@ return {
 			ft = "md",
 			root = vim.env.NOTES_PATH,
 			filekey = {
-				cwd = false,
+        cwd = false,
 				branch = true,
 			},
 			styles = {
@@ -38,7 +46,7 @@ return {
 				duration = { step = 15, total = 160 },
 			},
 		},
-		rename = { enabled = true },
+    rename = { enabled = true },
 		statuscolumn = { enabled = true },
 		words = { enabled = true },
 	},
@@ -116,12 +124,12 @@ return {
 			end,
 			desc = "Delete Other Buffers",
 		},
-		{
-			"<leader>cR",
-			function()
-				Snacks.rename.rename_file()
-			end,
-			desc = "Rename file",
-		},
+    {
+      "<leader>cR",
+      function()
+        Snacks.rename.rename_file()
+      end,
+      desc = "Rename file",
+    }
 	},
 }

@@ -28,7 +28,11 @@ require("lazy").setup({
 		version = false, -- always use the latest git commit
 		-- version = "*", -- try installing the latest stable version for plugins that support semver
 	},
-	checker = { enabled = true },
+	checker = {
+		enabled = true,
+		frequency = 60 * 60 * 24, -- Once every 24 hours
+		-- notify = false,
+	},
 	install = {
 		colorscheme = { "gruvbox" },
 	},

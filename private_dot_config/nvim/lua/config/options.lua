@@ -10,7 +10,7 @@ vim.o.background = "dark"
 
 vim.g.language_servers = {
   "copilot",
-	"elixirls",
+  "expert",
 	"lua_ls",
 	"marksman",
 	"ts_ls",
