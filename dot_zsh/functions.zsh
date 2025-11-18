@@ -134,6 +134,7 @@ function incident() {
 }
 
 function incidents() {
+  cd $INCIDENT_PATH
   $EDITOR "$INCIDENT_PATH"
 }
 

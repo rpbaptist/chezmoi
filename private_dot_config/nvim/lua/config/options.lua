@@ -9,7 +9,6 @@ vim.g.kitty_navigator_password = "nvimwindows"
 vim.o.background = "dark"
 
 vim.g.language_servers = {
-  "copilot",
   "expert",
 	"lua_ls",
 	"marksman",
