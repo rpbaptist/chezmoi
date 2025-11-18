@@ -3,7 +3,6 @@ return {
     "mrjones2014/smart-splits.nvim",
     event = "VeryLazy",
     build = "./kitty/install-kittens.bash",
-    tag = "v2.0.5",
     opts = {
       at_edge = "stop",
       cursor_follows_swapped_bufs = true,
@@ -12,7 +11,7 @@ return {
       resize_mode = {
         resize_keys = { "<Left>", "<Down>", "<Up>", "<Right>" },
       },
-      log_level = "debug",
+      log_level = "error",
     },
     keys = function()
       local splits = require("smart-splits")
