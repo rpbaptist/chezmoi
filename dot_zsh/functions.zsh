@@ -55,6 +55,11 @@ function git-get-branch() {
   git branch -vv | fzf -q "$1" | awk '/(.*)/ {print $1}'
 }
 
+function gnb() {
+  local branch
+  git checkout -b "richardbaptist/$1"
+}
+
 function gcof() {
   local branch
   branch="$(git-get-branch "$1")"
