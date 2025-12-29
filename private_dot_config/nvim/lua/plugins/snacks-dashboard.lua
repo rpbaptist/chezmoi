@@ -35,6 +35,12 @@ return {
 							Snacks.picker.pick(opts)
 						end,
 					},
+					{
+						icon = "󱊍 ",
+						key = "m",
+						desc = "Mason",
+						action = ":lua Mason",
+					},
 					{ icon = " ", key = "s", desc = "Restore Session", section = "session" },
 					{ icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
 					{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
