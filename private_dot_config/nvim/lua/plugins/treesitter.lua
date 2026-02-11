@@ -49,7 +49,7 @@ return {
 			})
 
 			vim.filetype.add({
-				extension = { rasi = "rasi", rofi = "rasi", wofi = "rasi" },
+				extension = { rasi = "rasi", rofi = "rasi", wofi = "rasi", livemd = "livebook" },
 				filename = {
 					["vifmrc"] = "vim",
 				},

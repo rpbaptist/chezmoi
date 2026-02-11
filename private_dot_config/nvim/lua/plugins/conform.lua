@@ -7,6 +7,7 @@ return {
 			elixir = { "mix_format" },
 			["markdown"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
 			["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
+			livebook = { "prettier", "markdownlint-cli2", "markdown-toc" },
 			sh = { "shfmt" },
 		},
 		format_on_save = {
