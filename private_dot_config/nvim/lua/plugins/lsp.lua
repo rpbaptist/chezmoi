@@ -16,7 +16,13 @@ return {
 		"mason-org/mason-lspconfig.nvim",
 		event = "VeryLazy",
 		opts = {
-			ensure_installed = vim.g.language_servers,
+			ensure_installed = {
+				"expert",
+				"lua_ls",
+				"marksman",
+				"ts_ls",
+				"yamlls",
+			},
 		},
 		dependencies = {
 			"neovim/nvim-lspconfig",

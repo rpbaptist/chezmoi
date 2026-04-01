@@ -93,4 +93,11 @@ vim.lsp.config("*", {
 	end,
 })
 
-vim.lsp.enable(vim.g.language_servers)
+vim.lsp.enable({
+  "dexter",
+  "expert",
+	"lua_ls",
+	"marksman",
+	"ts_ls",
+	"yamlls",
+})
