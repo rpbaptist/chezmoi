@@ -119,8 +119,8 @@ function note() {
   if [ -z "$file" ]
   then 
     mkdir -p $( dirname "$1")
-    touch "$1"
-    $EDITOR "$NOTES_PATH/$1"
+    touch "$1.md"
+    $EDITOR "$NOTES_PATH/$1.md"
   else
     $EDITOR "$NOTES_PATH/$file"
   fi
