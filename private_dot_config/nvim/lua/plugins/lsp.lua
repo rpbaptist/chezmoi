@@ -17,7 +17,7 @@ return {
 		event = "VeryLazy",
 		opts = {
 			ensure_installed = {
-				-- "expert",
+				"expert",
 				"lua_ls",
 				"marksman",
 				"ts_ls",

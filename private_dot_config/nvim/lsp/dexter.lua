@@ -1,6 +1,6 @@
 return {
   cmd = { 'dexter', 'lsp' },
-  root_markers = { '.dexter.db', '.git', 'mix.exs' },
-  filetypes = { 'elixir', 'eelixir' },
+  root_markers = { '.dexter/dexter.db', '.dexter.db', 'mix.exs' },
+  filetypes = { "elixir", "eelixir", "heex", "surface", "livebook" },
 }
 

@@ -95,7 +95,7 @@ vim.lsp.config("*", {
 
 vim.lsp.enable({
   "dexter",
-  -- "expert",
+  "expert",
 	"lua_ls",
 	"marksman",
 	"ts_ls",
