@@ -18,6 +18,7 @@ return {
 		opts = {
 			ensure_installed = {
 				"expert",
+        "gopls",
 				"lua_ls",
 				"marksman",
 				"ts_ls",
