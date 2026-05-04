@@ -1,5 +1,6 @@
 #!/bin/sh
 
+export MISE_NOT_FOUND_AUTO_INSTALL=false
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgreprc"
 export SHELLCHECK_OPTS="-e SC1090"
 
@@ -16,8 +17,9 @@ MISE_SHIM_PATH="$HOME/.local/share/mise/shims"
 SNAP_PATH="/snap/bin"
 NEOVIM_PATH="/opt/nvim-linux-x86_64/bin"
 CARGO_PATH="$HOME/.cargo/bin"
+OMARCHY_PATH="$HOME/.local/share/omarchy/bin"
 
-export PATH="$HOME_LOCAL_PATH:$COMMON_PATHS:$GAMES_PATH:$SNAP_PATH:$MISE_SHIM_PATH:$NEOVIM_PATH:$CARGO_PATH"
+export PATH="$HOME_LOCAL_PATH:$COMMON_PATHS:$GAMES_PATH:$SNAP_PATH:$MISE_SHIM_PATH:$NEOVIM_PATH:$CARGO_PATH:$OMARCHY_PATH"
 
 # Preferred editor for local and remote sessions
 if [ -n "$SSH_CONNECTION" ]; then

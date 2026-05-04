@@ -59,9 +59,6 @@ alias mtw='mix test.watch'
 alias mpr='mix phx.routes'
 alias mps='mix phx.server'
 
-# aliases
-alias rtx=mise
-
 alias localtunnel="$HOME/.local/bin/lt"
 
 alias qmku="cd $HOME/code/qmk_userspace"

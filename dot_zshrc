@@ -1,9 +1,17 @@
 #!/bin/sh
 
-# Prevent Ubuntu from performing useless overhead
-skip_global_compinit=1
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
 
-setopt nobeep
+# Load zsh options, keybindings, and completion
+[[ -f /usr/share/omarchy-zsh/shell/zoptions ]] && source /usr/share/omarchy-zsh/shell/zoptions
+
+# Load shared shell configuration (aliases, functions, environment, tool init)
+[[ -f /usr/share/omarchy-zsh/shell/all ]] && source /usr/share/omarchy-zsh/shell/all
+
+# Add your own customizations below
+
+setopt nobeep 
 unsetopt nomatch
 
 SAVEHIST=1000
@@ -63,7 +71,7 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 znap source zsh-users/zsh-autosuggestions
 
 znap eval dircolors "dircolors $HOME/.dircolors"
-znap eval mise "mise activate zsh"
+# znap eval mise "mise activate zsh"
 
 # Don't try to ssh to hosts file
 zstyle ":completion:*" hosts off
@@ -73,9 +81,6 @@ source "$ZSH/custom.zsh"
 
 fpath+=($ZSH/completions)
 
-znap fpath _glab      "glab      completion  -s zsh"
-znap fpath _kubectl   "kubectl   completion  zsh"
-znap fpath _remotectl "remotectl completion  zsh"
 znap fpath _mise      "mise      completion  zsh"
 znap fpath _starship  "starship  completions zsh"
 znap fpath _chezmoi   "chezmoi   completion zsh"
