@@ -7,7 +7,7 @@ return {
 	},
 	cmd = { "Fugit2", "Fugit2Diff", "Fugit2Graph" },
 	opts = {
-		libgit2_path = "libgit2.so.1.7",
+		libgit2_path = "libgit2.so.1.9",
 		show_patch = true,
 	},
 	keys = {

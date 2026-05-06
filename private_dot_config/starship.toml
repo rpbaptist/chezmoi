@@ -5,6 +5,8 @@ format = """
 [ $directory ](bg:#3c3836)\
 [([ ](fg:black bg:#3c3836)\
 $elixir\
+$python\
+$ruby\
 $golang\
 $custom\
 $c\
