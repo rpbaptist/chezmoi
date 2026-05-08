@@ -175,6 +175,8 @@ symbol = "󰏗 "
 
 [python]
 symbol = " "
+style = 'fg:bright-yellow bg:#3c3836'
+format = '[$symbol$version]($style)'
 
 [ruby]
 symbol = " "
