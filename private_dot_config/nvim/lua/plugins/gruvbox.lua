@@ -16,6 +16,7 @@ return {
         DiffDelete = { fg = "#fbf1c7", bg = "#cc241d" },
         DiffText = { fg = "#32302f", bg = "#fbf1c7" },
         FlashLabel = { fg = "#1d2021", bg = "#83a598" },
+        SidekickChat = { link = "Normal" },
         WinBar = { fg = "#ebdbb2", bg = "#32302f" },
         WinBarAqua = { fg = "#689d6a", bg = "#32302f" },
         WinBarBlue = { fg = "#458588", bg = "#32302f" },
