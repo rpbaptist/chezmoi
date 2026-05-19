@@ -33,7 +33,7 @@ return {
 			ft = "md",
 			root = vim.env.NOTES_PATH,
 			filekey = {
-        cwd = false,
+				cwd = false,
 				branch = true,
 			},
 			styles = {
@@ -41,12 +41,19 @@ return {
 			},
 		},
 		scope = { enabled = true },
+		-- styles = {
+		-- 	terminal = {
+		-- 		wo = {
+		-- 			winhighlight = "Normal:Normal,NormalNC:Normal,NormalFloat:Normal,FloatBorder:FloatBorder",
+		-- 		},
+		-- 	},
+		-- },
 		scroll = {
 			animate = {
 				duration = { step = 15, total = 160 },
 			},
 		},
-    rename = { enabled = true },
+		rename = { enabled = true },
 		statuscolumn = { enabled = true },
 		words = { enabled = true },
 	},
@@ -124,12 +131,12 @@ return {
 			end,
 			desc = "Delete Other Buffers",
 		},
-    {
-      "<leader>cR",
-      function()
-        Snacks.rename.rename_file()
-      end,
-      desc = "Rename file",
-    }
+		{
+			"<leader>cR",
+			function()
+				Snacks.rename.rename_file()
+			end,
+			desc = "Rename file",
+		},
 	},
 }
