@@ -94,6 +94,7 @@ vim.lsp.config("*", {
 })
 
 vim.lsp.enable({
+  "ruby_lsp",
   "expert",
   "gopls",
 	"lua_ls",

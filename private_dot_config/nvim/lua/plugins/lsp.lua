@@ -17,6 +17,7 @@ return {
 		event = "VeryLazy",
 		opts = {
 			ensure_installed = {
+        "ruby_lsp",
 				"expert",
         "gopls",
 				"lua_ls",

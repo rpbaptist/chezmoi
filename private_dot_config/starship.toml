@@ -180,6 +180,8 @@ format = '[$symbol$version]($style)'
 
 [ruby]
 symbol = " "
+style = 'fg:bright-red bg:#3c3836'
+format = '[$symbol($version)]($style)'
 
 [rust]
 symbol = " "
