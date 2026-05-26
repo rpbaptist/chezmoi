@@ -74,3 +74,10 @@ alias cme="chezmoi edit"
 alias cmf="chezmoi forget"
 
 alias nvc="cd $HOME/.config/nvim"
+
+unalias c
+
+alias oc=opencode
+alias cl=claude
+alias clx=claude --allow-dangerously-skip-permissions
+
