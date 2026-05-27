@@ -4,10 +4,14 @@ return {
     opts = {
       contrast = "hard",
       overrides = {
-        Function = { fg = "#8ec07c", bold = false }, -- light aqua instead of yellow
-        Number = { fg = "#fe8019" }, -- light orange instead of purple
-        Delimiter = { fg = "#d3869b" }, -- light blue instead of orange
-        ["@module"] = { fg = "#fabd2f" }, -- light yellow instead of light aqua
+        ["@function.elixir"] = { fg = "#8ec07c", bold = false },
+        ["@function.call.elixir"] = { fg = "#8ec07c", bold = false },
+        ["@number.elixir"] = { fg = "#fe8019" },
+        ["@number.float.elixir"] = { fg = "#fe8019" },
+        ["@punctuation.delimiter.elixir"] = { fg = "#d3869b" },
+        ["@punctuation.bracket.elixir"] = { fg = "#d3869b" },
+        ["@punctuation.special.elixir"] = { fg = "#d3869b" },
+        ["@module.elixir"] = { fg = "#fabd2f" },
         GitSignsAdd = { fg = "#8ec07c" },
         GitSignsChange = { fg = "#d79921" },
         GitSignsDelete = { fg = "#fb4934" },
@@ -52,6 +56,7 @@ return {
         NavicIconsEvent = { link = "WinBarYellow" },
         NavicIconsClass = { link = "WinBarYellow" },
         NavicIconsEnumMember = { link = "WinBarYellow" },
+        SidekickChat = { link = "Normal" },
         TabLine = { fg = "#bdae93", bg = "#504945" },
         TabLineSel = { fg = "#fbf1c7", bg = "#504945" },
         TabLineFill = { bg = "#1d2021" },
