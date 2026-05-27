@@ -81,3 +81,8 @@ alias oc=opencode
 alias cl=claude
 alias clx=claude --allow-dangerously-skip-permissions
 
+# ruby
+
+alias bi="bundle install"
+alias be="bundle exec"
+alias bb="bundle binstubs"
