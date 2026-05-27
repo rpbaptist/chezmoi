@@ -3,8 +3,10 @@ return {
 	dependencies = { "nvim-lua/plenary.nvim" },
 	cmd = { "CodeReview" },
 	opts = {
+    picker = "snacks",
+    open_in_tab = false,
     ai = {
-      review_level = "warning"
+      review_level = "suggestion"
     },
   },
 }
