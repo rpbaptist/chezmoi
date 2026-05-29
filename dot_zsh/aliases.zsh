@@ -75,7 +75,7 @@ alias cmf="chezmoi forget"
 
 alias nvc="cd $HOME/.config/nvim"
 
-unalias c
+# unalias c
 
 alias oc=opencode
 alias cl=claude
