@@ -9,6 +9,7 @@ return {
 			["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
 			livebook = { "prettier", "markdownlint-cli2", "markdown-toc" },
 			sh = { "shfmt" },
+			ruby = { "standardrb" },
 		},
 		format_on_save = {
 			timeout_ms = 500,
