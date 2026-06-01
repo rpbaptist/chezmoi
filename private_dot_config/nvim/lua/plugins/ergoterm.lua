@@ -29,6 +29,18 @@ return {
 			},
 		})
 
+		local ruby_tests = terms.Terminal:new({
+			name = "RubyTests",
+			layout = "right",
+			auto_list = false,
+			bang_target = false,
+			sticky = true,
+			auto_scroll = true,
+			start_in_insert = false,
+			close_on_job_exit = false,
+			size = { right = 80 },
+		})
+
 		local quick_term = terms.Terminal:new({
 			name = "QuickTerm",
 			layout = "below",
@@ -44,29 +56,49 @@ return {
 			{
 				"<leader>tg",
 				function()
-					iex_tests:toggle()
+					local toggle = {
+						ruby = function() ruby_tests:toggle() end,
+						elixir = function() iex_tests:toggle() end,
+					}
+					local fn = toggle[vim.bo.filetype]
+					if fn then fn() end
 				end,
-				desc = "Toggle IexTests",
+				desc = "Toggle test terminal",
 			},
 			{
 				"<leader>tf",
 				function()
-					iex_tests:start()
 					local file_path = vim.fn.expand("%")
-					iex_tests:send({ 'IexTests.test("' .. file_path .. '")' }, { action = "open" })
+					local run = {
+						ruby = function()
+							ruby_tests:send({ "rake test TEST=" .. file_path }, { action = "open" })
+						end,
+						elixir = function()
+							iex_tests:start()
+							iex_tests:send({ 'IexTests.test("' .. file_path .. '")' }, { action = "open" })
+						end,
+					}
+					local fn = run[vim.bo.filetype]
+					if fn then fn() end
 				end,
 				desc = "Test file",
 			},
 			{
 				"<leader>tt",
 				function()
-					iex_tests:start()
 					local file_path = vim.fn.expand("%")
 					local line_number = vim.fn.line(".")
-					iex_tests:send(
-						{ 'IexTests.test("' .. file_path .. ":" .. line_number .. '")' },
-						{ action = "open" }
-					)
+					local run = {
+						elixir = function()
+							iex_tests:start()
+							iex_tests:send(
+								{ 'IexTests.test("' .. file_path .. ":" .. line_number .. '")' },
+								{ action = "open" }
+							)
+						end,
+					}
+					local fn = run[vim.bo.filetype]
+					if fn then fn() end
 				end,
 				desc = "Test line",
 			},
