@@ -114,9 +114,9 @@ read if you used those and something break with a version upgrade you're on your
 /* GTK NAMED COLORS (Libadwaita)
    ----------------
    use responsibly! */
-@define-color accent_bg_color #d4be98;
+@define-color accent_bg_color #fabd2f;
 @define-color accent_fg_color rgba(0, 0, 0, 0.87);
-@define-color accent_color #d4be98;
+@define-color accent_color #fabd2f;
 @define-color destructive_bg_color #F28B82;
 @define-color destructive_fg_color rgba(0, 0, 0, 0.87);
 @define-color destructive_color #F28B82;
