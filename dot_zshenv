@@ -4,7 +4,7 @@ export MISE_NOT_FOUND_AUTO_INSTALL=false
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgreprc"
 export SHELLCHECK_OPTS="-e SC1090"
 
-export KERL_CONFIGURE_OPTIONS="--disable-debug --disable-silent-rules --without-javac --enable-shared-zlib --enable-dynamic-ssl-lib --enable-hipe --enable-sctp --enable-smp-support --enable-threads --enable-kernel-poll --with-ssl=/usr/local/ssl"
+export KERL_CONFIGURE_OPTIONS="--disable-debug --disable-silent-rules --without-javac --enable-shared-zlib --enable-dynamic-ssl-lib --enable-sctp --enable-smp-support --enable-threads --enable-kernel-poll --with-ssl=/usr"
 export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_path '\"$HOME/.erlang-history\"' -kernel shell_history_file_bytes 1024000"
 
 # Postgres host
