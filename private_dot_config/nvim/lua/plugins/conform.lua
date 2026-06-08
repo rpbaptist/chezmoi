@@ -5,6 +5,10 @@ return {
 		formatters_by_ft = {
 			lua = { "stylua" },
 			elixir = { "mix_format" },
+			javascript = { "prettier", "eslint_d" },
+			javascriptreact = { "prettier", "eslint_d" },
+			typescript = { "prettier", "eslint_d" },
+			typescriptreact = { "prettier", "eslint_d" },
 			["markdown"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
 			["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
 			livebook = { "prettier", "markdownlint-cli2", "markdown-toc" },
