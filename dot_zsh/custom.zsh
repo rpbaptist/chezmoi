@@ -10,7 +10,7 @@ function source-plugin() {
 }
 
 source-plugin "git"
-source-plugin "ubuntu"
+source-plugin "arch"
 
 source "$ZSH/title.zsh"
 source "$ZSH/aliases.zsh"
