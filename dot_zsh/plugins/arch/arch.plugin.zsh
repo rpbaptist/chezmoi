@@ -10,15 +10,11 @@ alias pcu='sudo pacman -U'
 alias pcr='sudo pacman -R'
 alias pcrem='sudo pacman -Rns'
 alias pcrep='pacman -Si'
-alias pcreps='pacman -Ss'
 alias pcloc='pacman -Qi'
 alias pclocs='pacman -Qs'
 alias pcinsd='sudo pacman -S --asdeps'
-alias pcmir='sudo pacman -Syy'
 alias pclsorphans='sudo pacman -Qdt'
 alias pcrmorphans='sudo pacman -Rs $(pacman -Qtdq)'
-alias pcfileupg='sudo pacman -Fy'
-alias pcfiles='pacman -F'
 alias pcls='pacman -Ql'
 alias pcown='pacman -Qo'
 alias pcupd="sudo pacman -Sy"
@@ -57,6 +53,7 @@ function pacmansignkeys() {
   done
 }
 
+  alias yaconf='yay -Pg'
 if (( $+commands[xdg-open] )); then
   function pacweb() {
     if [[ $# = 0 || "$1" =~ '--help|-h' ]]; then
@@ -83,12 +80,11 @@ fi
 #             AUR helpers             #
 #######################################
 
-  alias yaconf='yay -Pg'
   alias yaclean='yay -Sc'
   alias yaclr='yay -Scc'
-  alias yaupg='yay -Syu'
+  alias yaug='yay -Syu'
   alias yasu='yay -Syu --noconfirm'
-  alias yain='yay -S'
+  alias yai='yay -S'
   alias yains='yay -U'
   alias yare='yay -R'
   alias yarem='yay -Rns'
