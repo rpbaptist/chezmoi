@@ -1,15 +1,14 @@
 [Unit]
 Description=SSH key loader
 Requires=ssh-agent.service
-After=ssh-agent.service
+After=ssh-agent.service graphical-session.target
 
 [Service]
 Type=oneshot
 Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
 Environment=SSH_ASKPASS=/usr/bin/ksshaskpass
 Environment=SSH_ASKPASS_REQUIRE=force
-Environment=QT_QPA_PLATFORM=wayland
 ExecStart=/usr/bin/ssh-add %h/.ssh/richard_ed25519
 
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target
