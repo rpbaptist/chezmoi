@@ -16,15 +16,7 @@ return {
 		"mason-org/mason-lspconfig.nvim",
 		event = "VeryLazy",
 		opts = {
-			ensure_installed = {
-        "ruby_lsp",
-				"expert",
-        "gopls",
-				"lua_ls",
-				"marksman",
-				"ts_ls",
-				"yamlls",
-			},
+			ensure_installed = vim.g.lsps,
 		},
 		dependencies = {
 			"neovim/nvim-lspconfig",

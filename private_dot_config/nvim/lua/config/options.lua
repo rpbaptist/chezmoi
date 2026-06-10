@@ -8,6 +8,20 @@ vim.g.kitty_navigator_password = "nvimwindows"
 
 vim.o.background = "dark"
 
+vim.g.lsps = {
+  "eslint",
+  "tailwindcss",
+  "jsonls",
+  "cssls",
+  "ruby_lsp",
+  "expert",
+  "gopls",
+	"lua_ls",
+	"marksman",
+	"ts_ls",
+	"yamlls",
+}
+
 vim.g.custom_icons = {
 	modified = {
 		added = " ",

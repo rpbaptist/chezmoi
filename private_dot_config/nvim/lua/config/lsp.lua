@@ -93,12 +93,4 @@ vim.lsp.config("*", {
 	end,
 })
 
-vim.lsp.enable({
-  "ruby_lsp",
-  "expert",
-  "gopls",
-	"lua_ls",
-	"marksman",
-	"ts_ls",
-	"yamlls",
-})
+vim.lsp.enable(vim.g.lsps)
