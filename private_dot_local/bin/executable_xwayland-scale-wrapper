@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Get monitor scale from Hyprland
+SCALE=$(hyprctl monitors | grep "scale:" | head -1 | awk '{print $2}')
+
+# Calculate DPI assuming base DPI 96
+DPI=$(echo "96 * $SCALE" | bc)
+
+# Write DPI value to Xresources
+echo "Xft.dpi: $DPI" > ~/.Xresources
+
+# Load Xresources DPI values for XWayland/X11 apps
+xrdb -merge ~/.Xresources
+
+# Launch the application passed as arguments
+exec "$@"
