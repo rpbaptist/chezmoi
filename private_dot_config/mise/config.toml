@@ -5,7 +5,7 @@ experimental = true
 [tools]
 elixir = "latest"
 erlang = "latest"
-node = "latest"
+node = "lts"
 nodejs = "latest"
 usage = "latest"
 go = "latest"
