@@ -28,6 +28,10 @@ require("lazy").setup({
 		version = false, -- always use the latest git commit
 		-- version = "*", -- try installing the latest stable version for plugins that support semver
 	},
+	rocks = {
+		enabled = true,
+		hererocks = true,
+	},
 	checker = {
 		enabled = true,
 		frequency = 60 * 60 * 24, -- Once every 24 hours
