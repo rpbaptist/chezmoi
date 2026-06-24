@@ -51,7 +51,6 @@ bindkey -M emacs -r '^[/' \
                     '^[Y'
 
 znap source marlonrichert/zsh-autocomplete
-bindkey '\t' menu-select "$terminfo[kcbt]" reverse-menu-complete
 
 znap clone junegunn/fzf
 source "$ZSH/scripts/fzf.zsh"
@@ -92,4 +91,7 @@ ZSH_HIGHLIGHT_STYLES[arg0]='fg=green'
 
 znap source zsh-users/zsh-syntax-highlighting
 znap eval zoxide "zoxide init zsh --cmd cd"
+
+# Key bindings — must come last: fzf, zsh-autocomplete, and others above all touch Tab.
+bindkey '\t' menu-select "$terminfo[kcbt]" reverse-menu-complete
 
