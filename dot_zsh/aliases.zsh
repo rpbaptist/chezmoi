@@ -13,6 +13,10 @@ alias ltr='lt -r'
 alias ltra='ltr -a'
 alias tree='eza --tree --level=2 --long --icons --git'
 
+# system _eza completion (/usr/share/zsh/site-functions/_eza) has a broken option spec
+# ("--color=[...]:(when):(...)") that breaks completion for every eza-based alias; use plain file completion instead
+compdef _files eza
+
 alias sudo="sudo "
 alias sl="subl"
 alias nv="nvim"
