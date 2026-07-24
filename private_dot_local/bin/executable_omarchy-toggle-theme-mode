@@ -14,8 +14,10 @@ declare -A TO_DARK=(
 
 if [[ -f "$THEME_DIR/light.mode" ]]; then
   target="${TO_DARK[$CURRENT]:-}"
+  target_mode="dark"
 else
   target="${TO_LIGHT[$CURRENT]:-}"
+  target_mode="light"
 fi
 
 if [[ -z "$target" ]]; then
@@ -23,6 +25,18 @@ if [[ -z "$target" ]]; then
   exit 1
 fi
 
-# Preserve whatever background the user has set (via Omarchy's menu) across
-# the toggle — omarchy theme set otherwise cycles to the new theme's default.
+STATE_DIR="$HOME/.config/omarchy/state"
+mkdir -p "$STATE_DIR"
+
+# Skip omarchy's automatic background cycle -- each mode keeps its own last
+# background (see omarchy-bg-set-remember, which records a pick from the
+# Omarchy menu into $STATE_DIR/background-<mode>) and we restore it below.
 OMARCHY_THEME_SKIP_BACKGROUND=1 omarchy theme set "$target"
+
+SAVED_BG_FILE="$STATE_DIR/background-$target_mode"
+if [[ -f "$SAVED_BG_FILE" ]] && [[ -f "$(cat "$SAVED_BG_FILE")" ]]; then
+  omarchy-theme-bg-set "$(cat "$SAVED_BG_FILE")"
+else
+  omarchy-theme-bg-next
+  readlink "$HOME/.config/omarchy/current/background" >"$SAVED_BG_FILE"
+fi

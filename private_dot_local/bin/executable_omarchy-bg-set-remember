@@ -1,0 +1,22 @@
+#!/bin/bash
+# Set a background and remember it as the current mode's (light/dark) pick,
+# so omarchy-toggle-theme-mode can restore it when toggling back.
+set -euo pipefail
+
+if [[ -z "${1:-}" ]]; then
+  echo "Usage: omarchy-bg-set-remember <path-to-image>" >&2
+  exit 1
+fi
+
+omarchy-theme-bg-set "$1"
+
+STATE_DIR="$HOME/.config/omarchy/state"
+mkdir -p "$STATE_DIR"
+
+if [[ -f "$HOME/.config/omarchy/current/theme/light.mode" ]]; then
+  MODE="light"
+else
+  MODE="dark"
+fi
+
+realpath "$1" >"$STATE_DIR/background-$MODE"
