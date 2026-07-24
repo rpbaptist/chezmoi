@@ -1,0 +1,43 @@
+#!/bin/bash
+# Runs after `omarchy theme set <name>`. $1 is the snake-cased theme name.
+THEME_NAME="$1"
+
+if [[ -f "$HOME/.config/omarchy/current/theme/light.mode" ]]; then
+  MODE="light"
+else
+  MODE="dark"
+fi
+
+# omarchy-theme-set-gnome already set gtk-theme to Adwaita/Adwaita-dark and
+# color-scheme to prefer-light/prefer-dark for every theme; override to the
+# matching custom gruvbox GTK theme for our gruvbox pair.
+if [[ "$THEME_NAME" == "gruvbox" ]]; then
+  gsettings set org.gnome.desktop.interface gtk-theme "Gruvbox-Dark-BL-LB"
+elif [[ "$THEME_NAME" == "gruvbox-light" ]]; then
+  gsettings set org.gnome.desktop.interface gtk-theme "Gruvbox-BL-LB-Light"
+fi
+
+notify-send -u low "Theme changed" "Now using $THEME_NAME ($MODE)"
+
+# Starship re-reads its config fresh on every prompt draw (new subprocess per
+# prompt, not a daemon), so flipping this one line is enough -- no reload
+# needed. See [palettes.dark]/[palettes.light] in starship.toml.
+STARSHIP_CONFIG_FILE="$HOME/.config/starship.toml"
+if [[ -f "$STARSHIP_CONFIG_FILE" ]]; then
+  sed -i "s/^palette = .*/palette = \"$MODE\"/" "$STARSHIP_CONFIG_FILE"
+fi
+
+# Push a live background sync to any already-open nvim sessions (each
+# instance registers its RPC address on startup; see plugin/gruvbox.lua in
+# the nvim config repo). Self-prunes dead sockets from the registry.
+NVIM_REGISTRY="$HOME/.local/state/nvim/theme-sync-servers"
+if [[ -f "$NVIM_REGISTRY" ]] && command -v nvim >/dev/null; then
+  survivors=()
+  while IFS= read -r sock; do
+    [[ -n "$sock" && -S "$sock" ]] || continue
+    if nvim --server "$sock" --remote-send '<Cmd>SyncBackground<CR>' 2>/dev/null; then
+      survivors+=("$sock")
+    fi
+  done <"$NVIM_REGISTRY"
+  printf '%s\n' "${survivors[@]}" >"$NVIM_REGISTRY"
+fi

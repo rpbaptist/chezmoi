@@ -1,0 +1,26 @@
+#!/bin/bash
+# Toggle the active omarchy theme between its light and dark pair.
+set -euo pipefail
+
+THEME_DIR="$HOME/.config/omarchy/current/theme"
+CURRENT=$(cat "$HOME/.config/omarchy/current/theme.name" 2>/dev/null || echo "")
+
+declare -A TO_LIGHT=(
+  [gruvbox]="gruvbox-light"
+)
+declare -A TO_DARK=(
+  [gruvbox-light]="gruvbox"
+)
+
+if [[ -f "$THEME_DIR/light.mode" ]]; then
+  target="${TO_DARK[$CURRENT]:-}"
+else
+  target="${TO_LIGHT[$CURRENT]:-}"
+fi
+
+if [[ -z "$target" ]]; then
+  echo "No known light/dark pair for theme '$CURRENT'" >&2
+  exit 1
+fi
+
+omarchy theme set "$target"

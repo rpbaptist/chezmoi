@@ -1,29 +1,37 @@
 format = """
-([ $username$hostname ](bg:#3c3836)\
-[ ](fg:black bg:#3c3836))\
+([ $username$hostname ](bg:background)\
+[ ](fg:black bg:background))\
 \
-[ $directory ](bg:#3c3836)\
-[([ ](fg:black bg:#3c3836)\
+[ $directory ](bg:background)\
+[([ ](fg:black bg:background)\
 $elixir\
 $python\
 $ruby\
 $golang\
 $custom\
 $c\
-$nodejs )](bg:#3c3836)\
+$nodejs )](bg:background)\
 \
-[([ ](fg:black bg:#3c3836)\
+[([ ](fg:black bg:background)\
 $git_branch\
 $git_commit\
 $git_state\
-$git_status )](fg:bright-cyan bg:#3c3836)\
+$git_status )](fg:bright-cyan bg:background)\
 \
-[](#3c3836)\
+[](background)\
 $line_break\
 ($sudo )$character
 """
 
 command_timeout = 600
+
+palette = "dark"
+
+[palettes.dark]
+background = "#3c3836"
+
+[palettes.light]
+background = "#ebdbb2"
 
 continuation_prompt = ''
 
@@ -40,38 +48,38 @@ vimcmd_symbol = "[❮](green)"
 
 [directory]
 read_only = " 󰌾"
-read_only_style = "fg:bright-red bg:#3c3836"
-style = "fg:yellow bg:#3c3836"
+read_only_style = "fg:bright-red bg:background"
+style = "fg:yellow bg:background"
 format = '[$path]($style)[$read_only]($read_only_style)'
 
 [git_branch]
 symbol = "󰘬 "
 truncation_length = 40
-style = "fg:bright-cyan bg:#3c3836"
+style = "fg:bright-cyan bg:background"
 format = "[$symbol$branch]($style)"
 
 [git_commit]
 tag_symbol = " 󰓹 "
-style = "fg:bright-cyan bg:#3c3836"
+style = "fg:bright-cyan bg:background"
 format = '[\($hash$tag\)]($style)'
 
 [git_status]
 stashed = "≡"
-ahead = '[](fg:cyan bg:#3c3836)'
-up_to_date = "[✔](bold fg:cyan bg:#3c3836)"
-behind = '[](fg:bright-red bg:#3c3836)'
-diverged = "[✗](fg:bold bright-red bg:#3c3836)"
-staged = '[+](fg:bold cyan bg:#3c3836)'
-deleted = '[-](fg:bold bright-red bg:#3c3836)'
-untracked = '[?](fg:bright-yellow bg:#3c3836)'
-renamed = '[»](fg:bright-yellow bg:#3c3836)'
-modified = "[≠](fg:bright-yellow bg:#3c3836)"
+ahead = '[](fg:cyan bg:background)'
+up_to_date = "[✔](bold fg:cyan bg:background)"
+behind = '[](fg:bright-red bg:background)'
+diverged = "[✗](fg:bold bright-red bg:background)"
+staged = '[+](fg:bold cyan bg:background)'
+deleted = '[-](fg:bold bright-red bg:background)'
+untracked = '[?](fg:bright-yellow bg:background)'
+renamed = '[»](fg:bright-yellow bg:background)'
+modified = "[≠](fg:bright-yellow bg:background)"
 typechanged = ''
-style = 'bg:#3c3836'
+style = 'bg:background'
 format = "[( $ahead_behind)( $all_status)]($style)"
 
 [git_state]
-style = "fg:bright-yellow bg:#3c3836"
+style = "fg:bright-yellow bg:background"
 format = ' [$state( $progress_current/$progress_total)]($style)'
 
 [cmd_duration]
@@ -80,14 +88,14 @@ format = "[$duration]($style) "
 style = "yellow"
 
 [username]
-style_user = "fg:bright-blue bg:#3c3836"
-style_root = "fg:bold red bg:#3c3836"
+style_user = "fg:bright-blue bg:background"
+style_root = "fg:bold red bg:background"
 format = "[$user]($style)"
 # show_always = true
 
 [hostname]
 # ssh_only = false
-style = "fg:bright-yellow bg:#3c3836"
+style = "fg:bright-yellow bg:background"
 ssh_symbol = " "
 format = "[@$hostname]($style)"
 
@@ -96,7 +104,7 @@ symbol = "  "
 
 [c]
 symbol = " "
-style = 'fg:bright-yellow bg:#3c3836'
+style = 'fg:bright-yellow bg:background'
 version_format = '${raw}'
 format = '[$symbol($version(-$name))]($style)'
 
@@ -108,19 +116,19 @@ format = '[$symbol($version(-$name))]($style)'
 disabled = true
 symbol = " "
 version_format = '${raw}'
-style = 'fg:bright-purple bg:#3c3836'
+style = 'fg:bright-purple bg:background'
 format = '[$symbol$version]($style)'
 
 [custom.elixir]
 symbol = " "
-style = 'fg:bright-purple bg:#3c3836'
+style = 'fg:bright-purple bg:background'
 command = "elixir --short-version"
 format = '[$symbol$output]($style)'
 detect_files = ['mix.exs']
 
 [golang]
 symbol = "󰟓 "
-style = 'fg:bright-blue bg:#3c3836'
+style = 'fg:bright-blue bg:background'
 format = '[$symbol($version(-$name))]($style)'
 
 [lua]
@@ -137,12 +145,12 @@ symbol = " "
 
 [zig]
 symbol = " "
-style = 'fg:bright-purple bg:#3c3836'
+style = 'fg:bright-purple bg:background'
 format = '[$symbol$version]($style)'
 
 [nodejs]
 symbol = " "
-style = "fg:green bg:#3c3836"
+style = "fg:green bg:background"
 version_format = '${raw}'
 format = '[$symbol($version)]($style)'
 
@@ -175,12 +183,12 @@ symbol = "󰏗 "
 
 [python]
 symbol = " "
-style = 'fg:bright-yellow bg:#3c3836'
+style = 'fg:bright-yellow bg:background'
 format = '[$symbol$version]($style)'
 
 [ruby]
 symbol = " "
-style = 'fg:bright-red bg:#3c3836'
+style = 'fg:bright-red bg:background'
 format = '[$symbol($version)]($style)'
 
 [rust]
