@@ -23,4 +23,6 @@ if [[ -z "$target" ]]; then
   exit 1
 fi
 
-omarchy theme set "$target"
+# Preserve whatever background the user has set (via Omarchy's menu) across
+# the toggle — omarchy theme set otherwise cycles to the new theme's default.
+OMARCHY_THEME_SKIP_BACKGROUND=1 omarchy theme set "$target"
