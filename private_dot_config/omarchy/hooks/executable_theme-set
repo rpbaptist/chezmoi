@@ -17,6 +17,21 @@ elif [[ "$THEME_NAME" == "gruvbox-light" ]]; then
   gsettings set org.gnome.desktop.interface gtk-theme "Gruvbox-BL-LB-Light"
 fi
 
+# ExtraLight looks great on gruvbox (dark)'s near-black background, but its
+# thin strokes lose contrast against gruvbox-light's cream background --
+# bump to Regular weight there and fall back to ExtraLight everywhere else.
+KITTY_CONFIG="$HOME/.config/kitty/kitty.conf"
+if [[ "$THEME_NAME" == "gruvbox-light" ]]; then
+  FONT_WEIGHT="Regular"
+  ITALIC_STYLE="Italic"
+else
+  FONT_WEIGHT="ExtraLight"
+  ITALIC_STYLE="ExtraLight Italic"
+fi
+sed -i -E "s/^(font_family family=\"Jetbrains Mono\" style=\")[^\"]*(\")/\1${FONT_WEIGHT}\2/" "$KITTY_CONFIG"
+sed -i -E "s/^(italic_font family=\"Jetbrains Mono\" style=\")[^\"]*(\")/\1${ITALIC_STYLE}\2/" "$KITTY_CONFIG"
+kitty @ load-config >/dev/null 2>&1
+
 notify-send -u low "Theme changed" "Now using $THEME_NAME ($MODE)"
 
 # Starship re-reads its config fresh on every prompt draw (new subprocess per
