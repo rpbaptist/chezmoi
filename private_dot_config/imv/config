@@ -1,3 +1,10 @@
+[options]
+
+# Show filename overlay on startup
+overlay = true
+overlay_text = $(basename "$imv_current_file")
+overlay_font = Monospace:12
+
 [binds]
 
 # Print the current image file
