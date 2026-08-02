@@ -32,6 +32,19 @@ sed -i -E "s/^(font_family family=\"Jetbrains Mono\" style=\")[^\"]*(\")/\1${FON
 sed -i -E "s/^(italic_font family=\"Jetbrains Mono\" style=\")[^\"]*(\")/\1${ITALIC_STYLE}\2/" "$KITTY_CONFIG"
 kitty @ load-config >/dev/null 2>&1
 
+# Walker's gruvbox theme ships two stylesheets: style-dark.css is a
+# hand-tuned dark palette (kept exact rather than derived from colors.toml,
+# since the dynamic accent doesn't match what we want here); style-dynamic.css
+# imports current/theme/walker.css so every other theme (incl. gruvbox-light)
+# stays correct automatically. Swap the active one in and restart Walker.
+WALKER_GRUVBOX_DIR="$HOME/.config/walker/themes/gruvbox"
+if [[ "$THEME_NAME" == "gruvbox" ]]; then
+  cp "$WALKER_GRUVBOX_DIR/style-dark.css" "$WALKER_GRUVBOX_DIR/style.css"
+else
+  cp "$WALKER_GRUVBOX_DIR/style-dynamic.css" "$WALKER_GRUVBOX_DIR/style.css"
+fi
+"$HOME/.local/share/omarchy/bin/omarchy-restart-walker" >/dev/null 2>&1
+
 notify-send -u low "Theme changed" "Now using $THEME_NAME ($MODE)"
 
 # Starship re-reads its config fresh on every prompt draw (new subprocess per
