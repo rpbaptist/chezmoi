@@ -18,8 +18,9 @@ SNAP_PATH="/snap/bin"
 NEOVIM_PATH="/opt/nvim-linux-x86_64/bin"
 CARGO_PATH="$HOME/.cargo/bin"
 OMARCHY_BIN_PATH="$HOME/.local/share/omarchy/bin"
+PNPM_PATH="$HOME/.local/share/pnpm/bin"
 
-export PATH="$HOME_LOCAL_PATH:$GAMES_PATH:$MISE_SHIM_PATH:$NEOVIM_PATH:$CARGO_PATH:$OMARCHY_BIN_PATH:$COMMON_PATHS"
+export PATH="$HOME_LOCAL_PATH:$PNPM_PATH:$GAMES_PATH:$MISE_SHIM_PATH:$NEOVIM_PATH:$CARGO_PATH:$OMARCHY_BIN_PATH:$COMMON_PATHS"
 
 # Preferred editor for local and remote sessions
 if [ -n "$SSH_CONNECTION" ]; then

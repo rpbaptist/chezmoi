@@ -1,7 +1,11 @@
-@import "../../../../.config/omarchy/current/theme/walker.css";
+@define-color window_bg_color #282828;
+@define-color surface_color   #3c3836;
+@define-color fg_color        #d4be98;
+@define-color accent_color    #fbf1c7;
+@define-color border_color    #ebdbb2;
 
 * { all: unset; }
-* { font-family: monospace; font-size: 18px; color: @text; }
+* { font-family: monospace; font-size: 18px; color: @fg_color; }
 
 scrollbar { opacity: 0; }
 
@@ -9,16 +13,16 @@ scrollbar { opacity: 0; }
 .large-icons  { -gtk-icon-size: 32px; }
 
 .box-wrapper {
-  background: @base;
-  border: 2px solid alpha(@border, 0.85);
+  background: @window_bg_color;
+  border: 2px solid alpha(@border_color, 0.85);
   border-radius: 8px;
   padding: 12px;
-  box-shadow: 0 8px 24px alpha(@base, 0.9);
+  box-shadow: 0 8px 24px alpha(@window_bg_color, 0.9);
 }
 
 .search-container {
-  background: shade(@base, 0.94);
-  border: 2px solid alpha(@border, 0.3);
+  background: @surface_color;
+  border: 2px solid alpha(@border_color, 0.3);
   border-radius: 6px;
   padding: 8px 12px;
   margin-bottom: 8px;
@@ -31,20 +35,20 @@ scrollbar { opacity: 0; }
 .item-subtext  { font-size: 12px; opacity: 0.55; }
 .item-image    { margin-right: 12px; -gtk-icon-transform: scale(0.9); }
 
-child:hover .item-box           { background: alpha(@text, 0.06); }
-child:selected                  { background: alpha(@selected-text, 0.18); border-radius: 4px; }
+child:hover .item-box           { background: alpha(@fg_color, 0.06); }
+child:selected                  { background: alpha(@accent_color, 0.18); border-radius: 4px; }
 child:selected .item-box        { background: transparent; }
-child:selected .item-box *      { color: @selected-text; }
+child:selected .item-box *      { color: @accent_color; }
 
 .keybind-hints {
-  background: shade(@base, 0.94);
-  border-top: 1px solid alpha(@border, 0.2);
+  background: @surface_color;
+  border-top: 1px solid alpha(@border_color, 0.2);
   padding: 8px 12px;
   margin-top: 8px;
 }
 .keybind-label { opacity: 0.5; font-size: 13px; }
-.keybind-bind  { color: @selected-text; font-size: 13px; }
+.keybind-bind  { color: @accent_color; font-size: 13px; }
 
 .current     { font-style: italic; }
 .placeholder { opacity: 0.4; padding: 16px; }
-.error       { color: alpha(@text, 0.6); }
+.error       { color: alpha(@fg_color, 0.6); }
