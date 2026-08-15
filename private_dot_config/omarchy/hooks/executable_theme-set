@@ -2,7 +2,7 @@
 # Runs after `omarchy theme set <name>`. $1 is the snake-cased theme name.
 THEME_NAME="$1"
 
-if [[ -f "$HOME/.config/omarchy/current/theme/light.mode" ]]; then
+if [[ -f "$HOME/.local/state/omarchy/current/theme/light.mode" ]]; then
   MODE="light"
 else
   MODE="dark"
