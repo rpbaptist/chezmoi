@@ -23,8 +23,7 @@ hl.unbind("SUPER + ALT + S")
 hl.unbind("SUPER + C") -- keep universal copy inert
 hl.unbind("SUPER + X") -- keep universal cut inert
 hl.unbind("SUPER + V") -- keep universal paste inert
--- SUPER + CTRL + V is intentionally left bound to Quattro's native
--- clipboard-manager panel -- SUPER + CTRL + H covers this instead, below.
+hl.unbind("SUPER + CTRL + V") -- Quattro's native clipboard-manager panel; SUPER + CTRL + H covers this instead, below
 hl.unbind("SUPER + CTRL + H")
 hl.unbind("SUPER + CTRL + SPACE")
 -- resize windows
