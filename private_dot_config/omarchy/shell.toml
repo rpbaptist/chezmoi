@@ -1,0 +1,18 @@
+# Machine-level shell override (Quattro).
+#
+# Keys set here win over the active theme's generated shell.toml on a
+# per-key basis (Color.qml's mergeShell()). omarchy-theme-set never
+# writes to this file, so it survives theme switches, and it's watched
+# (watchChanges: true) -- saved edits re-flow the shell live, no restart
+# needed. Uncomment only the keys you want to pin; everything else keeps
+# following the active theme.
+
+# [font]
+# base-size = 12
+
+# [spacing]
+# scale = 1.0
+
+# [bar]
+# size-horizontal = 26
+# size-vertical   = 28
