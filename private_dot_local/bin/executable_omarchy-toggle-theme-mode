@@ -2,8 +2,8 @@
 # Toggle the active omarchy theme between its light and dark pair.
 set -euo pipefail
 
-THEME_DIR="$HOME/.config/omarchy/current/theme"
-CURRENT=$(cat "$HOME/.config/omarchy/current/theme.name" 2>/dev/null || echo "")
+THEME_DIR="$HOME/.local/state/omarchy/current/theme"
+CURRENT=$(cat "$HOME/.local/state/omarchy/current/theme.name" 2>/dev/null || echo "")
 
 declare -A TO_LIGHT=(
   [gruvbox]="gruvbox-light"
@@ -38,5 +38,5 @@ if [[ -f "$SAVED_BG_FILE" ]] && [[ -f "$(cat "$SAVED_BG_FILE")" ]]; then
   omarchy-theme-bg-set "$(cat "$SAVED_BG_FILE")"
 else
   omarchy-theme-bg-next
-  readlink "$HOME/.config/omarchy/current/background" >"$SAVED_BG_FILE"
+  readlink "$HOME/.local/state/omarchy/current/background" >"$SAVED_BG_FILE"
 fi
