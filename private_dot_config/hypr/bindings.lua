@@ -37,6 +37,7 @@ hl.unbind("SUPER + mouse:273")
 -- Quattro reassigned these to defaults that collide with the rebinds below
 hl.unbind("SUPER + CTRL + D")   -- was "Display" toggle; Capture menu goes here instead
 hl.unbind("SUPER + SHIFT + N")  -- was "Editor"; window-swap-left goes here instead
+hl.unbind("SUPER + CTRL + ALT + D")  -- was default Calendar; moved to SUPER + D
 -- Unbind F9 dictation push-to-talk (was: voxtype record start/stop)
 hl.unbind("F9")
 
@@ -108,8 +109,9 @@ o.bind("SUPER + CTRL + ALT + E", "Expand window down", hl.dsp.window.resize({ x 
 o.bind("ALT + mouse:272", "Move window", hl.dsp.window.drag(), { mouse = true })
 o.bind("CTRL + ALT + mouse:272", "Resize window", hl.dsp.window.resize(), { mouse = true })
 
--- Toggle laptop display (eDP-1)
-o.bind("SUPER + CTRL + ALT + D", "Toggle laptop display", "omarchy-hyprland-monitor-internal toggle")
+-- Show calendar / toggle laptop display (eDP-1)
+o.bind("SUPER + D", "Calendar", "omarchy-shell shell toggle omarchy.clock")
+o.bind("SUPER + ALT + D", "Toggle laptop display", "omarchy-hyprland-monitor-internal toggle")
 
 o.bind("mouse:275", "Previous workspace", hl.dsp.focus({ workspace = "e-1" }))
 o.bind("mouse:276", "Next workspace", hl.dsp.focus({ workspace = "e+1" }))
