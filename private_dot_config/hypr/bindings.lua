@@ -53,6 +53,12 @@ o.bind("SUPER + CTRL + B", "Browser", "omarchy-launch-browser")
 o.bind("SUPER + CTRL + C", "Calendar", 'omarchy-launch-webapp "https://app.hey.com/calendar/weeks/"')
 o.bind("SUPER + CTRL + E", "Email", 'omarchy-launch-webapp "https://app.hey.com"')
 
+-- Quattro's default put the Omarchy root menu on SUPER + SPACE, bumping the
+-- app launcher (program search) to SUPER + ALT + SPACE. Restore pre-Quattro
+-- muscle memory: SUPER + SPACE opens the launcher again.
+hl.unbind("SUPER + SPACE")
+o.bind("SUPER + SPACE", "Apps menu", "omarchy-menu toggle apps")
+
 -- Overwrite existing bindings, like putting Omarchy Menu on Super + Space
 o.bind("SUPER + O", "Toggle window split", hl.dsp.layout("togglesplit"))
 o.bind("SUPER + ALT + M", "Tiled full screen", "hyprctl dispatch fullscreenstate 0 2")
