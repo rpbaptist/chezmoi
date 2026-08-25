@@ -29,6 +29,9 @@
           "id": "omarchy.tailscale"
         },
         {
+          "id": "omarchy.monitor"
+        },
+        {
           "id": "omarchy.agents"
         },
         {
@@ -39,9 +42,6 @@
         },
         {
           "id": "omarchy.audio"
-        },
-        {
-          "id": "omarchy.monitor"
         },
         {
           "id": "omarchy.power"
@@ -61,6 +61,10 @@
     "lock": 300,
     "screensaver": 150
   },
-  "plugins": [],
+  "plugins": [
+    {
+      "id": "mfellipeso.display-watcher"
+    }
+  ],
   "version": 1
 }
