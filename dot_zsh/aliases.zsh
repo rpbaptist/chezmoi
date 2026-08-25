@@ -4,14 +4,16 @@ alias zshenv="$EDITOR ~/.zshenv"
 alias zshrc="$EDITOR ~/.zshrc"
 
 # File system
-alias ls='eza --group-directories-first --icons'
-alias ll='eza -l --group-directories-first --icons'
+# --icons takes an optional value, so a bare --icons greedily swallows the next
+# word as its argument (e.g. `ll somefile` errors); pin it with --icons=auto
+alias ls='eza --group-directories-first --icons=auto'
+alias ll='eza -l --group-directories-first --icons=auto'
 alias la='ll -a'
-alias lt='eza -l --sort accessed --icons'
+alias lt='eza -l --sort accessed --icons=auto'
 alias lta='lt -a'
 alias ltr='lt -r'
 alias ltra='ltr -a'
-alias tree='eza --tree --level=2 --long --icons --git'
+alias tree='eza --tree --level=2 --long --icons=auto --git'
 
 # system _eza completion (/usr/share/zsh/site-functions/_eza) has a broken option spec
 # ("--color=[...]:(when):(...)") that breaks completion for every eza-based alias; use plain file completion instead
