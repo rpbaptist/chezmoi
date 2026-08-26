@@ -121,3 +121,14 @@ o.bind("SUPER + ALT + D", "Toggle laptop display", "omarchy-hyprland-monitor-int
 
 o.bind("mouse:275", "Previous workspace", hl.dsp.focus({ workspace = "e-1" }))
 o.bind("mouse:276", "Next workspace", hl.dsp.focus({ workspace = "e+1" }))
+
+-- Move DPI (monitor scaling) off SUPER+SLASH / SUPER+ALT+SLASH onto
+-- SUPER+ALT+MINUS/EQUAL. Those two were previously "Expand/Shrink window
+-- left a little", bound by physical keycode (code:20/code:21) -- unbind by
+-- keycode too, since a keysym-based unbind won't match a keycode bind.
+hl.unbind("SUPER + SLASH")
+hl.unbind("SUPER + ALT + SLASH")
+hl.unbind("SUPER + ALT + code:20")
+hl.unbind("SUPER + ALT + code:21")
+o.bind("SUPER + ALT + MINUS", "Monitor scaling down", "omarchy-hyprland-monitor-scaling down")
+o.bind("SUPER + ALT + EQUAL", "Monitor scaling up", "omarchy-hyprland-monitor-scaling up")
