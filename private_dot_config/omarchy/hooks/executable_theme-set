@@ -13,8 +13,19 @@ fi
 # matching custom gruvbox GTK theme for our gruvbox pair.
 if [[ "$THEME_NAME" == "gruvbox" ]]; then
   gsettings set org.gnome.desktop.interface gtk-theme "Gruvbox-Dark-BL-LB"
+  CURSOR_THEME="gruvbox-dark"
 elif [[ "$THEME_NAME" == "gruvbox-light" ]]; then
   gsettings set org.gnome.desktop.interface gtk-theme "Gruvbox-BL-LB-Light"
+  CURSOR_THEME="gruvbox-light"
+fi
+
+# Swap the hyprcursor theme to match, live and persisted for the next login.
+if [[ -n "${CURSOR_THEME:-}" ]]; then
+  ENVS_FILE="$HOME/.config/hypr/envs.lua"
+  CURSOR_SIZE=$(grep -oP 'HYPRCURSOR_SIZE", "\K[0-9]+' "$ENVS_FILE")
+  gsettings set org.gnome.desktop.interface cursor-theme "$CURSOR_THEME"
+  hyprctl setcursor "$CURSOR_THEME" "$CURSOR_SIZE" >/dev/null
+  sed -i -E "s/(XCURSOR_THEME\", \")[^\"]*(\")/\1${CURSOR_THEME}\2/; s/(HYPRCURSOR_THEME\", \")[^\"]*(\")/\1${CURSOR_THEME}\2/" "$ENVS_FILE"
 fi
 
 # ExtraLight looks great on gruvbox (dark)'s near-black background, but its
