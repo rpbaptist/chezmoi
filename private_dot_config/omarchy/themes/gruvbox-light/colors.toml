@@ -1,3 +1,8 @@
+# See omarchy/themed/kitty.conf.tpl and gruvbox/colors.toml for why this
+# theme uses Regular instead of ExtraLight.
+font_weight = "Regular"
+italic_weight = "Italic"
+
 accent = "#98971a"
 cursor = "#282828"
 foreground = "#282828"

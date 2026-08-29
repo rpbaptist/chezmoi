@@ -19,28 +19,20 @@ elif [[ "$THEME_NAME" == "gruvbox-light" ]]; then
   CURSOR_THEME="gruvbox-light"
 fi
 
-# Swap the hyprcursor theme to match, live and persisted for the next login.
+# Swap the hyprcursor theme live for this session. envs.lua derives
+# XCURSOR_THEME/HYPRCURSOR_THEME itself from theme state (see that file), so
+# the next Hyprland reload or login already picks up the right value without
+# needing this hook to patch it in.
 if [[ -n "${CURSOR_THEME:-}" ]]; then
   ENVS_FILE="$HOME/.config/hypr/envs.lua"
   CURSOR_SIZE=$(grep -oP 'HYPRCURSOR_SIZE", "\K[0-9]+' "$ENVS_FILE")
   gsettings set org.gnome.desktop.interface cursor-theme "$CURSOR_THEME"
   hyprctl setcursor "$CURSOR_THEME" "$CURSOR_SIZE" >/dev/null
-  sed -i -E "s/(XCURSOR_THEME\", \")[^\"]*(\")/\1${CURSOR_THEME}\2/; s/(HYPRCURSOR_THEME\", \")[^\"]*(\")/\1${CURSOR_THEME}\2/" "$ENVS_FILE"
 fi
 
-# ExtraLight looks great on gruvbox (dark)'s near-black background, but its
-# thin strokes lose contrast against gruvbox-light's cream background --
-# bump to Regular weight there and fall back to ExtraLight everywhere else.
-KITTY_CONFIG="$HOME/.config/kitty/kitty.conf"
-if [[ "$THEME_NAME" == "gruvbox-light" ]]; then
-  FONT_WEIGHT="Regular"
-  ITALIC_STYLE="Italic"
-else
-  FONT_WEIGHT="ExtraLight"
-  ITALIC_STYLE="ExtraLight Italic"
-fi
-sed -i -E "s/^(font_family family=\"Jetbrains Mono\" style=\")[^\"]*(\")/\1${FONT_WEIGHT}\2/" "$KITTY_CONFIG"
-sed -i -E "s/^(italic_font family=\"Jetbrains Mono\" style=\")[^\"]*(\")/\1${ITALIC_STYLE}\2/" "$KITTY_CONFIG"
+# Font weight (ExtraLight vs Regular) is themed via font_weight/italic_weight
+# in colors.toml and generated into the theme include kitty.conf reads, so
+# just reload already-running kitty windows to pick it up.
 kitty @ load-config >/dev/null 2>&1
 
 notify-send -u low "Theme changed" "Now using $THEME_NAME ($MODE)"

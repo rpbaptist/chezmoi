@@ -1,3 +1,9 @@
+# ExtraLight looks great on this theme's near-black background; gruvbox-light
+# uses Regular instead since ExtraLight's thin strokes lose contrast against
+# a cream background. See omarchy/themed/kitty.conf.tpl.
+font_weight = "ExtraLight"
+italic_weight = "ExtraLight Italic"
+
 accent = "#98971a"
 cursor = "#ebdbb2"
 foreground = "#ebdbb2"
