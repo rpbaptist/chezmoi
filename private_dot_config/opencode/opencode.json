@@ -4,7 +4,9 @@
   "provider": {
     "ollama": {
       "npm": "@ai-sdk/openai-compatible",
-      "options": { "baseURL": "http://localhost:11434/v1" },
+      "options": {
+        "baseURL": "grunt.penguin-pantone.ts.net:11434/v1"
+      },
       "models": {
         "qwen3-coder-16k": {}
       }
