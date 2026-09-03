@@ -28,11 +28,14 @@ ICON_LOCK=$'\U000f033e'
 ICON_BRANCH=$'\U000f062c'
 ICON_AHEAD=$'\U000f4f2'
 ICON_BEHIND=$'\U000f4ef'
-ICON_DIVERGED=$'✗'
-ICON_UPTODATE=$'✔'
-ICON_STASHED=$'≡'
-ICON_RENAMED=$'»'
-ICON_MODIFIED=$'≠'
+# Plain Unicode symbols (✔ ✗ ≡ » ≠) are ambiguous-width in this font and end
+# up half-painted against the single-width background fill; these Nerd Font
+# PUA glyphs are pinned single-width like the branch/lock icons above.
+ICON_DIVERGED=$'\U0000f00d'
+ICON_UPTODATE=$'\U0000f00c'
+ICON_STASHED=$'\U0000f0c9'
+ICON_RENAMED=$'\U0000f178'
+ICON_MODIFIED=$'\U0000f040'
 
 # Directory segment - mirrors starship [directory]: inside a git repo, path
 # is relative to the repo root (anchored on the repo name); otherwise ~ is
