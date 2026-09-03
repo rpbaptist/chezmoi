@@ -26,8 +26,12 @@ BOLD=$'\033[1m'
 
 ICON_LOCK=$'\U000f033e'
 ICON_BRANCH=$'\U000f062c'
-ICON_AHEAD=$'\U000f4f2'
-ICON_BEHIND=$'\U000f4ef'
+# ICON_AHEAD/ICON_BEHIND use classic Font Awesome codepoints (F062/F063)
+# rather than the newer F4xx range: the F4xx arrows fell back to a
+# mismatched-width substitute font here and half-painted against the
+# background fill, same as the plain Unicode symbols noted below.
+ICON_AHEAD=$'\U0000f062'
+ICON_BEHIND=$'\U0000f063'
 # Plain Unicode symbols (✔ ✗ ≡ » ≠) are ambiguous-width in this font and end
 # up half-painted against the single-width background fill; these Nerd Font
 # PUA glyphs are pinned single-width like the branch/lock icons above.
