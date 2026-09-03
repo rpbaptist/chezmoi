@@ -1,9 +1,11 @@
 #!/bin/bash
 # Claude Code status line.
 # Directory/git segments mirror the Starship config at ~/.config/starship.toml
-# (dark palette, powerline-style background block). Model name and
-# context-remaining segments are Claude Code additions with no Starship
-# equivalent, so they're plain colored text after the block.
+# (dark palette, powerline-style background block). No end-cap glyph: the
+# terminal font doesn't render U+E0B0, so Starship's own chevron is equally
+# invisible there. Model name and context-remaining segments are Claude Code
+# additions with no Starship equivalent, so they're plain colored text after
+# the block.
 
 input=$(cat)
 
@@ -13,7 +15,6 @@ remaining=$(echo "$input" | jq -r '.context_window.remaining_percentage // empty
 
 RESET=$'\033[0m'
 BG=$'\033[48;2;60;56;54m'
-FG_ON_BG=$'\033[38;2;60;56;54m'      # foreground = block background, for the powerline end-cap
 YELLOW=$'\033[33m'
 BRIGHT_RED=$'\033[91m'
 BRIGHT_CYAN=$'\033[96m'
@@ -32,7 +33,6 @@ ICON_UPTODATE=$'✔'
 ICON_STASHED=$'≡'
 ICON_RENAMED=$'»'
 ICON_MODIFIED=$'≠'
-ICON_TRIANGLE=$''
 
 # Directory segment - mirrors starship [directory]: inside a git repo, path
 # is relative to the repo root (anchored on the repo name); otherwise ~ is
@@ -124,7 +124,7 @@ if git -C "$cwd" --no-optional-locks rev-parse --is-inside-work-tree >/dev/null 
   fi
 fi
 
-block_segment="${dir_segment}${git_segment}${RESET}${FG_ON_BG}${ICON_TRIANGLE}${RESET}"
+block_segment="${dir_segment}${git_segment}${RESET}"
 
 # Model segment - Claude Code default
 model_segment=$(printf " ${BRIGHT_BLUE}%s${RESET}" "$model")
