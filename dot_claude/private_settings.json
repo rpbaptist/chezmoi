@@ -15,17 +15,6 @@
           }
         ]
       }
-    ],
-    "SubagentStop": [
-      {
-        "matcher": "local-exec",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/home/richard/.claude/hooks/local-exec-review.py"
-          }
-        ]
-      }
     ]
   },
   "enabledPlugins": {
