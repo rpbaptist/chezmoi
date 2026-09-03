@@ -1,11 +1,11 @@
 #!/bin/bash
 # Claude Code status line.
 # Directory/git segments mirror the Starship config at ~/.config/starship.toml
-# (dark palette, powerline-style background block). No end-cap glyph: the
-# terminal font doesn't render U+E0B0, so Starship's own chevron is equally
-# invisible there. Model name and context-remaining segments are Claude Code
-# additions with no Starship equivalent, so they're plain colored text after
-# the block.
+# (same path-truncation and git-status logic), as plain colored text — no
+# background fill, since Starship's truecolor block half-painted certain
+# glyphs here and wasn't worth chasing further. Model name and
+# context-remaining segments are Claude Code additions with no Starship
+# equivalent.
 
 input=$(cat)
 
@@ -14,7 +14,6 @@ model=$(echo "$input" | jq -r '.model.display_name')
 remaining=$(echo "$input" | jq -r '.context_window.remaining_percentage // empty')
 
 RESET=$'\033[0m'
-BG=$'\033[48;2;60;56;54m'
 YELLOW=$'\033[33m'
 BRIGHT_RED=$'\033[91m'
 BRIGHT_CYAN=$'\033[96m'
@@ -26,15 +25,8 @@ BOLD=$'\033[1m'
 
 ICON_LOCK=$'\U000f033e'
 ICON_BRANCH=$'\U000f062c'
-# ICON_AHEAD/ICON_BEHIND use classic Font Awesome codepoints (F062/F063)
-# rather than the newer F4xx range: the F4xx arrows fell back to a
-# mismatched-width substitute font here and half-painted against the
-# background fill, same as the plain Unicode symbols noted below.
 ICON_AHEAD=$'\U0000f062'
 ICON_BEHIND=$'\U0000f063'
-# Plain Unicode symbols (✔ ✗ ≡ » ≠) are ambiguous-width in this font and end
-# up half-painted against the single-width background fill; these Nerd Font
-# PUA glyphs are pinned single-width like the branch/lock icons above.
 ICON_DIVERGED=$'\U0000f00d'
 ICON_UPTODATE=$'\U0000f00c'
 ICON_STASHED=$'\U0000f0c9'
@@ -69,9 +61,9 @@ if [ "$count" -gt 3 ]; then
 fi
 dir_display=$(IFS=/; echo "${components[*]}")
 
-dir_segment="${BG}${YELLOW}${dir_display}${RESET}"
+dir_segment="${YELLOW}${dir_display}${RESET}"
 if [ ! -w "$cwd" ]; then
-  dir_segment="${dir_segment}${BG} ${BRIGHT_RED}${ICON_LOCK}${RESET}"
+  dir_segment="${dir_segment} ${BRIGHT_RED}${ICON_LOCK}${RESET}"
 fi
 
 # Git segment - mirrors starship [git_branch] + [git_status]
@@ -107,31 +99,31 @@ if git -C "$cwd" --no-optional-locks rev-parse --is-inside-work-tree >/dev/null 
     ahead_behind=""
     if [ -n "$upstream" ]; then
       if [ "${ahead:-0}" -gt 0 ] && [ "${behind:-0}" -gt 0 ]; then
-        ahead_behind="${BOLD}${BRIGHT_RED}${ICON_DIVERGED}${RESET}${BG}"
+        ahead_behind="${BOLD}${BRIGHT_RED}${ICON_DIVERGED}${RESET}"
       elif [ "${ahead:-0}" -gt 0 ]; then
-        ahead_behind="${CYAN}${ICON_AHEAD}${RESET}${BG}"
+        ahead_behind="${CYAN}${ICON_AHEAD}${RESET}"
       elif [ "${behind:-0}" -gt 0 ]; then
-        ahead_behind="${BRIGHT_RED}${ICON_BEHIND}${RESET}${BG}"
+        ahead_behind="${BRIGHT_RED}${ICON_BEHIND}${RESET}"
       else
-        ahead_behind="${BOLD}${CYAN}${ICON_UPTODATE}${RESET}${BG}"
+        ahead_behind="${BOLD}${CYAN}${ICON_UPTODATE}${RESET}"
       fi
     fi
 
     all_status=""
     [ "$stash_count" -gt 0 ] && all_status="${all_status}${ICON_STASHED}"
-    $staged && all_status="${all_status}${BOLD}${CYAN}+${RESET}${BG}"
-    $deleted && all_status="${all_status}${BOLD}${BRIGHT_RED}-${RESET}${BG}"
-    $renamed && all_status="${all_status}${BRIGHT_YELLOW}${ICON_RENAMED}${RESET}${BG}"
-    $modified && all_status="${all_status}${BRIGHT_YELLOW}${ICON_MODIFIED}${RESET}${BG}"
-    $untracked && all_status="${all_status}${BRIGHT_YELLOW}?${RESET}${BG}"
+    $staged && all_status="${all_status}${BOLD}${CYAN}+${RESET}"
+    $deleted && all_status="${all_status}${BOLD}${BRIGHT_RED}-${RESET}"
+    $renamed && all_status="${all_status}${BRIGHT_YELLOW}${ICON_RENAMED}${RESET}"
+    $modified && all_status="${all_status}${BRIGHT_YELLOW}${ICON_MODIFIED}${RESET}"
+    $untracked && all_status="${all_status}${BRIGHT_YELLOW}?${RESET}"
 
-    git_segment="${BG} ${BRIGHT_CYAN}${ICON_BRANCH} ${branch}${RESET}${BG}"
+    git_segment=" ${BRIGHT_CYAN}${ICON_BRANCH} ${branch}${RESET}"
     [ -n "$ahead_behind" ] && git_segment="${git_segment} ${ahead_behind}"
     [ -n "$all_status" ] && git_segment="${git_segment} ${all_status}"
   fi
 fi
 
-block_segment="${dir_segment}${git_segment}${RESET}"
+block_segment="${dir_segment}${git_segment}"
 
 # Model segment - Claude Code default
 model_segment=$(printf " ${BRIGHT_BLUE}%s${RESET}" "$model")
