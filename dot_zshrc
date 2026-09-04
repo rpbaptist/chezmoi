@@ -83,6 +83,7 @@ fpath+=($ZSH/completions)
 znap fpath _mise      "mise      completion  zsh"
 znap fpath _starship  "starship  completions zsh"
 znap fpath _chezmoi   "chezmoi   completion zsh"
+znap fpath _hey       "hey shell-completion generate zsh"
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS+=(main brackets regexp)
 typeset -A ZSH_HIGHLIGHT_STYLES
