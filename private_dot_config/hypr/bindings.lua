@@ -35,13 +35,22 @@ hl.unbind("SUPER + SHIFT + code:21")
 hl.unbind("SUPER + mouse:272")
 hl.unbind("SUPER + mouse:273")
 -- Quattro reassigned these to defaults that collide with the rebinds below
-hl.unbind("SUPER + CTRL + D")   -- was "Display" toggle; Capture menu goes here instead
-hl.unbind("SUPER + SHIFT + N")  -- was "Editor"; window-swap-left goes here instead
-hl.unbind("SUPER + CTRL + ALT + D")  -- was default Calendar; moved to SUPER + D
+hl.unbind("SUPER + CTRL + D") -- was "Display" toggle; Capture menu goes here instead
+hl.unbind("SUPER + SHIFT + N") -- was "Editor"; window-swap-left goes here instead
+hl.unbind("SUPER + CTRL + ALT + D") -- was default Calendar; moved to SUPER + D
 -- Unbind F9 dictation push-to-talk (was: voxtype record start/stop)
 hl.unbind("F9")
 
-o.bind("SUPER + CTRL + D", "Capture menu", "omarchy-menu capture")
+hl.unbind("SUPER + SHIFT + ALT + LEFT")
+hl.unbind("SUPER + SHIFT + ALT + RIGHT")
+hl.unbind("SUPER + SHIFT + ALT + UP")
+hl.unbind("SUPER + SHIFT + ALT + DOWN")
+
+o.bind("SUPER + SHIFT + CTRL + LEFT", "Move workspace to left monitor", hl.dsp.workspace.move({ monitor = "l" }))
+o.bind("SUPER + SHIFT + CTRL + RIGHT", "Move workspace to right monitor", hl.dsp.workspace.move({ monitor = "r" }))
+o.bind("SUPER + SHIFT + CTRL + UP", "Move workspace to up monitor", hl.dsp.workspace.move({ monitor = "u" }))
+o.bind("SUPER + SHIFT + CTRL + DOWN", "Move workspace to down monitor", hl.dsp.workspace.move({ monitor = "d" }))
+
 o.bind("SUPER + ALT + T", "Toggle light/dark theme", "omarchy-toggle-theme-mode")
 
 o.bind("SUPER + CTRL + T", "Terminal", "uwsm app -- $TERMINAL")
@@ -73,7 +82,11 @@ o.bind("SUPER + SHIFT + H", "Show hidden windows", hl.dsp.workspace.toggle_speci
 
 -- Control scratchpad
 o.bind("SUPER + ALT + H", "Toggle scratchpad", hl.dsp.workspace.toggle_special("scratchpad"))
-o.bind("SUPER + H", "Move window to scratchpad", hl.dsp.window.move({ workspace = "special:scratchpad", follow = false }))
+o.bind(
+	"SUPER + H",
+	"Move window to scratchpad",
+	hl.dsp.window.move({ workspace = "special:scratchpad", follow = false })
+)
 
 o.bind("SUPER + CTRL + SPACE", "Omarchy menu", "omarchy-menu")
 
@@ -99,12 +112,12 @@ o.bind("SUPER + ALT + bracketright", "Move window to next workspace", hl.dsp.win
 
 -- Move active window silently to a workspace with mod + CTRL + SHIFT + [0-9]
 for workspace = 1, 10 do
-  local key = workspace == 10 and "0" or tostring(workspace)
-  o.bind(
-    "SUPER + CTRL + SHIFT + " .. key,
-    "Move window silently to workspace " .. workspace,
-    hl.dsp.window.move({ workspace = tostring(workspace), follow = false })
-  )
+	local key = workspace == 10 and "0" or tostring(workspace)
+	o.bind(
+		"SUPER + CTRL + SHIFT + " .. key,
+		"Move window silently to workspace " .. workspace,
+		hl.dsp.window.move({ workspace = tostring(workspace), follow = false })
+	)
 end
 
 o.bind("SUPER + CTRL + ALT + N", "Expand window left", hl.dsp.window.resize({ x = -100, y = 0, relative = true }))
