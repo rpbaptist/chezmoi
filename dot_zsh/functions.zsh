@@ -1,13 +1,5 @@
 #! /bin/bash
 
-function source-plugin() {
-  local plugin
-
-  plugin="$1"
-
-  source "$ZSH_PLUGINS/$plugin/$plugin.plugin.zsh"
-}
-
 # fg-bg toggle via c-z
 function fg-bg {
     if [[ $#BUFFER -eq 0 ]]; then

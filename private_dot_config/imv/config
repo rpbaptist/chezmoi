@@ -11,10 +11,10 @@ overlay_font = Monospace:12
 <Ctrl+p> = exec lp "$imv_current_file"
 
 # Delete the current image and quit the viewer
-<Ctrl+x> = exec rm "$imv_current_file"; quit
+<Ctrl+x> = exec trash-put "$imv_current_file"; quit
 
 # Delete the current image and move to the next one
-<Ctrl+Shift+X> = exec rm "$imv_current_file"; close
+<Ctrl+Shift+X> = exec trash-put "$imv_current_file"; close
 
 # Trash the current image and move to the next one
 <Delete> = exec trash-put "$imv_current_file"; close

@@ -35,7 +35,7 @@ export NOTES_PATH="$HOME/Drive/Notes"
 GPG_TTY=$(tty)
 export GPG_TTY
 
-source "$HOME/.local/env"
+[[ -f "$HOME/.local/env" ]] && source "$HOME/.local/env"
 
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
   --color fg:#ebdbb2,bg:#1D2021,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f
@@ -49,6 +49,6 @@ export XCURSOR_SIZE=16
 
 export NNN_OPTS="C"
 
-export XDG_DATA_DIRS=${XDG_DATA_DIRS}:${HOME}.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share
+export XDG_DATA_DIRS=${XDG_DATA_DIRS}:${HOME}/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share
 
 export SUDO_ASKPASS=/usr/bin/ksshaskpass
