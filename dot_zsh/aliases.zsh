@@ -38,27 +38,6 @@ alias rm='echo "Careful now!"; false'
 
 alias dockerprune='docker rmi $(docker images -f "dangling=true" -q)'
 
-# git
-alias gs='git status'
-alias gdh='git diff HEAD'
-alias gdm='git diff master'
-alias gdd='git diff develop'
-alias gpu='git push -u'
-alias gbm='git branch -m'
-alias gsl='git stash list'
-
-alias grho='git reset --hard @{upstream}'
-alias gcf='git commit --fixup'
-
-# Delete merged branches on master
-alias gbdm='git branch --merged | egrep -v "(^\*|master|production)" | xargs -r -n 1 git branch -d'
-
-# Change $TARGET_BRANCH to your targeted branch, e.g. change from `master` to `main` to delete branches squashed into `main`.
-alias gbdms='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch\^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
-
-alias gsync='git fetch && git pull && gbdm && gbdms && git remote prune origin'
-alias gclean='git reset --hard && git clean -fd'
-
 # mix
 alias mt='mix test'
 alias mtw='mix test.watch'

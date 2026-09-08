@@ -116,9 +116,7 @@ alias gcas='git commit --all --signoff'
 alias gcasm='git commit --all --signoff --message'
 alias gcb='git checkout -b'
 alias gcl='git clone --recurse-submodules'
-# alias gclean='git clean -id'
 alias gpristine='git reset --hard && git clean -dffx'
-alias gcf='git config --list'
 
 function gccd() {
   command git clone --recurse-submodules "$@"
@@ -127,7 +125,6 @@ function gccd() {
 compdef _git gccd=git-clone
 
 alias gcl='git clone --recurse-submodules'
-alias gclean='git clean --interactive -d'
 
 alias gcm='git checkout $(git_main_branch)'
 alias gcd='git checkout $(git_develop_branch)'
@@ -269,7 +266,6 @@ alias gpf!='git push --force'
 alias gpoat='git push origin --all && git push origin --tags'
 alias gpod='git push origin --delete'
 alias gpr='git pull --rebase'
-alias gpu='git push upstream'
 alias gpv='git push --verbose'
 
 alias gr='git remote'
@@ -370,5 +366,29 @@ function grename() {
     git push --set-upstream origin "$2"
   fi
 }
+
+#
+# Personal aliases (moved from aliases.zsh)
+#
+
+alias gs='git status'
+alias gdh='git diff HEAD'
+alias gdm='git diff master'
+alias gdd='git diff develop'
+alias gpu='git push -u'
+alias gbm='git branch -m'
+alias gsl='git stash list'
+
+alias grho='git reset --hard @{upstream}'
+alias gcf='git commit --fixup'
+alias gclean='git reset --hard && git clean -fd'
+
+# Delete merged branches on master
+alias gbdm='git branch --merged | egrep -v "(^\*|master|production)" | xargs -r -n 1 git branch -d'
+
+# Change $TARGET_BRANCH to your targeted branch, e.g. change from `master` to `main` to delete branches squashed into `main`.
+alias gbdms='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch\^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
+
+alias gsync='git fetch && git pull && gbdm && gbdms && git remote prune origin'
 
 unset git_version

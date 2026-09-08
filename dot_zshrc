@@ -74,7 +74,6 @@ znap eval mise "mise activate zsh"
 
 # Don't try to ssh to hosts file
 zstyle ":completion:*" hosts off
-zstyle ":completion:*:*:git:*" script "$ZSH/scripts/git-completion.bash"
 
 source "$ZSH/custom.zsh"
 
