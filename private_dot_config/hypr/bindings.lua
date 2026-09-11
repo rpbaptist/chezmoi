@@ -55,7 +55,6 @@ o.bind("SUPER + ALT + T", "Toggle light/dark theme", "omarchy-toggle-theme-mode"
 
 o.bind("SUPER + CTRL + T", "Terminal", "uwsm app -- $TERMINAL")
 o.bind("CTRL + SHIFT + ESCAPE", "Activity", { tui = "btop" })
-o.bind("SUPER + CTRL + F", "File manager", "uwsm app -- pcmanfm")
 o.bind("SUPER + CTRL + B", "Browser", "omarchy-launch-browser")
 
 -- If your web app url contains #, type it as ## to prevent Hyprland treating it as a comment.
@@ -145,3 +144,12 @@ hl.unbind("SUPER + ALT + code:20")
 hl.unbind("SUPER + ALT + code:21")
 o.bind("SUPER + ALT + MINUS", "Monitor scaling down", "omarchy-hyprland-monitor-scaling down")
 o.bind("SUPER + ALT + EQUAL", "Monitor scaling up", "omarchy-hyprland-monitor-scaling up")
+
+-- strata-installer: file-manager start
+o.bind("SUPER + CTRL + F", "File manager", { launch = "/home/richard/.local/bin/strata" })
+o.bind(
+	"SUPER + ALT + CTRL + F",
+	"File manager (cwd)",
+	'uwsm-app -- /home/richard/.local/bin/strata "$(omarchy-cmd-terminal-cwd)"'
+)
+-- strata-installer: file-manager end
