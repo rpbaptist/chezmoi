@@ -2,6 +2,9 @@
 
 Respond with: No filler/hedging. Professional but tight. Use ASD-STE100.
 
+When reporting information to me, be extremely concise and sacrifice grammar for sake of concision.
+
+
 ### Commit style
 
 1. Limit the subject line to 70 characters
