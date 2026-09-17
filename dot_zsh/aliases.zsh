@@ -71,3 +71,5 @@ alias clx=claude --allow-dangerously-skip-permissions
 alias bi="bundle install"
 alias be="bundle exec"
 alias bb="bundle binstubs"
+
+alias hr="herdr"
