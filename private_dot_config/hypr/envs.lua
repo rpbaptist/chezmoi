@@ -2,7 +2,7 @@
 -- HYPRCURSOR_SIZE=24, and all the Wayland/QT/Electron platform vars.
 local paths = require("default.hypr.paths")
 
-hl.env("SSH_AUTH_SOCK", os.getenv("XDG_RUNTIME_DIR") .. "/ssh-agent.socket")
+hl.env("SSH_AUTH_SOCK", os.getenv("XDG_RUNTIME_DIR") .. "/gcr/ssh")
 hl.env("XCURSOR_SIZE", "34")
 hl.env("HYPRCURSOR_SIZE", "34")
 
