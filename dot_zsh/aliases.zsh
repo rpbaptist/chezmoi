@@ -65,6 +65,7 @@ alias nvc="cd $HOME/.config/nvim"
 alias oc=opencode
 alias cl=claude
 alias clx=claude --allow-dangerously-skip-permissions
+alias ca=cursor-agent
 
 # ruby
 

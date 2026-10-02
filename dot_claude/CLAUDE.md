@@ -14,3 +14,8 @@ When reporting information to me, be extremely concise and sacrifice grammar for
 5. Use the imperative mood in the subject line
 6. Use the body to explain what and why vs. how
 
+
+### Session docs
+
+Store session/troubleshooting docs in `~/.local/share/doc/`.
+Machine-specific. Not chezmoi-managed.
