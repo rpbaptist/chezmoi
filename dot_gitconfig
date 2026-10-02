@@ -38,6 +38,8 @@
 	repo = /home/richard/.zsh/repos/znap
 [gpg]
 	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = ~/.git_allowed_signers
 [delta]
   syntax-theme = gruvbox-dark
 [filter "lfs"]
