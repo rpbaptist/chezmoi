@@ -51,4 +51,4 @@ export NNN_OPTS="C"
 
 export XDG_DATA_DIRS=${XDG_DATA_DIRS}:${HOME}/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share
 
-export SUDO_ASKPASS=/usr/bin/ksshaskpass
+export SUDO_ASKPASS=/usr/lib/gcr4-ssh-askpass

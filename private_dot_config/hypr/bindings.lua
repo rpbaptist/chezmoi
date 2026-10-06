@@ -6,6 +6,7 @@
 -- Faithful port of the old unbind list -- some now free a key Quattro's
 -- default reassigned to something else; keeping old muscle memory throughout.
 hl.unbind("SUPER + O")
+hl.unbind("SUPER + T")
 hl.unbind("SUPER + J")
 hl.unbind("SUPER + F")
 hl.unbind("SUPER + CTRL + C")
@@ -74,7 +75,8 @@ o.bind("SUPER + M", "Maximize window", hl.dsp.window.fullscreen({ mode = "maximi
 
 o.bind("SUPER + CTRL + H", "Clipboard manager", "omarchy-shell shell toggle omarchy.clipboard")
 
-o.bind("SUPER + F", "Pop window out (float & pin)", "omarchy-hyprland-window-pop")
+o.bind("SUPER + F", "Toggle window floating/tiling", hl.dsp.window.float({ action = "toggle" }))
+-- o.bind("SUPER + F", "Pop window out (float & pin)", "omarchy-hyprland-window-pop")
 
 -- Control tiling
 o.bind("SUPER + SHIFT + H", "Show hidden windows", hl.dsp.workspace.toggle_special())
