@@ -1,0 +1,4 @@
+# Follows the omarchy gruvbox/gruvbox-light pair: the theme-set hook rewrites
+# this line on every theme switch (see ~/.config/omarchy/hooks/theme-set).
+# Hunk's own "auto" theme only picks GitHub themes, so it cannot be used here.
+theme = "gruvbox-dark-hard"

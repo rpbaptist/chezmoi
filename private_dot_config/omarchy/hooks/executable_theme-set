@@ -45,6 +45,13 @@ if [[ -f "$STARSHIP_CONFIG_FILE" ]]; then
   sed -i "s/^palette = .*/palette = \"$MODE\"/" "$STARSHIP_CONFIG_FILE"
 fi
 
+# Hunk reads its theme from config.toml at startup only, so this affects new
+# sessions; already-open ones keep their theme until restarted.
+HUNK_CONFIG_FILE="$HOME/.config/hunk/config.toml"
+if [[ -f "$HUNK_CONFIG_FILE" ]]; then
+  sed -i "s/^theme = .*/theme = \"gruvbox-$MODE-hard\"/" "$HUNK_CONFIG_FILE"
+fi
+
 # Push a live background sync to any already-open nvim sessions (each
 # instance registers its RPC address on startup; see plugin/gruvbox.lua in
 # the nvim config repo). Self-prunes dead sockets from the registry.
