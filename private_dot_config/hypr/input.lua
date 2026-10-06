@@ -7,6 +7,8 @@ hl.config({
   input = {
     kb_options = "compose:caps",
     repeat_delay = 600,
+    -- Click to focus: hover does not move keyboard focus.
+    follow_mouse = 2,
 
     touchpad = {
       natural_scroll = true,

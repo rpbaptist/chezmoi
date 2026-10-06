@@ -29,10 +29,13 @@
           "id": "omarchy.tray"
         },
         {
-          "id": "omarchy.monitor"
+          "id": "io.github.fluffet.display"
         },
         {
           "id": "omarchy.agents"
+        },
+        {
+          "id": "omarchy.power"
         },
         {
           "id": "richard.bluetooth"
@@ -44,13 +47,10 @@
           "id": "omarchy.network"
         },
         {
-          "id": "omarchy.power"
-        },
-        {
           "format": "HH:mm",
           "formatAlt": "d MMMM 'W'ww yyyy",
           "id": "omarchy.clock",
-          "verticalFormat": "HH\n\u2014\nmm"
+          "verticalFormat": "HH\n—\nmm"
         }
       ]
     },
@@ -61,10 +61,6 @@
     "lock": 300,
     "screensaver": 150
   },
-  "plugins": [
-    {
-      "id": "mfellipeso.display-watcher"
-    }
-  ],
+  "plugins": [],
   "version": 1
 }

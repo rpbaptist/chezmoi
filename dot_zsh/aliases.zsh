@@ -74,3 +74,5 @@ alias be="bundle exec"
 alias bb="bundle binstubs"
 
 alias hr="herdr"
+alias hra="herdr session attach"
+alias hrs="herdr --session"
