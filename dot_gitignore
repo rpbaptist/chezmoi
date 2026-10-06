@@ -11,5 +11,7 @@ personal.planning.avanterules
 mise.local.toml
 .claude
 .dexter.db*
+.pi/*
+.hermes/*
 
 **/.claude/settings.local.json
