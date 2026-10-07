@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "command": "{{ .chezmoi.homeDir }}/.cursor/hooks/session-start.sh"
+      }
+    ],
+    "preToolUse": [
+      {
+        "command": "rtk hook cursor",
+        "matcher": "Shell"
+      }
+    ]
+  }
+}

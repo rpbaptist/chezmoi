@@ -1,5 +1,3 @@
-@RTK.md
-
 Respond with: No filler/hedging. Professional but tight. Use ASD-STE100.
 
 When reporting information to me, be extremely concise and sacrifice grammar for sake of concision.
