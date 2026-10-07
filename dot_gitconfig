@@ -29,13 +29,6 @@
 	defaultBranch = master
 [diff]
 	colorMoved = blocks
-[maintenance]
-	repo = /home/richard/.zsh/repos/marlonrichert/zsh-autocomplete
-	repo = /home/richard/.zsh/repos/marlonrichert/zsh-edit
-	repo = /home/richard/.zsh/repos/zsh-users/zsh-autosuggestions
-	repo = /home/richard/.zsh/repos/junegunn/fzf
-	repo = /home/richard/.zsh/repos/zsh-users/zsh-syntax-highlighting
-	repo = /home/richard/.zsh/repos/znap
 [gpg]
 	format = ssh
 [gpg "ssh"]
