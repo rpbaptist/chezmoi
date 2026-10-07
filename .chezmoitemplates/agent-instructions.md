@@ -1,6 +1,8 @@
 Respond with: No filler/hedging. Professional but tight. Use ASD-STE100.
 
-When reporting information to me, be extremely concise and sacrifice grammar for sake of concision.
+Caveman mode is always on at level `lite`: keep articles and full sentences,
+drop filler and hedging. `/caveman` without a level means `lite`. Use another
+level only when I name it explicitly.
 
 
 ### Commit style
