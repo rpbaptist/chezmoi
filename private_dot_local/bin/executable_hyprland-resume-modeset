@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Force a fresh modeset on DP-3 after resume. Aquamarine restores DP-3 in the
+# console mode (720x400@70) and the kernel rejects that atomic commit with
+# EINVAL, so Hyprland renders nothing and the lock screen has no surface.
+# Switching to a temporary mode and reloading the monitor rules recovers it.
+#
+# Usage: hyprland-resume-modeset [--once]
+
+OUTPUT=DP-3
+TEMP_MODE="2560x1440@59.95"
+
+reapply() {
+  sleep 5
+  hyprctl -j monitors all | jq -e --arg o "$OUTPUT" '.[] | select(.name == $o)' >/dev/null || return 0
+  hyprctl eval "hl.monitor({ output = \"$OUTPUT\", mode = \"$TEMP_MODE\", position = \"0x0\", scale = 1 })" >/dev/null
+  sleep 2
+  hyprctl reload >/dev/null
+  echo "Re-applied $OUTPUT mode after resume"
+}
+
+if [[ $1 == --once ]]; then
+  reapply
+  exit
+fi
+
+gdbus monitor --system --dest org.freedesktop.login1 --object-path /org/freedesktop/login1 |
+  while read -r line; do
+    [[ $line == *"PrepareForSleep (false,)"* ]] && reapply
+  done

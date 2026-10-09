@@ -1,0 +1,15 @@
+[Unit]
+Description=Re-apply DP-3 mode after resume
+After=dbus.socket wayland-session-waitenv.service
+Requires=dbus.socket
+PartOf=graphical-session.target
+ConditionEnvironment=HYPRLAND_INSTANCE_SIGNATURE
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/hyprland-resume-modeset
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=graphical-session.target
