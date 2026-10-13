@@ -104,8 +104,8 @@ o.bind("SUPER + SHIFT + N", "Swap window left", hl.dsp.window.swap({ direction =
 o.bind("SUPER + SHIFT + I", "Swap window right", hl.dsp.window.swap({ direction = "r" }))
 
 -- Switch workspaces (1-10 via omarchy code:10-19)
-o.bind("SUPER + bracketleft", "Previous workspace", hl.dsp.focus({ workspace = "-1" }))
-o.bind("SUPER + bracketright", "Next workspace", hl.dsp.focus({ workspace = "+1" }))
+o.bind("SUPER + bracketleft", "Previous workspace", hl.dsp.focus({ workspace = "r-1" }))
+o.bind("SUPER + bracketright", "Next workspace", hl.dsp.focus({ workspace = "r+1" }))
 
 -- Move window to workspace
 o.bind("SUPER + ALT + bracketleft", "Move window to previous workspace", hl.dsp.window.move({ workspace = "-1" }))
