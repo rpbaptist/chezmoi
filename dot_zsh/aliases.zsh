@@ -30,8 +30,6 @@ alias code="code --goto"
 alias ghostscript="/usr/bin/gs"
 # alias toclip="xclip -sel clip <"
 
-alias ssh="kitty +kitten ssh"
-
 # Save files, save lives
 alias tp="trash-put"
 alias rm='echo "Careful now!"; false'
