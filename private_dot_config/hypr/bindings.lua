@@ -155,3 +155,10 @@ o.bind(
 	'uwsm-app -- /home/richard/.local/bin/strata "$(omarchy-cmd-terminal-cwd)"'
 )
 -- strata-installer: file-manager end
+
+-- Cycle through all windows on all workspaces and monitors. The default
+-- ALT + TAB only cycles windows on the active workspace.
+hl.unbind("ALT + TAB")
+hl.unbind("ALT + SHIFT + TAB")
+o.bind("ALT + TAB", "Focus on next window (all workspaces)", "hyprland-cycle-windows next")
+o.bind("ALT + SHIFT + TAB", "Focus on previous window (all workspaces)", "hyprland-cycle-windows prev")

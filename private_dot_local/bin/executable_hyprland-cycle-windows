@@ -1,0 +1,34 @@
+#!/bin/bash
+# Focus the next (or previous, with "prev") window across all workspaces and
+# monitors. Hyprland's cycle_next only cycles windows on the active workspace.
+# Order is stable: workspace ID, then top-to-bottom, left-to-right.
+# Special workspaces (scratchpad, hidden windows) are skipped.
+
+direction="${1:-next}"
+
+active=$(hyprctl activewindow -j | jq -r '.address // empty')
+
+mapfile -t addresses < <(
+  hyprctl clients -j | jq -r '
+    map(select(.mapped and (.hidden | not) and .workspace.id > 0))
+    | sort_by(.workspace.id, .at[1], .at[0])
+    | .[].address'
+)
+
+count=${#addresses[@]}
+((count == 0)) && exit 0
+
+index=-1
+for i in "${!addresses[@]}"; do
+  [[ ${addresses[$i]} == "$active" ]] && index=$i && break
+done
+
+if [[ $direction == prev ]]; then
+  ((index < 0)) && index=0
+  target=${addresses[$(((index - 1 + count) % count))]}
+else
+  target=${addresses[$(((index + 1) % count))]}
+fi
+
+hyprctl dispatch "hl.dsp.focus({ window = \"address:$target\" })" >/dev/null
+hyprctl dispatch "hl.dsp.window.bring_to_top()" >/dev/null
