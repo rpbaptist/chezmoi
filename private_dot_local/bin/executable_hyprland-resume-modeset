@@ -1,30 +1,72 @@
 #!/bin/bash
 
-# Force a fresh modeset on DP-3 after resume. Aquamarine restores DP-3 in the
-# console mode (720x400@70) and the kernel rejects that atomic commit with
-# EINVAL, so Hyprland renders nothing and the lock screen has no surface.
-# Switching to a temporary mode and reloading the monitor rules recovers it.
+# Recover Hyprland outputs after resume and after a VT switch back.
+#
+# DP-3: Aquamarine restores DP-3 in the console mode (720x400@70) after resume
+# and the kernel rejects that atomic commit with EINVAL, so Hyprland renders
+# nothing. Switching to a temporary mode and reloading the monitor rules
+# recovers it.
+#
+# Session lock: after resume, or when the idle lock engages while another VT
+# is active, the lock surface never paints. Hyprland shows a black screen with
+# only a cursor and sends all input to the invisible lock. A DPMS off/on cycle
+# and a reload while the session VT is active make the lock surface paint.
 #
 # Usage: hyprland-resume-modeset [--once]
 
 OUTPUT=DP-3
 TEMP_MODE="2560x1440@59.95"
+SESSION_VT=tty1
 
-reapply() {
-  sleep 5
+on_session_vt() {
+  [[ $(cat /sys/class/tty/tty0/active) == "$SESSION_VT" ]]
+}
+
+reapply_output() {
   hyprctl -j monitors all | jq -e --arg o "$OUTPUT" '.[] | select(.name == $o)' >/dev/null || return 0
   hyprctl eval "hl.monitor({ output = \"$OUTPUT\", mode = \"$TEMP_MODE\", position = \"0x0\", scale = 1 })" >/dev/null
   sleep 2
   hyprctl reload >/dev/null
-  echo "Re-applied $OUTPUT mode after resume"
+  echo "Re-applied $OUTPUT mode"
+}
+
+repaint_lock() {
+  omarchy-hyprland-session-locked || return 0
+  hyprctl dispatch 'hl.dsp.dpms("off")' >/dev/null
+  sleep 1
+  hyprctl dispatch 'hl.dsp.dpms("on")' >/dev/null
+  sleep 2
+  hyprctl reload >/dev/null
+  echo "Cycled DPMS to repaint the lock screen"
+}
+
+# Commits fail with "Session inactive" while another VT is active, so a resume
+# seen from another VT is handled by the VT return instead.
+after_resume() {
+  sleep 5
+  on_session_vt || return 0
+  reapply_output
+  repaint_lock
+}
+
+after_vt_return() {
+  sleep 2
+  on_session_vt || return 0
+  reapply_output
+  repaint_lock
 }
 
 if [[ $1 == --once ]]; then
-  reapply
+  after_resume
   exit
 fi
 
-gdbus monitor --system --dest org.freedesktop.login1 --object-path /org/freedesktop/login1 |
+# Without --object-path, the monitor also receives the PropertiesChanged
+# signals of the session objects, which carry the VT switches.
+gdbus monitor --system --dest org.freedesktop.login1 |
   while read -r line; do
-    [[ $line == *"PrepareForSleep (false,)"* ]] && reapply
+    case $line in
+      *"PrepareForSleep (false,)"*) after_resume ;;
+      *"/session/"*"'Active': <true>"*) after_vt_return ;;
+    esac
   done

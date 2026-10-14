@@ -1,5 +1,5 @@
 [Unit]
-Description=Re-apply DP-3 mode after resume
+Description=Recover Hyprland outputs and lock screen after resume and VT return
 After=dbus.socket wayland-session-waitenv.service
 Requires=dbus.socket
 PartOf=graphical-session.target
