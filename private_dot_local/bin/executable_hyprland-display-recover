@@ -1,0 +1,128 @@
+#!/bin/bash
+
+# Work around display failures in Hyprland on this laptop.
+#
+# Console mode: Aquamarine builds its swapchain with the Y_TILED_GEN12_RC_CCS_CC
+# modifier, and i915 rejects every test commit with it. Aquamarine then steps
+# down the mode list to the 720x400 console mode, which the kernel rejects too,
+# so the output stays black. It happens after resume, on a DPMS wake, and on a
+# dock plug-in. Aquamarine only gets a commit through with every head restated,
+# which it does when it restores after a VT switch, so force a VT round trip
+# through logind. With two outputs stuck this does not help: when the fallback
+# comes back within RETRY_AFTER seconds, notify and give up until a display
+# disconnects or the laptop resumes, instead of looping.
+#
+# Session lock: after resume, or when the idle lock engages while another VT
+# is active, the lock surface never paints. Hyprland shows a black screen with
+# only a cursor and sends all input to the invisible lock. A DPMS off/on cycle
+# and a reload while the session VT is active make the lock surface paint.
+#
+# Laptop display: the manual toggle (SUPER + ALT + D) keeps the laptop display
+# off until the next login, even with no external display left. Clear it when
+# the last external display goes.
+#
+# Upstream report: ~/.local/share/doc/aquamarine-ccs-720x400-issue.md
+
+SESSION_VT=1
+SPARE_VT=6
+RETRY_AFTER=60
+SEAT=/org/freedesktop/login1/seat/seat0
+LOG="$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/hyprland.log"
+LOCK="$XDG_RUNTIME_DIR/hyprland-display-recover.lock"
+LAST_ATTEMPT="$XDG_RUNTIME_DIR/hyprland-display-recover.last"
+GAVE_UP="$XDG_RUNTIME_DIR/hyprland-display-recover.gave-up"
+INTERNAL_DISABLE_FLAG="$HOME/.local/state/omarchy/toggles/hypr/internal-monitor-disable.lua"
+
+on_session_vt() {
+  [[ $(cat /sys/class/tty/tty0/active) == "tty$SESSION_VT" ]]
+}
+
+switch_vt() {
+  busctl call org.freedesktop.login1 "$SEAT" org.freedesktop.login1.Seat SwitchTo u "$1"
+}
+
+restate_heads() {
+  local now last=0
+  [[ -f $GAVE_UP ]] && return 1
+  now=$(date +%s)
+  [[ -f $LAST_ATTEMPT ]] && last=$(< "$LAST_ATTEMPT")
+
+  if (( now - last < RETRY_AFTER )); then
+    touch "$GAVE_UP"
+    notify-send -u critical "Display stuck in console mode" \
+      "Recovery did not help. Reconnect the display or switch VT."
+    echo "Still in console mode after a VT round trip; giving up until a display disconnects or resume"
+    return 1
+  fi
+
+  echo "$now" >"$LAST_ATTEMPT"
+  switch_vt "$SPARE_VT" || return 1
+  sleep 1.5
+  switch_vt "$SESSION_VT"
+  echo "Restated all heads with a VT round trip"
+}
+
+repaint_lock() {
+  omarchy-hyprland-session-locked || return 0
+  hyprctl dispatch 'hl.dsp.dpms("off")' >/dev/null
+  sleep 1
+  hyprctl dispatch 'hl.dsp.dpms("on")' >/dev/null
+  sleep 2
+  hyprctl reload >/dev/null
+  echo "Cycled DPMS to repaint the lock screen"
+}
+
+restore_internal() {
+  [[ -f $INTERNAL_DISABLE_FLAG ]] || return 0
+  omarchy-hw-external-monitors && return 0
+  omarchy-hyprland-monitor-internal on
+  echo "Enabled the laptop display: no external display left"
+}
+
+# Commits fail with "Session inactive" while another VT is active, so the
+# session VT must be active. The VT round trip fires a VT return itself; the
+# lock makes that event a no-op while the round trip runs.
+locked() {
+  (
+    flock -n 9 || exit 0
+    "$@"
+  ) 9>"$LOCK"
+}
+
+after_wake() {
+  sleep "$1"
+  restore_internal
+  on_session_vt && locked repaint_lock
+}
+
+# Aquamarine logs each modeset, so the console-mode fallback shows up there
+# whatever the connector is called. The failures and hotplug events come in
+# bursts; let a burst settle before acting on it.
+tail -n 0 -F "$LOG" 2>/dev/null |
+  grep --line-buffered -E 'drm: (Modesetting [^ ]+ with 720x400|Connector [^ ]+ disconnected)' |
+  while read -r line; do
+    console_mode=0 disconnected=0
+    while :; do
+      case $line in
+        *" with 720x400"*) console_mode=1 ;;
+        *" disconnected"*) disconnected=1 ;;
+      esac
+      read -r -t 3 line || break
+    done
+
+    if (( disconnected )); then
+      rm -f "$GAVE_UP"
+      restore_internal
+    fi
+    (( console_mode )) && on_session_vt && locked restate_heads
+  done &
+
+# Without --object-path, the monitor also receives the PropertiesChanged
+# signals of the session objects, which carry the VT switches.
+gdbus monitor --system --dest org.freedesktop.login1 |
+  while read -r line; do
+    case $line in
+      *"PrepareForSleep (false,)"*) rm -f "$GAVE_UP"; after_wake 5 ;;
+      *"/session/"*"'Active': <true>"*) after_wake 2 ;;
+    esac
+  done

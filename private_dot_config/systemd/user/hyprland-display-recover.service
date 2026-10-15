@@ -1,5 +1,5 @@
 [Unit]
-Description=Recover Hyprland outputs and lock screen after resume and VT return
+Description=Recover Hyprland displays from console-mode fallback and unpainted lock
 After=dbus.socket wayland-session-waitenv.service
 Requires=dbus.socket
 PartOf=graphical-session.target
@@ -7,7 +7,7 @@ ConditionEnvironment=HYPRLAND_INSTANCE_SIGNATURE
 
 [Service]
 Type=simple
-ExecStart=%h/.local/bin/hyprland-resume-modeset
+ExecStart=%h/.local/bin/hyprland-display-recover
 Restart=always
 RestartSec=2
 
