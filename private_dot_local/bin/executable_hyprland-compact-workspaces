@@ -1,0 +1,30 @@
+#!/bin/bash
+# Renumber workspaces so that there are no gaps: when workspace 2 becomes
+# empty, workspace 3 becomes 2, 4 becomes 3, and so on. Hyprland removes empty
+# workspaces, but it does not renumber the others.
+# A workspace keeps its monitor and layout (change_id). If the target ID is
+# still in use by an empty workspace (e.g. the focused one), the windows move
+# into it instead. Special and named workspaces are skipped.
+
+exec 9>"${XDG_RUNTIME_DIR:-/tmp}/hyprland-compact-workspaces.lock"
+flock 9
+
+workspaces=$(hyprctl workspaces -j)
+
+mapfile -t occupied < <(
+  jq -r 'map(select(.id > 0 and .windows > 0)) | sort_by(.id) | .[].id' <<<"$workspaces"
+)
+
+expected=1
+for id in "${occupied[@]}"; do
+  if ((id != expected)); then
+    if jq -e --argjson id "$expected" 'any(.id == $id)' <<<"$workspaces" >/dev/null; then
+      for address in $(hyprctl clients -j | jq -r --argjson id "$id" '.[] | select(.workspace.id == $id) | .address'); do
+        hyprctl dispatch "hl.dsp.window.move({ workspace = \"$expected\", follow = false, window = \"address:$address\" })" >/dev/null
+      done
+    else
+      hyprctl dispatch "hl.dsp.workspace.change_id({ workspace = \"$id\", id = $expected })" >/dev/null
+    fi
+  fi
+  ((expected++))
+done
