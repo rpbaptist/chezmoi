@@ -3,3 +3,9 @@
 export TERMINAL=kitty
 export EDITOR=nvim
 export BROWSER=chromium
+
+# Aquamarine builds its buffers with the Y_TILED_GEN12_RC_CCS_CC modifier, and
+# i915 rejects every commit with it, so external displays fall back to the
+# 720x400 console mode and stay black. Use implicit modifiers instead.
+# See ~/.local/share/doc/aquamarine-ccs-720x400-issue.md
+export AQ_NO_MODIFIERS=1
