@@ -8,8 +8,9 @@
 # so the output stays black. It happens after resume, on a DPMS wake, and on a
 # dock plug-in. Aquamarine only gets a commit through with every head restated,
 # which it does when it restores after a VT switch, so force a VT round trip
-# through logind. With two outputs stuck this does not help: when the fallback
-# comes back within RETRY_AFTER seconds, notify and give up until a display
+# through logind. That does not always help: when the fallback comes back
+# within RETRY_AFTER seconds, switch the laptop display on if the toggle has it
+# off and the lid is open. Otherwise notify and give up until a display
 # disconnects or the laptop resumes, instead of looping.
 #
 # Session lock: after resume, or when the idle lock engages while another VT
@@ -20,6 +21,12 @@
 # Laptop display: the manual toggle (SUPER + ALT + D) keeps the laptop display
 # off until the next login, even with no external display left. Clear it when
 # the last external display goes.
+#
+# Display Setups: a plugin profile sets each display at runtime, so it can
+# switch the laptop display back on while the toggle has it off. Mirror the
+# toggle as a hold in the plugin, which wins over any profile. The key, the
+# menu, the clamshell watcher, the login cleanup, and restore_internal all
+# change the toggle file, so watch the file instead of each caller.
 #
 # Upstream report: ~/.local/share/doc/aquamarine-ccs-720x400-issue.md
 
@@ -32,9 +39,14 @@ LOCK="$XDG_RUNTIME_DIR/hyprland-display-recover.lock"
 LAST_ATTEMPT="$XDG_RUNTIME_DIR/hyprland-display-recover.last"
 GAVE_UP="$XDG_RUNTIME_DIR/hyprland-display-recover.gave-up"
 INTERNAL_DISABLE_FLAG="$HOME/.local/state/omarchy/toggles/hypr/internal-monitor-disable.lua"
+HOLD_OWNER="Laptop display toggle"
 
 on_session_vt() {
   [[ $(cat /sys/class/tty/tty0/active) == "tty$SESSION_VT" ]]
+}
+
+lid_open() {
+  grep -qs open /proc/acpi/button/lid/*/state
 }
 
 switch_vt() {
@@ -48,6 +60,15 @@ restate_heads() {
   [[ -f $LAST_ATTEMPT ]] && last=$(< "$LAST_ATTEMPT")
 
   if (( now - last < RETRY_AFTER )); then
+    # Switching the laptop display on restates every head as well, and it
+    # gives the lock screen a display to show on whatever the outputs do.
+    if [[ -f $INTERNAL_DISABLE_FLAG ]] && lid_open; then
+      echo "$now" >"$LAST_ATTEMPT"
+      omarchy-hyprland-monitor-internal on
+      echo "Still in console mode after a VT round trip; enabled the laptop display"
+      return 0
+    fi
+
     touch "$GAVE_UP"
     notify-send -u critical "Display stuck in console mode" \
       "Recovery did not help. Reconnect the display or switch VT."
@@ -77,6 +98,36 @@ restore_internal() {
   omarchy-hw-external-monitors && return 0
   omarchy-hyprland-monitor-internal on
   echo "Enabled the laptop display: no external display left"
+}
+
+# Each hold or unhold makes the plugin apply the layout again, so only send
+# one when it changes something. Returns 1 while the plugin cannot take it yet.
+sync_internal_hold() {
+  local status display held answer
+  status=$(omarchy-shell display-setups status 2>/dev/null) || return 1
+  jq -e .ready <<<"$status" >/dev/null || return 1
+  display=$(jq -r 'first(.monitors[] | select(.name | startswith("eDP")) | "desc:" + .description) // empty' <<<"$status")
+  [[ -n $display ]] || return 0
+  held=$(jq -r --arg d "$display" --arg o "$HOLD_OWNER" \
+    'any(.holds[]; .display == $d and .owner == $o and .state == "off")' <<<"$status")
+
+  if [[ -f $INTERNAL_DISABLE_FLAG ]]; then
+    [[ $held == true ]] && return 0
+    answer=$(omarchy-shell display-setups hold "$display" off "$HOLD_OWNER")
+  else
+    [[ $held == true ]] || return 0
+    answer=$(omarchy-shell display-setups unhold "$display" "$HOLD_OWNER")
+  fi
+  echo "Display Setups hold on the laptop display: $answer"
+  [[ $answer != *"still starting"* ]]
+}
+
+# The shell starts with the session and can restart; give it a minute.
+sync_internal_hold_retry() {
+  for _ in {1..30}; do
+    sync_internal_hold && return 0
+    sleep 2
+  done
 }
 
 # Commits fail with "Session inactive" while another VT is active, so the
@@ -115,6 +166,15 @@ tail -n 0 -F "$LOG" 2>/dev/null |
       restore_internal
     fi
     (( console_mode )) && on_session_vt && locked restate_heads
+  done &
+
+sync_internal_hold_retry &
+
+mkdir -p "${INTERNAL_DISABLE_FLAG%/*}"
+inotifywait -m -q -e create,delete,moved_to,moved_from,close_write --format %f "${INTERNAL_DISABLE_FLAG%/*}" |
+  grep --line-buffered -Fx "${INTERNAL_DISABLE_FLAG##*/}" |
+  while read -r _; do
+    sync_internal_hold_retry
   done &
 
 # Without --object-path, the monitor also receives the PropertiesChanged
