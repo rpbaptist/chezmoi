@@ -52,6 +52,12 @@ o.bind("SUPER + SHIFT + CTRL + RIGHT", "Move workspace to right monitor", hl.dsp
 o.bind("SUPER + SHIFT + CTRL + UP", "Move workspace to up monitor", hl.dsp.workspace.move({ monitor = "u" }))
 o.bind("SUPER + SHIFT + CTRL + DOWN", "Move workspace to down monitor", hl.dsp.workspace.move({ monitor = "d" }))
 
+-- Move window to monitor with vim keys (same directions as focus/swap)
+o.bind("SUPER + SHIFT + CTRL + N", "Move window to left monitor", hl.dsp.window.move({ monitor = "l" }))
+o.bind("SUPER + SHIFT + CTRL + E", "Move window to down monitor", hl.dsp.window.move({ monitor = "d" }))
+o.bind("SUPER + SHIFT + CTRL + U", "Move window to up monitor", hl.dsp.window.move({ monitor = "u" }))
+o.bind("SUPER + SHIFT + CTRL + I", "Move window to right monitor", hl.dsp.window.move({ monitor = "r" }))
+
 o.bind("SUPER + ALT + T", "Toggle light/dark theme", "omarchy-toggle-theme-mode")
 
 o.bind("SUPER + CTRL + T", "Terminal", "uwsm app -- $TERMINAL")
