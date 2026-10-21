@@ -63,6 +63,9 @@ alias nvc="cd $HOME/.config/nvim"
 alias oc=opencode
 alias cl=claude
 alias clx=claude --allow-dangerously-skip-permissions
+# Force 16 colors so Cursor CLI uses the terminal (Omarchy) palette
+alias cursor-agent='FORCE_COLOR=1 cursor-agent'
+alias agent='FORCE_COLOR=1 agent'
 alias ca=cursor-agent
 
 # ruby
