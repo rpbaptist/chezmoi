@@ -3,11 +3,17 @@
 # empty, workspace 3 becomes 2, 4 becomes 3, and so on. Hyprland removes empty
 # workspaces, but it does not renumber the others.
 # A workspace keeps its monitor and layout (change_id). If the target ID is
-# still in use by an empty workspace (e.g. the focused one), the windows move
-# into it instead. Special and named workspaces are skipped.
+# still in use by an empty workspace (e.g. the focused one) on the same
+# monitor, the windows move into it instead. If that empty workspace is on
+# another monitor, it gets a free ID first, so windows never change monitor.
+# Special and named workspaces are skipped.
 
 exec 9>"${XDG_RUNTIME_DIR:-/tmp}/hyprland-compact-workspaces.lock"
 flock 9
+
+workspace_monitor() {
+  jq -r --argjson id "$1" '.[] | select(.id == $id) | .monitor' <<<"$workspaces"
+}
 
 workspaces=$(hyprctl workspaces -j)
 
@@ -18,11 +24,17 @@ mapfile -t occupied < <(
 expected=1
 for id in "${occupied[@]}"; do
   if ((id != expected)); then
-    if jq -e --argjson id "$expected" 'any(.id == $id)' <<<"$workspaces" >/dev/null; then
+    workspaces=$(hyprctl workspaces -j)
+    target_monitor=$(workspace_monitor "$expected")
+    if [[ -n $target_monitor && $target_monitor == "$(workspace_monitor "$id")" ]]; then
       for address in $(hyprctl clients -j | jq -r --argjson id "$id" '.[] | select(.workspace.id == $id) | .address'); do
         hyprctl dispatch "hl.dsp.window.move({ workspace = \"$expected\", follow = false, window = \"address:$address\" })" >/dev/null
       done
     else
+      if [[ -n $target_monitor ]]; then
+        free=$(jq '[.[].id] | max + 1' <<<"$workspaces")
+        hyprctl dispatch "hl.dsp.workspace.change_id({ workspace = \"$expected\", id = $free })" >/dev/null
+      fi
       hyprctl dispatch "hl.dsp.workspace.change_id({ workspace = \"$id\", id = $expected })" >/dev/null
     fi
   fi
