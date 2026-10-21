@@ -3,14 +3,13 @@ format = """
 [ ](fg:black bg:background))\
 \
 [ $directory ](bg:background)\
-[([ ](fg:black bg:background)\
-$elixir\
+[($elixir\
 $python\
 $ruby\
 $golang\
 $custom\
 $c\
-$nodejs )](bg:background)\
+$nodejs)](bg:background)\
 \
 [([ ](fg:black bg:background)\
 $git_branch\
@@ -106,7 +105,7 @@ symbol = "  "
 symbol = " "
 style = 'fg:bright-yellow bg:background'
 version_format = '${raw}'
-format = '[$symbol($version(-$name))]($style)'
+format = '[ ](fg:black bg:background)[$symbol($version(-$name))]($style) '
 
 [docker_context]
 symbol = " "
@@ -117,19 +116,19 @@ disabled = true
 symbol = " "
 version_format = '${raw}'
 style = 'fg:bright-purple bg:background'
-format = '[$symbol$version]($style)'
+format = '[ ](fg:black bg:background)[$symbol$version]($style) '
 
 [custom.elixir]
 symbol = " "
 style = 'fg:bright-purple bg:background'
 command = "elixir --short-version"
-format = '[$symbol$output]($style)'
+format = '[ ](fg:black bg:background)[$symbol$output]($style) '
 detect_files = ['mix.exs']
 
 [golang]
 symbol = "󰟓 "
 style = 'fg:bright-blue bg:background'
-format = '[$symbol($version(-$name))]($style)'
+format = '[ ](fg:black bg:background)[$symbol($version(-$name))]($style) '
 
 [lua]
 symbol = " "
@@ -152,7 +151,7 @@ format = '[$symbol$version]($style)'
 symbol = " "
 style = "fg:green bg:background"
 version_format = '${raw}'
-format = '[$symbol($version)]($style)'
+format = '[ ](fg:black bg:background)[$symbol($version)]($style) '
 
 [os.symbols]
 Alpine = " "
@@ -184,12 +183,12 @@ symbol = "󰏗 "
 [python]
 symbol = " "
 style = 'fg:bright-yellow bg:background'
-format = '[$symbol$version]($style)'
+format = '[ ](fg:black bg:background)[$symbol$version]($style) '
 
 [ruby]
 symbol = " "
 style = 'fg:bright-red bg:background'
-format = '[$symbol($version)]($style)'
+format = '[ ](fg:black bg:background)[$symbol($version)]($style) '
 
 [rust]
 symbol = " "
