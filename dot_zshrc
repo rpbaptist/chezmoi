@@ -91,6 +91,7 @@ ZSH_HIGHLIGHT_STYLES[arg0]='fg=green'
 
 znap source zsh-users/zsh-syntax-highlighting
 znap eval zoxide "zoxide init zsh --cmd cd"
+znap eval wt "wt config shell init zsh"
 
 # Key bindings — must come last: fzf, zsh-autocomplete, and others above all touch Tab.
 bindkey '\t' menu-select "$terminfo[kcbt]" reverse-menu-complete
