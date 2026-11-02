@@ -30,6 +30,34 @@
           }
         ]
       }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "^(startup|resume|clear|compact|fork)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/herdr-agent-state.sh session",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/herdr-issue-title.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/herdr-issue-title.sh",
+            "timeout": 10
+          }
+        ]
+      }
     ]
   },
   "disableWorkflows": true,
