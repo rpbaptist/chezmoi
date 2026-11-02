@@ -1,0 +1,14 @@
+#!/bin/bash
+# Write ~/.claude/settings.json from .chezmoitemplates/claude-settings.json and keep the hook
+# groups that Orca adds. See .chezmoitemplates/keep-orca-hooks.jq.
+set -euo pipefail
+
+current=$(cat)
+jq -e 'type == "object"' >/dev/null 2>&1 <<<"$current" || current='{}'
+
+jq --argjson cur "$current" "$(cat <<'JQ'
+{{ template "keep-orca-hooks.jq" }}
+JQ
+)" <<'JSON'
+{{ template "claude-settings.json" . }}
+JSON

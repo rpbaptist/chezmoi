@@ -4,6 +4,9 @@
     "sessionStart": [
       {
         "command": "{{ .chezmoi.homeDir }}/.cursor/hooks/session-start.sh"
+      },
+      {
+        "command": "bash '{{ .chezmoi.homeDir }}/.cursor/herdr-agent-state.sh' session"
       }
     ],
     "preToolUse": [
