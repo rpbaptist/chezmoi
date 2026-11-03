@@ -45,7 +45,7 @@ herdr worktree open --cwd "$(git rev-parse --path-format=absolute --git-common-d
 ```
 
 Remove, after the PR state is `MERGED`: run `wt remove -D <branch>` (a squash
-merge needs `-D`), then close the herdr workspace of the worktree. `wt` does
-not close it (`herdr workspace list`, then `herdr workspace close <id>`).
+merge needs `-D`). A `post-remove` hook in the worktrunk user config closes
+the herdr workspace.
 
 When `herdr` is not running or `wt` is missing, use plain `git worktree`.
