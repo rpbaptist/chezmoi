@@ -67,6 +67,7 @@ alias clx=claude --allow-dangerously-skip-permissions
 alias cursor-agent='FORCE_COLOR=1 cursor-agent'
 alias agent='FORCE_COLOR=1 agent'
 alias ca=cursor-agent
+alias cx="codex --approve-for-me"
 
 # ruby
 
