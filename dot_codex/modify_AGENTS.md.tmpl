@@ -1,0 +1,15 @@
+#!/bin/bash
+# Write ~/.codex/AGENTS.md from .chezmoitemplates/agent-instructions.md and keep the
+# pstack models block that pstack maintains between its marker comments.
+set -euo pipefail
+
+current=$(cat)
+
+cat <<'INSTRUCTIONS'
+{{ template "agent-instructions.md" . }}
+INSTRUCTIONS
+
+block=$(sed -n '/<!-- pstack models start -->/,/<!-- pstack models end -->/p' <<<"$current")
+if [ -n "$block" ]; then
+  printf '\n%s\n' "$block"
+fi
