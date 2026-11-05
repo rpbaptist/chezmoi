@@ -1,0 +1,18 @@
+id = "richard.terminal-browser-links"
+name = "Terminal Browser links"
+version = "0.1.0"
+min_herdr_version = "0.8.2"
+description = "Ctrl+click web URLs to open them in terminal-browser"
+platforms = ["linux", "macos"]
+
+# Invoked by herdr on Ctrl+click of a link_handlers match below.
+[[actions]]
+id = "open-link"
+title = "terminal-browser: open clicked URL"
+command = ["bash", "open-link.sh"]
+
+[[link_handlers]]
+id = "web-url"
+title = "Open in terminal-browser"
+pattern = '^https?://'
+action = "open-link"
