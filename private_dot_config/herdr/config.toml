@@ -64,8 +64,9 @@ focus_pane_right = "ctrl+alt+i"
 # cycle_pane_next = "prefix+tab"
 # cycle_pane_previous = "prefix+shift+tab"
 # last_pane = ""          # optional, unset by default; bind e.g. "prefix+tab" for global back-and-forth
-split_vertical = "prefix+|"
-split_horizontal = "prefix+-"
+# Splits use scripts/split-follow.sh (see [[keys.command]] below).
+split_vertical = ""
+split_horizontal = ""
 # close_pane = "prefix+x"
 # zoom = "prefix+z"       # legacy alias: fullscreen
 # resize_mode = "prefix+r"
@@ -93,6 +94,20 @@ split_horizontal = "prefix+-"
 # width = "80%"
 # height = "80%"
 
+
+# Split panes in the directory where the agent session works now (for
+# example its worktree), not in the process cwd of the pane.
+[[keys.command]]
+key = "prefix+|"
+type = "shell"
+command = "$HOME/.config/herdr/scripts/split-follow.sh right"
+description = "Split right in session cwd"
+
+[[keys.command]]
+key = "prefix+-"
+type = "shell"
+command = "$HOME/.config/herdr/scripts/split-follow.sh down"
+description = "Split down in session cwd"
 
 # Worktrunk plugin (devashish2203/herdr-worktrunk). Worktrees open as nested
 # spaces under the repo space.
