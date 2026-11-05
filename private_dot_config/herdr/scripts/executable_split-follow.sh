@@ -4,10 +4,13 @@
 # moved into with `cd`. herdr's own "follow" policy uses the process cwd, which
 # stays in the main checkout.
 #
-# Usage: split-follow.sh right|down
+# Usage: split-follow.sh right|down|tab [command...]
+# "tab" opens a new tab in that directory, not a split. With a command, the
+# new pane runs it, for example `claude`.
 set -euo pipefail
 
 direction=${1:-right}
+shift || true
 
 pane=$(herdr pane list | jq -c '.result.panes[] | select(.focused)' | head -n 1)
 [[ -n $pane ]] || exit 0
@@ -28,6 +31,18 @@ if [[ $(jq -r '.agent // empty' <<<"$pane") == claude ]]; then
   fi
 fi
 
-args=(pane split "$pane_id" --direction "$direction" --focus)
+if [[ $direction == tab ]]; then
+  args=(tab create --focus)
+  query=.result.root_pane.pane_id
+else
+  args=(pane split "$pane_id" --direction "$direction" --focus)
+  query=.result.pane.pane_id
+fi
 [[ -d $cwd ]] && args+=(--cwd "$cwd")
-exec herdr "${args[@]}" >/dev/null
+
+if (($# == 0)); then
+  exec herdr "${args[@]}" >/dev/null
+fi
+
+new_pane=$(herdr "${args[@]}" | jq -r "$query")
+exec herdr pane run "$new_pane" "$@" >/dev/null

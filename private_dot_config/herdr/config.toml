@@ -109,6 +109,17 @@ type = "shell"
 command = "$HOME/.config/herdr/scripts/split-follow.sh down"
 description = "Split down in session cwd"
 
+# Claude leader (a for AI). herdr has no multi-key sequences, so
+# prefix+ctrl+a opens a popup that reads one more key: | right, - down,
+# n new tab.
+[[keys.command]]
+key = "prefix+ctrl+a"
+type = "popup"
+command = "$HOME/.config/herdr/scripts/claude-leader.sh"
+description = "Claude: open in split or tab"
+width = 34
+height = 7
+
 # Worktrunk plugin (devashish2203/herdr-worktrunk). Worktrees open as nested
 # spaces under the repo space.
 [[keys.command]]
