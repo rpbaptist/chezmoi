@@ -48,3 +48,7 @@
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
+[hook "wt-prune-merged"]
+	; Remove worktrees of merged PRs when main is pulled.
+	command = /home/richard/.local/bin/git-wt-prune-merged
+	event = post-merge

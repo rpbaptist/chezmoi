@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+# Git post-merge hook: when the default branch is updated, remove the
+# worktrees and local branches whose GitHub PR is merged.
+#
+# Candidates come from `wt step prune` (branches integrated into the default
+# branch). A candidate is removed only when `gh` reports a merged PR for it, so
+# a new worktree that only looks merged stays. Removal uses `wt remove`, so the
+# worktrunk hooks run (for example, the herdr workspace close).
+#
+# Registered in ~/.gitconfig as hook.wt-prune-merged. Log:
+# ~/.local/state/git-wt-prune-merged.log. Run with --dry-run to see what it
+# would remove, in the foreground.
+set -uo pipefail
+
+dry_run=false
+[ "${1:-}" = --dry-run ] && dry_run=true
+
+for cmd in wt gh jq; do
+  command -v "$cmd" >/dev/null || exit 0
+done
+
+default=$(git rev-parse --abbrev-ref origin/HEAD 2>/dev/null) || exit 0
+[ "$(git branch --show-current)" = "${default#origin/}" ] || exit 0
+top=$(git rev-parse --show-toplevel) || exit 0
+
+prune() {
+  echo "== $(date -Is) $top"
+  git -C "$top" fetch --prune -q origin
+  wt -C "$top" step prune --dry-run --format=json --min-age 0 |
+    jq -r '.[].branch' |
+    while read -r branch; do
+      merged=$(cd "$top" && gh pr list --head "$branch" --state merged \
+        --json number -q length 2>/dev/null)
+      if [ "${merged:-0}" -gt 0 ] 2>/dev/null; then
+        echo "remove $branch"
+        $dry_run || wt -C "$top" remove -D "$branch"
+      else
+        echo "keep $branch (no merged PR)"
+      fi
+    done
+}
+
+if $dry_run; then
+  prune
+else
+  log=${XDG_STATE_HOME:-$HOME/.local/state}/git-wt-prune-merged.log
+  mkdir -p "$(dirname "$log")"
+  prune </dev/null >>"$log" 2>&1 &
+  disown
+fi
+exit 0
