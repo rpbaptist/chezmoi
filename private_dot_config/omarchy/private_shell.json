@@ -22,10 +22,10 @@
       ],
       "right": [
         {
-          "id": "omarchy.tailscale"
+          "id": "omarchy.tray"
         },
         {
-          "id": "omarchy.tray"
+          "id": "omarchy.tailscale"
         },
         {
           "id": "richard.background-crop"
@@ -54,7 +54,10 @@
           "id": "omarchy.clock",
           "verticalFormat": "HH\n—\nmm"
         }
-      ]
+      ],
+      "centerBegin": [],
+      "centerEnd": [],
+      "tray": []
     },
     "position": "top",
     "transparent": true,
