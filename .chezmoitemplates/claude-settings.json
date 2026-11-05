@@ -69,7 +69,10 @@
     "ruby-lsp@claude-plugins-official": true,
     "lua-lsp@claude-plugins-official": true,
     "vercel@claude-plugins-official": true,
-    "mattpocock-skills@claude-plugins-official": true
+    "warp@warp-skills": true,
+    "docs-tools@warp-skills": true,
+    "dev-workflow@warp-skills": true,
+    "mattpocock-skills@warp-skills": true
   },
   "extraKnownMarketplaces": {
     "caveman": {

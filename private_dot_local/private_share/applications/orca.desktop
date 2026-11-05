@@ -2,7 +2,7 @@
 Version=1.0
 Name=Orca
 Comment=Next-gen IDE for parallel agentic development
-Exec=/home/richard/.local/bin/orca %U
+Exec=env CLAUDE_CONFIG_DIR=/home/richard/.claude-work /home/richard/.local/bin/orca %U
 Terminal=false
 Type=Application
 Icon=orca-ide

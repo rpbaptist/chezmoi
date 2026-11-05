@@ -12,3 +12,5 @@
 [[ -f /usr/share/omarchy-zsh/shell/all ]] && source /usr/share/omarchy-zsh/shell/all
 
 # Add your own exports, aliases, and functions below.
+
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init bash)"; fi
