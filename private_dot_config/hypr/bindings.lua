@@ -168,3 +168,9 @@ hl.unbind("ALT + TAB")
 hl.unbind("ALT + SHIFT + TAB")
 o.bind("ALT + TAB", "Focus on next window (all workspaces)", "hyprland-cycle-windows next")
 o.bind("ALT + SHIFT + TAB", "Focus on previous window (all workspaces)", "hyprland-cycle-windows prev")
+
+-- Dictation keys from before Alt + Space and Right Alt became the defaults.
+-- Remove these lines to give the keys back to applications.
+if o.dictation_installed and o.dictation_installed() then
+  o.bind("SUPER + CTRL + X", "Toggle dictation", "omarchy-dictation toggle")
+end
