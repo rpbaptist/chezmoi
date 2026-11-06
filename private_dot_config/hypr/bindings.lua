@@ -109,13 +109,56 @@ o.bind("SUPER + SHIFT + E", "Swap window down", hl.dsp.window.swap({ direction =
 o.bind("SUPER + SHIFT + N", "Swap window left", hl.dsp.window.swap({ direction = "l" }))
 o.bind("SUPER + SHIFT + I", "Swap window right", hl.dsp.window.swap({ direction = "r" }))
 
+-- Previous/next workspace inside the focused monitor's own block of ten
+-- (see default/hypr/monitor-workspaces.lua). Plain relative IDs ("r-1", "e+1")
+-- cross into another monitor's block. With `existing`, skip slots that have no
+-- workspace yet, like "e+1"; otherwise stop at slot 1 and slot 10, like "r+1".
+local function slot_target(delta, existing)
+	local monitor = hl.get_active_monitor()
+	local active = monitor and monitor.active_workspace
+	if not active or active.id < 1 then
+		return nil
+	end
+	local base = o.workspaces.workspace_id(monitor, 1) - 1
+	local slot = (active.id - 1) % 10 + 1
+	if not existing then
+		local target = slot + delta
+		return (target >= 1 and target <= 10) and target or nil
+	end
+	for target = slot + delta, delta > 0 and 10 or 1, delta do
+		local workspace = hl.get_workspace(base + target)
+		if workspace and workspace.monitor and workspace.monitor.name == monitor.name then
+			return target
+		end
+	end
+	return nil
+end
+
+local function focus_step(delta, existing)
+	return function()
+		local target = slot_target(delta, existing)
+		if target then
+			o.workspaces.focus(target)()
+		end
+	end
+end
+
+local function move_step(delta)
+	return function()
+		local target = slot_target(delta, false)
+		if target then
+			o.workspaces.move_window(target)()
+		end
+	end
+end
+
 -- Switch workspaces (1-10 via omarchy code:10-19)
-o.bind("SUPER + bracketleft", "Previous workspace", hl.dsp.focus({ workspace = "r-1" }))
-o.bind("SUPER + bracketright", "Next workspace", hl.dsp.focus({ workspace = "r+1" }))
+o.bind("SUPER + bracketleft", "Previous workspace", focus_step(-1))
+o.bind("SUPER + bracketright", "Next workspace", focus_step(1))
 
 -- Move window to workspace
-o.bind("SUPER + ALT + bracketleft", "Move window to previous workspace", hl.dsp.window.move({ workspace = "-1" }))
-o.bind("SUPER + ALT + bracketright", "Move window to next workspace", hl.dsp.window.move({ workspace = "+1" }))
+o.bind("SUPER + ALT + bracketleft", "Move window to previous workspace", move_step(-1))
+o.bind("SUPER + ALT + bracketright", "Move window to next workspace", move_step(1))
 
 -- Move active window silently to a workspace with mod + CTRL + SHIFT + [0-9]
 for workspace = 1, 10 do
@@ -123,7 +166,7 @@ for workspace = 1, 10 do
 	o.bind(
 		"SUPER + CTRL + SHIFT + " .. key,
 		"Move window silently to workspace " .. workspace,
-		hl.dsp.window.move({ workspace = tostring(workspace), follow = false })
+		o.workspaces.move_window(workspace, false)
 	)
 end
 
@@ -139,8 +182,8 @@ o.bind("CTRL + ALT + mouse:272", "Resize window", hl.dsp.window.resize(), { mous
 o.bind("SUPER + D", "Calendar", "omarchy-shell shell toggle omarchy.clock")
 o.bind("SUPER + ALT + D", "Toggle laptop display", "omarchy-hyprland-monitor-internal toggle")
 
-o.bind("mouse:275", "Previous workspace", hl.dsp.focus({ workspace = "e-1" }))
-o.bind("mouse:276", "Next workspace", hl.dsp.focus({ workspace = "e+1" }))
+o.bind("mouse:275", "Previous workspace", focus_step(-1, true))
+o.bind("mouse:276", "Next workspace", focus_step(1, true))
 
 -- Move DPI (monitor scaling) off SUPER+SLASH / SUPER+ALT+SLASH onto
 -- SUPER+ALT+MINUS/EQUAL. Those two were previously "Expand/Shrink window
