@@ -34,7 +34,15 @@
           "id": "io.github.gillmania.display-setups"
         },
         {
-          "id": "omarchy.agents"
+          "id": "omarchy.agents",
+          "providers": {
+            "grok": {
+              "enabled": false
+            },
+            "grokbot": {
+              "enabled": false
+            }
+          }
         },
         {
           "id": "omarchy.power"
