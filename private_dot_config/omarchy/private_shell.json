@@ -34,7 +34,7 @@
           "id": "io.github.gillmania.display-setups"
         },
         {
-          "id": "omarchy.agents",
+          "id": "richard.agents",
           "providers": {
             "grok": {
               "enabled": false
