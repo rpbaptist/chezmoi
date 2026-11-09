@@ -1,1 +1,0 @@
-../.claude/commit-strategy.md
