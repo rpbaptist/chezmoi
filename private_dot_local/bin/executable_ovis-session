@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+# Point Ovis (the devswha.ovis herdr plugin) at another herdr session, then
+# restart it. Ovis shows one session at a time: the one HERDR_SOCKET in its
+# plugin config names.
+#
+#   ovis-session          pick a running session with fzf
+#   ovis-session <name>   switch to that session
+#   ovis-session --show   print the session Ovis uses now
+#
+# The script changes only the HERDR_SOCKET line of the config file. That file
+# also holds the access token, so it stays out of chezmoi.
+set -euo pipefail
+
+plugin=devswha.ovis
+
+die() { printf 'ovis-session: %s\n' "$*" >&2; exit 1; }
+
+config_dir=$(herdr plugin config-dir "$plugin" 2>/dev/null) || die "Ovis is not installed as a herdr plugin"
+env_file="$config_dir/.env"
+sessions=$(herdr session list --json) || die "herdr session list failed"
+
+current_socket() {
+  [[ -f $env_file ]] || return 0
+  sed -n 's/^[[:space:]]*HERDR_SOCKET[[:space:]]*=[[:space:]]*//p' "$env_file" | tail -n 1
+}
+
+if [[ ${1:-} == --show ]]; then
+  socket=$(current_socket)
+  if [[ -z $socket ]]; then
+    echo "not pinned: Ovis follows the herdr session that started it first"
+  else
+    jq -r --arg s "$socket" '.sessions[] | select(.socket_path == $s) | .name' <<<"$sessions" | grep . || echo "$socket"
+  fi
+  exit 0
+fi
+
+name=${1:-}
+if [[ -z $name ]]; then
+  name=$(jq -r '.sessions[] | select(.running) | .name' <<<"$sessions" |
+    fzf --prompt='Ovis session> ' --height=~40% --reverse) || exit 1
+fi
+
+read -r running socket < <(jq -r --arg n "$name" '.sessions[] | select(.name == $n) | "\(.running) \(.socket_path)"' <<<"$sessions") ||
+  die "no herdr session named '$name' (see: herdr session list)"
+[[ $running == true ]] || die "session '$name' is stopped; start it first: herdr --session $name"
+
+mkdir -p "$config_dir"
+touch "$env_file"
+chmod 600 "$env_file"
+sed -i '/^[[:space:]]*HERDR_SOCKET[[:space:]]*=/d' "$env_file"
+if [[ -s $env_file && -n $(tail -c 1 "$env_file") ]]; then echo >>"$env_file"; fi
+printf 'HERDR_SOCKET=%s\n' "$socket" >>"$env_file"
+
+# Stop synchronously: the start action only starts a server when none answers.
+root=$(herdr plugin list --json | jq -r --arg p "$plugin" '.result.plugins[] | select(.plugin_id == $p) | .plugin_root')
+[[ -n $root ]] || die "herdr does not list $plugin"
+bun "$root/scripts/plugin.ts" stop </dev/null >/dev/null || die "could not stop Ovis"
+herdr plugin action invoke "$plugin.start" </dev/null >/dev/null
+
+for _ in $(seq 25); do
+  if bun "$root/scripts/plugin.ts" status </dev/null | grep -q '^running'; then
+    echo "Ovis now shows herdr session '$name'"
+    exit 0
+  fi
+  sleep 1
+done
+die "Ovis did not start within 25 s; see: herdr plugin log list"

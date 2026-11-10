@@ -187,6 +187,11 @@ type = "plugin_action"
 command = "hhdebb.herdr-radar.settings"
 description = "Radar: settings"
 
+[[keys.command]]
+key = "prefix+p"
+type = "plugin_action"
+command = "herdr-bar.open"
+description = "command bar"
 # [worktrees]
 # directory = "~/.herdr/worktrees"
 
