@@ -23,15 +23,22 @@ default=$(git rev-parse --abbrev-ref origin/HEAD 2>/dev/null) || exit 0
 [ "$(git branch --show-current)" = "${default#origin/}" ] || exit 0
 top=$(git rev-parse --show-toplevel) || exit 0
 
+# The pull can come from a shell without the repo's mise env. Load it, so
+# that gh uses the right account (for example GH_TOKEN in ~/code/warp).
+if command -v mise >/dev/null; then
+  eval "$(mise env -C "$top" -s bash 2>/dev/null)"
+fi
+
 prune() {
   echo "== $(date -Is) $top"
   git -C "$top" fetch --prune -q origin
   wt -C "$top" step prune --dry-run --format=json --min-age 0 |
     jq -r '.[].branch' |
     while read -r branch; do
-      merged=$(cd "$top" && gh pr list --head "$branch" --state merged \
-        --json number -q length 2>/dev/null)
-      if [ "${merged:-0}" -gt 0 ] 2>/dev/null; then
+      if ! merged=$(cd "$top" && gh pr list --head "$branch" --state merged \
+        --json number -q length 2>&1); then
+        echo "keep $branch (gh error: $merged)"
+      elif [ "${merged:-0}" -gt 0 ] 2>/dev/null; then
         echo "remove $branch"
         $dry_run || wt -C "$top" remove -D "$branch"
       else
