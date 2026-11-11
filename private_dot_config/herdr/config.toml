@@ -173,6 +173,14 @@ type = "plugin_action"
 command = "slara.tmdview.open"
 description = "open Markdown in tmdview"
 
+# Chat view (https://github.com/rpbaptist/herdr-chat-view). Toggle the
+# focused agent between its terminal and a chat view.
+[[keys.command]]
+key = "prefix+i"
+type = "plugin_action"
+command = "rpbaptist.herdr-chat-view.toggle"
+description = "Chat view: toggle terminal / chat"
+
 # Radar plugin (https://github.com/hhdebb/herdr-radar). Agents sidebar with
 # worktrees nested under their repo.
 [[keys.command]]
