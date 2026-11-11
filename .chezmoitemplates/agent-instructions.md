@@ -25,6 +25,12 @@ Store session/troubleshooting docs in `~/.local/share/doc/`.
 Machine-specific. Not chezmoi-managed.
 
 
+### Screenshots
+
+When I mention a screenshot and give no path, read the most recent file in
+`~/Pictures/Screenshots/` (`ls -t ~/Pictures/Screenshots | head -1`).
+
+
 ### Worktrees
 
 Applies to every agent on this machine. It overrides the worktree commands
