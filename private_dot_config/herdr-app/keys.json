@@ -88,7 +88,8 @@
           "claude"
         ]
       }
-    }
+    },
+    "ctrl-alt-shift-p": "mod.open:new-chat"
   },
   "terminal": {
     "ctrl-backspace": "send:\u0017",
@@ -99,6 +100,7 @@
     "ctrl-shift-f": "terminal.search",
     "ctrl-v": "terminal.paste_image",
     "ctrl-insert": "terminal.copy",
-    "shift-insert": "terminal.paste"
+    "shift-insert": "terminal.paste",
+    "ctrl-shift-i": "new-chat.switch"
   }
 }
