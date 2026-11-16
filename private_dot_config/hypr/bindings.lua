@@ -18,6 +18,8 @@ hl.unbind("SUPER + CTRL + E")
 hl.unbind("SUPER + SHIFT + E")
 hl.unbind("SUPER + SHIFT + C")
 hl.unbind("SUPER + SHIFT + SPACE") -- keep the top-bar toggle disabled
+hl.unbind("SUPER + ALT + K") -- tmux keybindings menu
+hl.unbind("SUPER + CTRL + K") -- herdr keybindings menu
 hl.unbind("SUPER + ALT + F")
 hl.unbind("SUPER + S")
 hl.unbind("SUPER + ALT + S")

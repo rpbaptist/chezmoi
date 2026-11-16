@@ -9,3 +9,9 @@ export BROWSER=chromium
 # 720x400 console mode and stay black. Use implicit modifiers instead.
 # See ~/.local/share/doc/aquamarine-ccs-720x400-issue.md
 export AQ_NO_MODIFIERS=1
+
+# Orca restarts itself (e.g. after an update) from the systemd user manager,
+# not from its .desktop entry, so the env override there is lost. Without this,
+# Claude sessions fall back to ~/.claude and the two OAuth copies invalidate
+# each other on refresh.
+export CLAUDE_CONFIG_DIR=/home/richard/.claude-work
