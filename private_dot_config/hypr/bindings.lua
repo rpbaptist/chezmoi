@@ -220,6 +220,7 @@ if o.dictation_installed and o.dictation_installed() then
   o.bind("SUPER + CTRL + X", "Toggle dictation", "omarchy-dictation toggle")
 end
 
--- Cycle the workspace layout forward on SUPER + ALT + L, and free SUPER + L.
+-- Cycle the workspace layout between dwindle and scrolling on SUPER + ALT + L
+-- (no floating), and free SUPER + L.
 hl.unbind("SUPER + L")
-o.rebind("SUPER + ALT + L", "Cycle workspace layout", "omarchy-hyprland-workspace-layout-toggle")
+o.rebind("SUPER + ALT + L", "Cycle workspace layout", "hyprland-workspace-layout-toggle")

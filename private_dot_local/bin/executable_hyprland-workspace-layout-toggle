@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Cycle the active workspace between the dwindle and scrolling layouts.
+# Omarchy's toggle also cycles through floating; this skips it. It delegates
+# to Omarchy's script so that its notification and persistence still apply.
+
+if [[ $(omarchy-hyprland-workspace-layout-current) == scrolling ]]; then
+  exec omarchy-hyprland-workspace-layout-toggle back
+else
+  # From dwindle, "next" is scrolling. From floating, "next" is dwindle.
+  exec omarchy-hyprland-workspace-layout-toggle
+fi
