@@ -8,3 +8,16 @@ herdr workspace list 2>/dev/null \
   | while read -r id; do herdr workspace close "$id" >/dev/null; done
 exit 0
 '''
+
+# Copy the local-only pstack sheet and its CLAUDE.local.md loader into each
+# new worktree. Both files are git-ignored, so git does not copy them.
+# Repos without the sheet skip this.
+[pre-start]
+pstack-sheet = '''
+src="{{ primary_worktree_path }}"
+[ -f "$src/.claude/pstack-models.md" ] || exit 0
+mkdir -p .claude
+cp "$src/.claude/pstack-models.md" .claude/pstack-models.md
+[ -f "$src/CLAUDE.local.md" ] && cp "$src/CLAUDE.local.md" CLAUDE.local.md
+exit 0
+'''

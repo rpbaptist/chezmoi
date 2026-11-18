@@ -3,6 +3,8 @@
 # a cream background. See omarchy/themed/kitty.conf.tpl.
 font_weight = "ExtraLight"
 italic_weight = "ExtraLight Italic"
+# kitty's Linux default suits light text on a dark background.
+text_composition = "platform"
 
 accent = "#98971a"
 cursor = "#ebdbb2"

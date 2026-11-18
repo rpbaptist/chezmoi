@@ -2,6 +2,9 @@
 # theme uses Regular instead of ExtraLight.
 font_weight = "Regular"
 italic_weight = "Italic"
+# Dark text on a light background looks thin with kitty's Linux default
+# (gamma 1.0, no contrast). Gamma 1.7 and contrast 30 thicken the strokes.
+text_composition = "1.7 30"
 
 accent = "#98971a"
 cursor = "#282828"

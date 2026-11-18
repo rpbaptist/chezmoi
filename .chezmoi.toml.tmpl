@@ -2,3 +2,7 @@ encryption = "age"
 [age]
   identity = "~/.config/chezmoi/key.txt"
   recipient = "age1cdfdvc0wjgezdhu77x6c05d2jc99h4cwj67jnunp6vqz67cwcvcs9seta4"
+
+[data]
+  # Separate work Claude profile in ~/.claude-work (CLAUDE_CONFIG_DIR).
+  claudeWork = {{ promptBoolOnce . "claudeWork" "Use a separate ~/.claude-work Claude profile" }}

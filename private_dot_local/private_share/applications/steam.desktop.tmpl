@@ -27,7 +27,7 @@ Comment[th]=โปรแกรมสำหรับจัดการและ�
 Comment[tr]=Steam üzerinden oyun oynama ve düzenleme uygulaması
 Comment[uk]=Програма для керування іграми та запуску ігор у Steam
 Comment[vi]=Ứng dụng để quản lý và chơi trò chơi trên Steam
-Exec=env -u SDL_VIDEODRIVER MANGOHUD=1 /home/richard/.local/bin/xwayland-scale-wrapper /usr/bin/steam %U
+Exec=env -u SDL_VIDEODRIVER MANGOHUD=1 {{ .chezmoi.homeDir }}/.local/bin/xwayland-scale-wrapper /usr/bin/steam %U
 Icon=steam
 Terminal=false
 Type=Application

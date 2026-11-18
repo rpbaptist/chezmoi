@@ -53,7 +53,7 @@ model = "small"
 # Language for transcription
 # Use "en" for English, "auto" for auto-detection
 # See: https://github.com/openai/whisper#available-models-and-languages
-language = "en,nl"
+language = "nl"
 
 # Translate non-English speech to English
 translate = false

@@ -1,5 +1,7 @@
 {
   "bar": {
+    "background": "glassy",
+    "centerAnchor": "",
     "layout": {
       "center": [
         {
@@ -12,6 +14,8 @@
           "id": "omarchy.system-update"
         }
       ],
+      "centerBegin": [],
+      "centerEnd": [],
       "left": [
         {
           "id": "richard.menu"
@@ -63,24 +67,20 @@
           "verticalFormat": "HH\n—\nmm"
         }
       ],
-      "centerBegin": [],
-      "centerEnd": [],
       "tray": []
     },
-    "position": "top",
-    "transparent": true,
-    "centerAnchor": ""
+    "position": "top"
   },
+  "cloneSourceRestores": [
+    "richard.menu"
+  ],
+  "disabledPlugins": [
+    "omarchy.menu"
+  ],
   "idle": {
     "lock": 300,
     "screensaver": 150
   },
   "plugins": [],
-  "version": 1,
-  "disabledPlugins": [
-    "omarchy.menu"
-  ],
-  "cloneSourceRestores": [
-    "richard.menu"
-  ]
+  "version": 1
 }

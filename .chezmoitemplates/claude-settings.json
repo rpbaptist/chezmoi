@@ -72,7 +72,9 @@
     "warp@warp-skills": true,
     "docs-tools@warp-skills": true,
     "dev-workflow@warp-skills": true,
-    "mattpocock-skills@warp-skills": true
+    "pstack@pstack-claude": true,
+    "mattpocock-skills@warp-skills": true,
+    "clangd-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "caveman": {
@@ -85,6 +87,12 @@
       "source": {
         "source": "github",
         "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "pstack-claude": {
+      "source": {
+        "source": "github",
+        "repo": "michael-denyer/pstack-claude"
       }
     }
   },
@@ -129,7 +137,7 @@
       "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries prod or production as a whole word or name segment",
       "### User-specific",
       "**Primary use of Claude Code**: software development (this repo: belastingaangifte-check, a Dutch tax-return reconciliation tool)",
-      "**Trusted repo**: /home/richard/code/belastingaangifte-check and its origin remote github.com:rpbaptist/belastingaangifte-check.git — PUBLIC, so only this repo's own work belongs in commits/pushes; secrets and sensitive data are never cleared in regardless of visibility",
+      "**Trusted repo**: {{ .chezmoi.homeDir }}/code/belastingaangifte-check and its origin remote github.com:rpbaptist/belastingaangifte-check.git — PUBLIC, so only this repo's own work belongs in commits/pushes; secrets and sensitive data are never cleared in regardless of visibility",
       "**Org-specific CLIs**: rtk (50×), herdr (2×) — project-local CLIs seen in this project's transcripts; no org-wide CLI set configured",
       "routine under this repo's working tree is standard development activity per the transcript history (npx, rtk usage)"
     ]

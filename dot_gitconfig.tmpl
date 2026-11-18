@@ -1,7 +1,7 @@
 [user]
 	name = Richard Baptist
 	email = code@richardbaptist.nl
-	signingkey = /home/richard/.ssh/richard_ed25519
+	signingkey = {{ .chezmoi.homeDir }}/.ssh/richard_ed25519
 [checkout]
   defaultRemote=origin
 [color]
@@ -50,5 +50,5 @@
 	helper = !/usr/bin/gh auth git-credential
 [hook "wt-prune-merged"]
 	; Remove worktrees of merged PRs when main is pulled.
-	command = /home/richard/.local/bin/git-wt-prune-merged
+	command = {{ .chezmoi.homeDir }}/.local/bin/git-wt-prune-merged
 	event = post-merge

@@ -199,11 +199,11 @@ o.bind("SUPER + ALT + MINUS", "Monitor scaling down", "omarchy-hyprland-monitor-
 o.bind("SUPER + ALT + EQUAL", "Monitor scaling up", "omarchy-hyprland-monitor-scaling up")
 
 -- strata-installer: file-manager start
-o.bind("SUPER + CTRL + F", "File manager", { launch = "/home/richard/.local/bin/strata" })
+o.bind("SUPER + CTRL + F", "File manager", { launch = os.getenv("HOME") .. "/.local/bin/strata" })
 o.bind(
 	"SUPER + ALT + CTRL + F",
 	"File manager (cwd)",
-	'uwsm-app -- /home/richard/.local/bin/strata "$(omarchy-cmd-terminal-cwd)"'
+	'uwsm-app -- "$HOME/.local/bin/strata" "$(omarchy-cmd-terminal-cwd)"'
 )
 -- strata-installer: file-manager end
 

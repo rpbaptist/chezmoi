@@ -9,6 +9,9 @@ italic_font family="Jetbrains Mono" style="{{ italic_weight }}" features="ss02=1
 bold_font family="Jetbrains Mono" style="SemiBold" features="cv07=1 cv08=1 cv12=1"
 bold_italic_font family="Jetbrains Mono" style="SemiBold Italic" features="ss02=1 cv08=1"
 
+# Gamma and contrast of text edges; see text_composition in colors.toml.
+text_composition_strategy {{ text_composition }}
+
 foreground {{ foreground }}
 background {{ background }}
 selection_foreground {{ selection_foreground }}
