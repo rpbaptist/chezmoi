@@ -52,3 +52,9 @@ export NNN_OPTS="C"
 export XDG_DATA_DIRS=${XDG_DATA_DIRS}:${HOME}/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share
 
 export SUDO_ASKPASS=/usr/lib/gcr4-ssh-askpass
+
+# Hyprland sets this in envs.lua, but processes that start before it (such as
+# the herdr server) do not get it, and neither do their shells.
+if [ -z "$SSH_AUTH_SOCK" ] && [ -S "$XDG_RUNTIME_DIR/gcr/ssh" ]; then
+  export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gcr/ssh"
+fi
