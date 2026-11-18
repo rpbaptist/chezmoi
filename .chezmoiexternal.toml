@@ -2,3 +2,8 @@
     type = "git-repo"
     url = "https://github.com/rpbaptist/nvim-config.git"
     refreshPeriod = "24h"
+
+[".config/omarchy/plugins/richard.background-crop"]
+    type = "git-repo"
+    url = "https://github.com/rpbaptist/omarchy-background-crop.git"
+    refreshPeriod = "24h"
