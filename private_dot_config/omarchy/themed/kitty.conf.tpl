@@ -2,16 +2,6 @@
 # (user templates in ~/.config/omarchy/themed/ win over the built-in one), so
 # it must restate every key the stock template sets.
 
-# Jetbrains Mono weight is theme-specific (see font_weight/italic_weight in
-# each theme's colors.toml); bold weights don't vary, so stay fixed here.
-font_family family="Jetbrains Mono" style="{{ font_weight }}" features="cv07=1 cv08=1"
-italic_font family="Jetbrains Mono" style="{{ italic_weight }}" features="ss02=1 cv08=1 cv12=1"
-bold_font family="Jetbrains Mono" style="SemiBold" features="cv07=1 cv08=1 cv12=1"
-bold_italic_font family="Jetbrains Mono" style="SemiBold Italic" features="ss02=1 cv08=1"
-
-# Gamma and contrast of text edges; see text_composition in colors.toml.
-text_composition_strategy {{ text_composition }}
-
 foreground {{ foreground }}
 background {{ background }}
 selection_foreground {{ selection_foreground }}
@@ -19,6 +9,10 @@ selection_background {{ selection_background }}
 
 cursor {{ bright_foreground }}
 cursor_text_color {{ background }}
+
+# Lets a reload change the background opacity, as Glassy windows do, since
+# kitty only allows that when this is on from launch.
+dynamic_background_opacity yes
 
 active_border_color {{ accent }}
 active_tab_background {{ accent }}
