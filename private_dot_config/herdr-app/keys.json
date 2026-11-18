@@ -89,7 +89,10 @@
         ]
       }
     },
-    "ctrl-alt-shift-p": "mod.open:new-chat"
+    "ctrl-alt-shift-p": "mod.open:new-chat",
+    "ctrl-alt-g": "mod.open:gruvbox",
+    "ctrl-alt-w": "workspaces.new",
+    "ctrl-alt-r": "workspaces.pr"
   },
   "terminal": {
     "ctrl-backspace": "send:\u0017",
@@ -101,6 +104,7 @@
     "ctrl-v": "terminal.paste_image",
     "ctrl-insert": "terminal.copy",
     "shift-insert": "terminal.paste",
-    "ctrl-shift-i": "new-chat.switch"
+    "ctrl-shift-i": "new-chat.switch",
+    "ctrl-alt-g": "mod.open:gruvbox"
   }
 }

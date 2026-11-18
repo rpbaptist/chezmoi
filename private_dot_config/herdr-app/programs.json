@@ -1,0 +1,13 @@
+{
+  "programs": {
+    "amp": { "tint": true },
+    "antigravity": { "tint": true, "icon": "icons-mono/antigravity.svg" },
+    "claude": { "tint": true },
+    "codex": { "tint": true, "icon": "icons-mono/codex.svg" },
+    "crush": { "tint": true, "icon": "icons-mono/crush.svg" },
+    "gemini": { "tint": true },
+    "kimi": { "tint": true },
+    "kiro": { "tint": true, "icon": "icons-mono/kiro.svg" },
+    "pig": { "tint": true, "icon": "icons-mono/pig.svg" }
+  }
+}
