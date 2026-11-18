@@ -13,7 +13,16 @@ hl.config({
     touchpad = {
       natural_scroll = true,
       disable_while_typing = true,
+      -- A finger that lands before the others in a 3-finger swipe reads as
+      -- tap + drag, which holds the left button and selects text.
+      tap_and_drag = false,
     },
+  },
+
+  -- A 3-finger tap or click is a middle click, which pastes the primary
+  -- selection into the window under the cursor during a workspace swipe.
+  misc = {
+    middle_click_paste = false,
   },
 })
 
