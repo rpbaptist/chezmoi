@@ -1,2 +1,5 @@
 README.md
 HANDOFF-DOTFILES-CLEANUP.md
+{{- if not .workDefault }}
+.gitconfig-personal
+{{- end }}

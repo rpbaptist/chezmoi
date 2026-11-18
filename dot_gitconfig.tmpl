@@ -1,7 +1,21 @@
 [user]
 	name = Richard Baptist
+{{- if .workDefault }}
+	email = richard@wearereasonablepeople.com
+	signingkey = {{ .chezmoi.homeDir }}/.ssh/warp_ed25519
+[core]
+	sshCommand = ssh -F /dev/null -i {{ .chezmoi.homeDir }}/.ssh/warp_ed25519 -o IdentitiesOnly=yes
+; Port 22 is blocked on some networks; use GitHub's SSH endpoint on 443.
+[url "ssh://git@ssh.github.com:443/"]
+	insteadOf = git@github.com:
+[includeIf "gitdir:{{ .chezmoi.sourceDir }}/"]
+	path = ~/.gitconfig-personal
+[includeIf "gitdir:{{ .chezmoi.homeDir }}/.config/nvim/"]
+	path = ~/.gitconfig-personal
+{{- else }}
 	email = code@richardbaptist.nl
 	signingkey = {{ .chezmoi.homeDir }}/.ssh/richard_ed25519
+{{- end }}
 [checkout]
   defaultRemote=origin
 [color]

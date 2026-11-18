@@ -1,0 +1,5 @@
+[user]
+	email = code@richardbaptist.nl
+	signingkey = {{ .chezmoi.homeDir }}/.ssh/richard_ed25519
+[core]
+	sshCommand = ssh -i {{ .chezmoi.homeDir }}/.ssh/richard_ed25519 -o IdentitiesOnly=yes

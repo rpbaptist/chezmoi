@@ -6,3 +6,5 @@ encryption = "age"
 [data]
   # Separate work Claude profile in ~/.claude-work (CLAUDE_CONFIG_DIR).
   claudeWork = {{ promptBoolOnce . "claudeWork" "Use a separate ~/.claude-work Claude profile" }}
+  # Work Git identity by default; personal only in the chezmoi and nvim repos.
+  workDefault = {{ promptBoolOnce . "workDefault" "Use the work Git identity by default" }}
