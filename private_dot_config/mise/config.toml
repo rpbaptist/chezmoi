@@ -2,6 +2,7 @@
 disable_tools = ['redis', 'postgres']
 experimental = true
 minimum_release_age = "12h"
+trusted_config_paths = ["~/Work/code"]
 [tools]
 elixir = "latest"
 erlang = "latest"
