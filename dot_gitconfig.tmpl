@@ -12,6 +12,8 @@
 	path = ~/.gitconfig-personal
 [includeIf "gitdir:{{ .chezmoi.homeDir }}/.config/nvim/"]
 	path = ~/.gitconfig-personal
+[includeIf "gitdir:{{ .chezmoi.homeDir }}/code/personal/"]
+	path = ~/.gitconfig-personal
 {{- else }}
 	email = code@richardbaptist.nl
 	signingkey = {{ .chezmoi.homeDir }}/.ssh/richard_ed25519
