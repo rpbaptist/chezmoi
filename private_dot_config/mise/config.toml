@@ -13,4 +13,13 @@ python = "latest"
 ruby = "latest"
 herdr = "latest"
 bun = "latest"
-gemini = { version = "latest", allow_builds = ["@github/keytar", "node-pty"] }
+# Kept from Omarchy's defaults (/etc/mise/conf.d/omarchy-tools.toml), which
+# miserc.toml opts out of.
+claude = { version = "latest", auto_update = "4h", minimum_release_age = "0s" }
+gh = { version = "latest", lazy = true, minimum_release_age = "0s" }
+opencode = { version = "latest", lazy = true, auto_update = "4h", minimum_release_age = "0s" }
+ghui = { version = "latest", lazy = true, minimum_release_age = "0s" }
+hunk = { version = "latest", lazy = true, minimum_release_age = "0s" }
+node = { version = "latest", lazy = true, minimum_release_age = "0s" }
+playwright = { version = "latest", lazy = true, minimum_release_age = "0s" }
+uv = { version = "latest", lazy = true, minimum_release_age = "0s" }
