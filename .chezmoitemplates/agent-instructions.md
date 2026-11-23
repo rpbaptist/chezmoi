@@ -33,14 +33,19 @@ When I mention a screenshot and give no path, read the most recent file in
 
 ### Worktrees
 
-Applies to every agent on this machine. It overrides the worktree commands
-in a repo's `AGENTS.md`. Keep the repo's rules (branch from fresh
-`origin/main`, one worktree per task, cleanup after merge).
+Applies only when the agent runs inside herdr (`HERDR_ENV=1`). In that
+case it overrides the worktree commands in a repo's `AGENTS.md`. Keep the
+repo's rules (branch from fresh `origin/main`, one worktree per task,
+cleanup after merge).
 
-Make and remove worktrees with `wt` (worktrunk) so that its hooks run. Then
-register the worktree with herdr, so it shows as a nested workspace. Do not
-use `git worktree add` or `herdr worktree create`: they skip the hooks or
-the herdr workspace.
+Outside herdr, do not use `wt`. Use the worktree method of the tool that
+runs the agent (for example, Orca: use the `orca` CLI). When no tool
+manages worktrees, use the repo's `AGENTS.md` or plain `git worktree`.
+
+Inside herdr, make and remove worktrees with `wt` (worktrunk) so that its
+hooks run. Then register the worktree with herdr, so it shows as a nested
+workspace. Do not use `git worktree add` or `herdr worktree create`: they
+skip the hooks or the herdr workspace.
 
 Create, from the primary checkout or any worktree of the repo:
 
@@ -54,7 +59,7 @@ Remove, after the PR state is `MERGED`: run `wt remove -D <branch>` (a squash
 merge needs `-D`). A `post-remove` hook in the worktrunk user config closes
 the herdr workspace.
 
-When `herdr` is not running or `wt` is missing, use plain `git worktree`.
+When `wt` is missing, use plain `git worktree`.
 
 <!-- herdr-chat:subagents begin -->
 ## Sub-agents in Herdr
