@@ -77,12 +77,6 @@
     "clangd-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
-    "caveman": {
-      "source": {
-        "source": "github",
-        "repo": "JuliusBrussee/caveman"
-      }
-    },
     "claude-plugins-official": {
       "source": {
         "source": "github",

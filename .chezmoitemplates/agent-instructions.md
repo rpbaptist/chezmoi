@@ -4,9 +4,8 @@ All agents use ASD-STE100 for all communication. This includes subagents,
 reports to a parent agent, and prompts that you write for a subagent. When
 you start a subagent, tell it to use ASD-STE100.
 
-Caveman mode is always on at level `lite`: keep articles and full sentences,
-drop filler and hedging. `/caveman` without a level means `lite`. Use another
-level only when I name it explicitly.
+Keep articles and full sentences. Drop filler, hedging, pleasantries and
+restated context.
 
 
 ### Commit style
