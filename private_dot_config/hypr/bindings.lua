@@ -224,3 +224,7 @@ end
 -- (no floating), and free SUPER + L.
 hl.unbind("SUPER + L")
 o.rebind("SUPER + ALT + L", "Cycle workspace layout", "hyprland-workspace-layout-toggle")
+
+-- Launch or focus Slack (was: Share menu).
+o.rebind("SUPER + CTRL + S", "Slack", { launch = "slack", focus = "^Slack$" })
+o.bind("SUPER + S", "Share", { menu = "share" })
