@@ -79,7 +79,7 @@ o.bind("SUPER + SPACE", "Apps menu", "omarchy-menu toggle apps")
 -- Overwrite existing bindings, like putting Omarchy Menu on Super + Space
 o.bind("SUPER + O", "Toggle window split", hl.dsp.layout("togglesplit"))
 o.bind("SUPER + ALT + M", "Tiled full screen", "hyprctl dispatch fullscreenstate 0 2")
-o.bind("SUPER + M", "Maximize window", hl.dsp.window.fullscreen({ mode = "maximized" }))
+o.rebind("SUPER + M", "Maximize window", hl.dsp.window.fullscreen({ mode = "maximized" }))
 
 o.bind("SUPER + CTRL + H", "Clipboard manager", "omarchy-shell shell toggle omarchy.clipboard")
 

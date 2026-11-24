@@ -30,3 +30,8 @@ hl.animation({ leaf = "windowsMove", enabled = true, speed = 3, bezier = "easeOu
 -- Find its class with: hyprctl clients
 -- o.transparent_window("my-app")
 -- o.transparent_window("my-app", "0.9 0.85") -- Custom active/inactive opacity.
+
+-- A maximized window (SUPER + M) fills the area below the bar,
+-- with no gaps, border or rounding. "f[1]" matches a workspace whose
+-- fullscreen state is "maximized".
+hl.workspace_rule({ workspace = "f[1]", gaps_out = 0, gaps_in = 0, no_border = true, no_rounding = true })
