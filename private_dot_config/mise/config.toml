@@ -23,3 +23,4 @@ hunk = { version = "latest", lazy = true, minimum_release_age = "0s" }
 node = { version = "latest", lazy = true, minimum_release_age = "0s" }
 playwright = { version = "latest", lazy = true, minimum_release_age = "0s" }
 uv = { version = "latest", lazy = true, minimum_release_age = "0s" }
+hey-cli = { version = "latest", lazy = true, minimum_release_age = "0s" }
